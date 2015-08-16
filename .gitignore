@@ -1,0 +1,17 @@
+# Composer
+/vendor
+
+# Configuration
+/config/local
+/config/staging
+/config/production
+
+# Packages
+/node_modules
+public/assets/bower_components
+
+# IDE
+.idea/
+
+# Environment files
+.env

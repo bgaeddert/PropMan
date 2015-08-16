@@ -1,0 +1,45 @@
+<div ng-controller="userController">
+    <div class="col-md-4">
+        <div class="well">
+            This calls a GET API route using the laravel router.<br>
+            And returns the logged in users name.
+        </div>
+
+        <!-------------------------------------------------------
+            Using @ before the brackets tells blade to ignore
+            it but angular to still see it.
+        -------------------------------------------------------->
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{users}}</h3>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="onGetUsers(1)">GET USERS</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="well">
+            This calls a POST API route using the laravel router.<br>
+            Posts what you type to a laravel controller that returns it
+            to Angular to display.
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{postResponse}}</h3>
+            </div>
+
+            <div class="col-md-3">
+                <button class="btn btn-primary" ng-click="onPostTest(textInput)">POST TEST</button>
+            </div>
+
+            <div class="col-md-8">
+                <input class="form-control" ng-model="textInput" placeholder="Type then click."/>
+            </div>
+        </div>
+
+    </div>
+
+</div>

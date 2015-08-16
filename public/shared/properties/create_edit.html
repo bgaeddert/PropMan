@@ -1,0 +1,34 @@
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="property-title col-md-8">
+                <h2>{{property.name}}</h2>
+            </div>
+            <div class="property-title col-md-4">
+                <!--<a ui-sref="owners/create" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="item-view" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <form class="form col-md-8">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" ng-model="property.name">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea type="text" class="form-control" id="address" ng-model="property.address"></textarea>
+                </div>
+                <div class="pull-left">
+                    <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+                    <button class="btn btn-success" ng-click="onUpdate()" ng-if="id">Save</button>
+                    <button class="btn btn-success" ng-click="onCreate()" ng-hide="id">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
