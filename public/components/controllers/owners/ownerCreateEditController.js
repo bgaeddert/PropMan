@@ -16,6 +16,11 @@ angular.module('propman').controller('ownerCreateEditController',
         }
 
         $scope.onUpdate = function(){
+
+            if ($scope.ownerForm.$invalid) {
+                return;
+            }
+
             requestData = $scope.owner;
             ownerFactory.putUpdate(requestData)
                 .success(function(dataResponse){
@@ -28,6 +33,11 @@ angular.module('propman').controller('ownerCreateEditController',
         };
 
         $scope.onCreate = function(){
+
+            if ($scope.ownerForm.$invalid) {
+                return;
+            }
+
             requestData = $scope.owner;
             ownerFactory.getCreate(requestData)
                 .success(function(dataResponse){
