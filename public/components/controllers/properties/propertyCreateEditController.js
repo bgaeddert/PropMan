@@ -13,13 +13,44 @@ angular.module('propman').controller('propertyCreateEditController',
                 .error(function(error){
                     errorHandler(error)
                 });
+        }else{
+            // instantiate for create
+            $scope.property = {};
         }
 
+
+
+        $scope.loadOwnerOptions = function(){
+            propertyFactory.getOwnerOptions()
+                .success(function(dataResponse){
+                    $scope.property.owners = dataResponse.data;
+
+                    if($scope.property.hasOwnProperty('owner_id')){
+                        $scope.selected = where($scope.property.owners, 'id', $scope.property.owner_id);
+                    }
+                })
+                .error(function(error){
+                    errorHandler(error)
+                });
+        };
+
+        $scope.loadOwnerOptions();
+
         $scope.onUpdate = function(){
-            requestData = $scope.property;
+
+            if ($scope.propertyForm.$invalid) {
+                return;
+            }
+
+            var newProperty = $scope.property;
+            newProperty.owner_id = $scope.selected.id;
+            delete newProperty.owners;
+
+            requestData = newProperty;
             propertyFactory.putUpdate(requestData)
                 .success(function(dataResponse){
                     $scope.property = dataResponse.data;
+                    $scope.loadOwnerOptions();
                     toastr.success('Property ' + $scope.property.name + ' updated!')
                 })
                 .error(function(error){
@@ -28,7 +59,16 @@ angular.module('propman').controller('propertyCreateEditController',
         };
 
         $scope.onCreate = function(){
-            requestData = $scope.property;
+
+            if ($scope.propertyForm.$invalid) {
+                return;
+            }
+
+            var newProperty = $scope.property;
+            newProperty.owner_id = $scope.selected.id;
+            delete newProperty.owners;
+
+            requestData = newProperty;
             propertyFactory.getCreate(requestData)
                 .success(function(dataResponse){
                     console.log(dataResponse);
