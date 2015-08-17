@@ -34,6 +34,15 @@ angular.module('propman').factory('propertyFactory', function($http){
                 data: requestData
             });
             return response;
+        },
+        getOwnerOptions: function(requestData){
+            var url = '/api/owners';
+            var response = $http({
+                method: "get",
+                url: url,
+                params: requestData
+            });
+            return response;
         }
     }
 });
