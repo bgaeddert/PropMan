@@ -1,25 +1,28 @@
-<section id="control-bar" class="row">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="property-title col-md-8">
-                <h2>{{property.name}}&ensp;</h2>
+<section id="control-bar">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>{{property.name}}&ensp;</h2></div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                <div class="row item">
+                    <div class="col-md-2 text-right sub-title">Owner:</div>
+                        <div class="col-md-10"><a ui-sref="viewOwner({owner_id : property.owner.id})">{{property.owner.name}}</a></div>
+                </div>
             </div>
-            <div class="property-title col-md-4">
-                <!--<a ui-sref="propertys/create" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>-->
+            <div class="col-md-6 item">
+                <div class="row">
+                    <div class="col-md-2 text-right sub-title">Address:</div>
+                    <div class="col-md-10">{{property.address}}</div>
+                </div>
             </div>
         </div>
     </div>
+
 </section>
 
-<section class="row">
-    <div class="col-md-8">
-        <div class=""><b>Owner:</b> <a ui-sref="viewOwner({owner_id : property.owner.id})">{{property.owner.name}}</a></div>
-        <div class=""><b>Address:</b> {{property.address}}</div>
-    </div>
-</section>
 
 <section class="tab-section row">
-    <div class="col-md-12">
+    <div class="col-md-12 hide-first">
         <tabset>
             <tab
                     ng-repeat="t in tabs"
@@ -29,8 +32,10 @@
             </tab>
         </tabset>
 
-        <div class="tab-content">
-            <div ui-view></div>
+        <div class="tab-content col-md-12">
+            <div class="tab-view">
+                <div ui-view></div>
+            </div>
         </div>
     </div>
 </section>
