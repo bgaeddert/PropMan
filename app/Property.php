@@ -28,6 +28,19 @@ class Property extends Model{
 	 *
 	 * @var array
 	 */
-	protected $guarded = ['id'];
+	protected $fillable = ['owner_id', 'name', 'address'];
+
+	/**
+	 * Owner relationship
+	 *
+	 * Property belong to an owner;
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+	public function Owner(){
+
+		return $this->belongsTo('App\Owner', 'owner_id');
+
+	}
 
 }
