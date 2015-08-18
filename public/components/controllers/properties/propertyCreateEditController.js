@@ -1,40 +1,13 @@
 angular.module('propman').controller('propertyCreateEditController',
     function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
 
-        $scope.id = $stateParams.property_id;
-
-        if($scope.id){
-            requestData = {};
-            requestData.id = $scope.id;
-            propertyFactory.getEdit(requestData)
-                .success(function(dataResponse){
-                    $scope.property = dataResponse.data;
-                })
-                .error(function(error){
-                    errorHandler(error)
-                });
-        }else{
-            // instantiate for create
-            $scope.property = {};
-        }
-
-
-
-        $scope.loadOwnerOptions = function(){
-            propertyFactory.getOwnerOptions()
-                .success(function(dataResponse){
-                    $scope.property.owners = dataResponse.data;
-
-                    if($scope.property.hasOwnProperty('owner_id')){
-                        $scope.selected = where($scope.property.owners, 'id', $scope.property.owner_id);
-                    }
-                })
-                .error(function(error){
-                    errorHandler(error)
-                });
-        };
-
-        $scope.loadOwnerOptions();
+        /*
+        |-----------------------------------
+        |   Events
+        |-----------------------------------
+        |
+        |
+         */
 
         $scope.onUpdate = function(){
 
@@ -80,5 +53,62 @@ angular.module('propman').controller('propertyCreateEditController',
                     errorHandler(error)
                 });
         };
+
+        /*
+        |-----------------------------------
+        |   Loaders
+        |-----------------------------------
+        |
+        |
+         */
+
+        $scope.getProperty = function(){
+            requestData = {};
+            requestData.id = $scope.id;
+            propertyFactory.getEdit(requestData)
+                .success(function(dataResponse){
+                    $scope.property = dataResponse.data;
+                })
+                .error(function(error){
+                    errorHandler(error)
+                });
+        };
+
+        $scope.loadOwnerOptions = function(){
+            propertyFactory.getOwnerOptions()
+                .success(function(dataResponse){
+                    $scope.property.owners = dataResponse.data;
+
+                    if($scope.property.hasOwnProperty('owner_id')){
+                        $scope.selected = where($scope.property.owners, 'id', $scope.property.owner_id);
+                    }
+                })
+                .error(function(error){
+                    errorHandler(error)
+                });
+        };
+
+        /*
+         |-----------------------------------
+         |   Initialize
+         |-----------------------------------
+         |
+         |
+         */
+
+        // Get params from router
+        $scope.id = $stateParams.property_id;
+
+        if($scope.id){
+            // Edit property
+            $scope.getProperty();
+            $scope.loadOwnerOptions();
+
+        }else{
+            // Create property
+            $scope.property = {};
+            $scope.loadOwnerOptions();
+
+        }
 
     });
