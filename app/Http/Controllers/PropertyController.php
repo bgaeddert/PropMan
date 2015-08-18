@@ -27,7 +27,7 @@ class PropertyController extends Controller
      */
     public function index(){
 
-        $properties = Property::all();
+        $properties = Property::with('Owner')->get();
 
         return \Response::json( [
             'success' => true,
