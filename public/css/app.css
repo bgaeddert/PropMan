@@ -6353,5 +6353,11 @@ a:focus {
 #control-bar .owner-title h2 {
   margin-top: 0px;
 }
+.tab-section {
+  margin-top: 10px;
+}
+.tab-section .tab-content {
+  margin-top: 10px;
+}
 
 /*# sourceMappingURL=app.css.map */
