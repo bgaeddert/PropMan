@@ -28,7 +28,10 @@
                 <!-- Property Owner -->
                 <div class="form-group">
                     <label for="owners"><b>Owner:</b> <span class="label-note-optional">Required</span></label>
-                    <select id="owners" name="owners" class="form-control" ng-options="owner.name for owner in property.owners | orderBy:'name' track by owner.id" ng-model="selected" required></select>
+                    <select id="owners" name="owners" class="form-control"
+                            ng-disabled="property.owner_id"
+                            ng-options="owner.name for owner in property.owners | orderBy:'name' track by owner.id"
+                            ng-model="selected" required></select>
                 </div>
                 <!-- ./ Property Owner -->
 

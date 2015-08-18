@@ -75,9 +75,15 @@
                 controller: 'ownerViewController'
             })
             .state('viewOwner.properties', {
-                url: "properties",
+                url: "properties/",
                 templateUrl: '/shared/properties/index.html',
                 controller: 'propertyIndexController'
+            })
+            // TODO Brian - fix outside route
+            .state('viewOwner.createProperty', {
+                url: "properties/create/",
+                templateUrl: '/shared/properties/create_edit.html',
+                controller: 'propertyCreateEditController'
             })
 
             /*-----------------------------

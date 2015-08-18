@@ -107,6 +107,7 @@ angular.module('propman').controller('propertyCreateEditController',
         }else{
             // Create property
             $scope.property = {};
+            $scope.property.owner_id = $stateParams.owner_id;
             $scope.loadOwnerOptions();
 
         }
