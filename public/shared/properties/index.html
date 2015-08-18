@@ -21,7 +21,7 @@
             <div class="list-item listed-property row" ng-repeat="property in properties | filter:searchText | orderBy:'name'">
 
                 <div class="col-md-12">
-                    <h3><i class="fa fa-briefcase"></i> {{property.name}}</h3>
+                    <h3><i class="fa fa-briefcase"></i> <a ui-sref="editProperty({property_id : property.id})">{{property.name}}</a></h3>
                 </div>
                 <div class="col-md-8">
                     <div class="">{{property.email}}</div>
