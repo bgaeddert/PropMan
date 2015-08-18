@@ -105,6 +105,8 @@
 
 <script type="text/javascript" src="/components/controllers/properties/propertyIndexController.js"></script>
 <script type="text/javascript" src="/components/controllers/properties/propertyCreateEditController.js"></script>
+<script type="text/javascript" src="/components/controllers/properties/propertyViewController.js"></script>
+
 {{--<script type="text/javascript" src="/components/controllers/owners/propertyViewController.js"></script>--}}
 <script type="text/javascript" src="/components/services/propertyFactory.js"></script>
 
