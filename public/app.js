@@ -79,7 +79,7 @@
                 templateUrl: '/shared/properties/index.html',
                 controller: 'propertyIndexController'
             })
-            // TODO Brian - fix outside route
+            // TODO BRIAN - fix outside route
             .state('viewOwner.createProperty', {
                 url: "properties/create/",
                 templateUrl: '/shared/properties/create_edit.html',
