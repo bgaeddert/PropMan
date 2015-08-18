@@ -2,13 +2,12 @@
 
     <section id="control-bar" class="row">
         <div class="col-md-12">
-            <div class="row">
+            <div class="row"  ng-if="!owner_id">
                 <div class="property-title col-md-8">
                     <h2><i class="fa fa-building"></i> Properties</h2>
                 </div>
                 <div class="property-title col-md-4">
-                    <a ng-if="!owner_id" ui-sref="createProperty" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>
-                    <a ng-if="owner_id" ui-sref="viewOwner.createProperty" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>
+                    <a ui-sref="createProperty" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>
                 </div>
             </div>
         </div>
