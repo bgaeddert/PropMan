@@ -6344,7 +6344,6 @@ a:focus {
 }
 .list-con .list .list-item {
   border-top: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
   padding-bottom: 5px;
 }
 #control-bar {
@@ -6354,10 +6353,30 @@ a:focus {
   margin-top: 0px;
 }
 .tab-section {
-  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.tab-section .hide-first .ng-isolate-scope .tab-content {
+  display: none;
 }
 .tab-section .tab-content {
-  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.tab-section .tab-content .tab-view {
+  padding: 10px 0;
+}
+.panel .panel-heading h1,
+.panel .panel-heading h2,
+.panel .panel-heading h3,
+.panel .panel-heading h4,
+.panel .panel-heading h5 {
+  margin: 0;
+}
+.panel .panel-body .item {
+  padding: 5px 0;
+}
+.panel .panel-body .sub-title {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=app.css.map */
