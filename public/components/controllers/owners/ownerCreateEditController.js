@@ -1,19 +1,13 @@
 angular.module('propman').controller('ownerCreateEditController',
     function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, ownerFactory){
 
-        $scope.id = $stateParams.owner_id;
-
-        if($scope.id){
-            requestData = {};
-            requestData.id = $scope.id;
-            ownerFactory.getEdit(requestData)
-                .success(function(dataResponse){
-                    $scope.owner = dataResponse.data;
-                })
-                .error(function(error){
-                    errorHandler(error)
-                });
-        }
+        /*
+         |-----------------------------------
+         |   Events
+         |-----------------------------------
+         |
+         |
+         */
 
         $scope.onUpdate = function(){
 
@@ -49,5 +43,39 @@ angular.module('propman').controller('ownerCreateEditController',
                     errorHandler(error)
                 });
         };
+
+        /*
+         |-----------------------------------
+         |   Loaders
+         |-----------------------------------
+         |
+         |
+         */
+
+        $scope.getOwner =  function(){
+            requestData = {};
+            requestData.id = $scope.id;
+            ownerFactory.getEdit(requestData)
+                .success(function(dataResponse){
+                    $scope.owner = dataResponse.data;
+                })
+                .error(function(error){
+                    errorHandler(error)
+                });
+        };
+
+        /*
+         |-----------------------------------
+         |   Initialize
+         |-----------------------------------
+         |
+         |
+         */
+
+        $scope.id = $stateParams.owner_id;
+
+        if($scope.id){
+            $scope.getOwner();
+        }
 
     });
