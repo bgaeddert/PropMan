@@ -1,9 +1,15 @@
 angular.module('propman').controller('ownerViewController',
     function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, ownerFactory){
 
-        $scope.id = $stateParams.owner_id;
+        /*
+         |-----------------------------------
+         |   Loaders
+         |-----------------------------------
+         |
+         |
+         */
 
-        if($scope.id){
+        $scope.getOwner = function(){
             requestData = {};
             requestData.id = $scope.id;
             ownerFactory.getShow(requestData)
@@ -13,6 +19,20 @@ angular.module('propman').controller('ownerViewController',
                 .error(function(error){
                     errorHandler(error)
                 });
+        };
+
+        /*
+         |-----------------------------------
+         |   Initialize
+         |-----------------------------------
+         |
+         |
+         */
+
+        $scope.id = $stateParams.owner_id;
+
+        if($scope.id){
+            $scope.getOwner()
         }
 
         /*
