@@ -30,7 +30,8 @@ angular.module('propman').controller('ownerViewController',
 
         $scope.tabs = [
             {heading: "Properties", route: "viewOwner.properties", active: false},
-            {heading: "Transactions", route: "viewOwner.transactions", active: false},
+            {heading: "New Property", route: "viewOwner.createProperty", active: false},
+            {heading: "Transactions", route: "viewOwner.transactions", active: false}
         ];
 
         $scope.go = function(route){
