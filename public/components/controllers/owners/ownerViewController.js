@@ -22,20 +22,6 @@ angular.module('propman').controller('ownerViewController',
         };
 
         /*
-         |-----------------------------------
-         |   Initialize
-         |-----------------------------------
-         |
-         |
-         */
-
-        $scope.id = $stateParams.owner_id;
-
-        if($scope.id){
-            $scope.getOwner()
-        }
-
-        /*
         |------------------------------
         | Tabs
         |------------------------------
@@ -60,5 +46,21 @@ angular.module('propman').controller('ownerViewController',
                 tab.active = $scope.active(tab.route);
             });
         });
+
+
+        /*
+         |-----------------------------------
+         |   Initialize
+         |-----------------------------------
+         |
+         |
+         */
+
+        $scope.id = $stateParams.owner_id;
+
+        if($scope.id){
+            $scope.getOwner()
+            $scope.go("viewOwner.properties");
+        }
 
     });
