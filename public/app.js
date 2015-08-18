@@ -97,6 +97,11 @@
                 templateUrl: '/shared/properties/create_edit.html',
                 controller: 'propertyCreateEditController'
             })
+            .state('viewProperty', {
+                url: "/property/:property_id/",
+                templateUrl: '/shared/properties/view.html',
+                controller: 'propertyViewController'
+            })
 
             /*-----------------------------
              |   Users
