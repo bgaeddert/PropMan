@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="owner-title col-md-8">
-                    <h2><i class="fa fa-briefcase"></i> Owners</h2>
+                     <h2><i class="fa fa-briefcase"></i> Owners</h2></a>
                 </div>
                 <div class="owner-title col-md-4">
                     <a ui-sref="createOwner" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>
@@ -21,7 +21,7 @@
             <div class="list-item listed-owner row" ng-repeat="owner in owners | filter:searchText | orderBy:'name'">
 
                 <div class="col-md-12">
-                    <h3><i class="fa fa-briefcase"></i> {{owner.name}}</h3>
+                    <h3><i class="fa fa-briefcase"></i> <a ui-sref="editOwner({owner_id : owner.id})">{{owner.name}}</a></h3>
                 </div>
                 <div class="col-md-8">
                     <div class="">{{owner.email}}</div>
