@@ -21,7 +21,7 @@
             <div class="list-item listed-owner row" ng-repeat="owner in owners | filter:searchText | orderBy:'name'">
 
                 <div class="col-md-12">
-                    <h3><i class="fa fa-briefcase"></i> <a ui-sref="editOwner({owner_id : owner.id})">{{owner.name}}</a></h3>
+                    <h3><i class="fa fa-briefcase"></i> <a ui-sref="viewOwner({owner_id : owner.id})">{{owner.name}}</a></h3>
                 </div>
                 <div class="col-md-8">
                     <div class="">{{owner.email}}</div>
