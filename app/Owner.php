@@ -30,4 +30,17 @@ class Owner extends Model{
 	 */
 	protected $fillable = ['name', 'email', 'address', 'phone'];
 
+	/**
+	 * Property relationship
+	 *
+	 * Owner has many properties;
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function Properties(){
+
+		return $this->hasMany('App\Property', 'id');
+
+	}
+
 }
