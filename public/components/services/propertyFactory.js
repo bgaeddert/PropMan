@@ -9,6 +9,14 @@ angular.module('propman').factory('propertyFactory', function($http){
             });
             return response;
         },
+        getShow: function(requestData){
+            var url = '/api/properties/'+ requestData.id;
+            var response = $http({
+                method: "get",
+                url: url
+            });
+            return response;
+        },
         getCreate: function(requestData){
             var url = '/api/properties/create/' ;
             var response = $http({
