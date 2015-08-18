@@ -1,10 +1,11 @@
 angular.module('propman').controller('propertyIndexController',
     function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
 
-    //console.log($stateParams);
+    $scope.owner_id = $stateParams.owner_id;
 
     $scope.onGetProperties = function(){
         requestData = {};
+        requestData.owner_id = $scope.owner_id;
         propertyFactory.getProperties(requestData)
             .success(function(dataResponse){
                 $scope.properties = dataResponse.data;
