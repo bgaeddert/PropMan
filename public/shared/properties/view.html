@@ -1,0 +1,36 @@
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="property-title col-md-8">
+                <h2>{{property.name}}&ensp;</h2>
+            </div>
+            <div class="property-title col-md-4">
+                <!--<a ui-sref="propertys/create" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row">
+    <div class="col-md-8">
+        <div class=""><b>Owner:</b> <a ui-sref="viewOwner({owner_id : property.owner.id})">{{property.owner.name}}</a></div>
+        <div class=""><b>Address:</b> {{property.address}}</div>
+    </div>
+</section>
+
+<section class="row">
+    <div class="col-md-12">
+        <tabset>
+            <tab
+                    ng-repeat="t in tabs"
+                    heading="{{t.heading}}"
+                    select="go(t.route)"
+                    active="t.active">
+            </tab>
+        </tabset>
+
+        <div class="tab-content">
+            <div ui-view></div>
+        </div>
+    </div>
+</section>
