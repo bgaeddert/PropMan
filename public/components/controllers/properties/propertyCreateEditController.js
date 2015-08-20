@@ -24,14 +24,14 @@ angular.module('propman').controller('propertyCreateEditController',
                 .success(function(dataResponse){
                     $scope.property = dataResponse.data;
                     $scope.loadOwnerOptions();
-                    toastr.success('Property ' + $scope.property.name + ' updated!')
+                    toastr.success('Property ' + $scope.property.property_name + ' updated!');
                 })
                 .error(function(error){
                     errorHandler(error)
                 });
         };
 
-        $scope.onCreate = function(){
+        $scope.onStore = function(){
 
             if ($scope.propertyForm.$invalid) {
                 return;
@@ -42,11 +42,11 @@ angular.module('propman').controller('propertyCreateEditController',
             delete newProperty.owners;
 
             requestData = newProperty;
-            propertyFactory.getCreate(requestData)
+            propertyFactory.postStore(requestData)
                 .success(function(dataResponse){
                     console.log(dataResponse);
                     $scope.property = dataResponse.data;
-                    toastr.success('Property ' + $scope.property.name + ' created!')
+                    toastr.success('Property ' + $scope.property.property_name + ' created!');
                     history.go(-1);
                 })
                 .error(function(error){

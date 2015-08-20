@@ -36,12 +36,12 @@ class AuthController extends Controller {
 	}
 
 	// The following overrides registration.
-	public function getRegister() {
-		return redirect('/');
-	}
-
-	public function postRegister() {
-		return redirect('/');
-	}
+	//public function getRegister() {
+	//	return redirect('/');
+	//}
+    //
+	//public function postRegister() {
+	//	return redirect('/');
+	//}
 
 }

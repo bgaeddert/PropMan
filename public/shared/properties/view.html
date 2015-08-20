@@ -1,18 +1,18 @@
 <section id="control-bar">
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h2>{{property.name}}&ensp;</h2></div>
+        <div class="panel-heading"><h2>{{property.property_name}}&ensp;</h2></div>
         <div class="panel-body">
             <div class="col-md-6">
                 <div class="row item">
                     <div class="col-md-2 text-right sub-title">Owner:</div>
-                        <div class="col-md-10"><a ui-sref="viewOwner({owner_id : property.owner.id})">{{property.owner.name}}</a></div>
+                        <div class="col-md-10"><a ui-sref="viewOwner({owner_id : property.owner.id})">{{property.owner.owner_name}}</a></div>
                 </div>
             </div>
             <div class="col-md-6 item">
                 <div class="row">
                     <div class="col-md-2 text-right sub-title">Address:</div>
-                    <div class="col-md-10">{{property.address}}</div>
+                    <div class="col-md-10">{{property.property_address}}</div>
                 </div>
             </div>
         </div>

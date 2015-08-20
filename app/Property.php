@@ -28,7 +28,7 @@ class Property extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['owner_id', 'name', 'address'];
+	protected $fillable = ['owner_id', 'property_name', 'property_address'];
 
 	/**
 	 * Owner relationship

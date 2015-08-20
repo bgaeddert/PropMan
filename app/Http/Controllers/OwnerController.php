@@ -16,8 +16,9 @@ class OwnerController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct(){
+    public function __construct(Owner $owner){
         $this->middleware( 'auth' );
+        $this->owner = $owner;
     }
 
     /**
@@ -27,7 +28,7 @@ class OwnerController extends Controller
      */
     public function index(){
 
-        $owners = Owner::all();
+        $owners = Owner::where('org_id', \Auth::user()->org_id)->get();
 
         return \Response::json( [
             'success' => true,
@@ -54,9 +55,18 @@ class OwnerController extends Controller
     /**
      * @return mixed
      */
-    public function create(){
+    public function store(){
 
         $input = \Request::all();
+
+        $validator = \Validator::make($input, [
+            'org_id' => "in:" . \Auth::user()->org_id,
+            'owner_name' => 'required|max:255',
+        ]);
+
+        if($validator->fails())
+            \App::abort( 400, $validator->messages()->first() );
+
 
         $owner = Owner::create( $input );
 

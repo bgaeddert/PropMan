@@ -26,7 +26,15 @@ class EventServiceProvider extends ServiceProvider {
 	{
 		parent::boot($events);
 
-		//
+		\App\Owner::saving(function($owner)
+		{
+			if(empty($owner->owner_name))
+				$owner->owner_name = null;
+
+			$owner->org_id = \Auth::User()->org_id;
+
+			return $owner;
+		});
 	}
 
 }

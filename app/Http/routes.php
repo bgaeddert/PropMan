@@ -26,9 +26,6 @@ Route::controllers( [
 Route::group( [ 'prefix' => '/api', 'middleware' => 'auth' ], function (){
     Route::resource( 'owners', 'OwnerController' );
     Route::resource( 'properties', 'PropertyController' );
-    Route::get( 'user/{user_id}', 'UserController@getUser' );
-    Route::get( 'users', 'UserController@index' );
-    Route::post( 'users/test', 'UserController@postTest' );
 } );
 
 // Catch all route send you to the homeController. (index page)

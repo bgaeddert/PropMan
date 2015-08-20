@@ -18,15 +18,15 @@
 
     <section class="list-con row">
         <div id="owners-list" class="list col-md-12">
-            <div class="list-item listed-owner row" ng-repeat="owner in owners | filter:searchText | orderBy:'name'">
+            <div class="list-item listed-owner row" ng-repeat="owner in owners | filter:searchText | orderBy:'owner_name'">
 
                 <div class="col-md-12">
-                    <h3><i class="fa fa-briefcase"></i> <a ui-sref="viewOwner({owner_id : owner.id})">{{owner.name}}</a></h3>
+                    <h3><i class="fa fa-briefcase" ng-class="{inactive : owner.owner_active == 0}"></i> <a ui-sref="viewOwner({owner_id : owner.id})">{{owner.owner_name}}</a></h3>
                 </div>
                 <div class="col-md-8">
-                    <div class="">{{owner.email}}</div>
-                    <div class="">{{owner.phone}}</div>
-                    <div class="">{{owner.address}}</div>
+                    <div class="">{{owner.owner_email}}</div>
+                    <div class="">{{owner.owner_phone}}</div>
+                    <div class="">{{owner.owner_address}}</div>
                 </div>
                 <div class="buttons col-md-12">
                     <div class="pull-right">

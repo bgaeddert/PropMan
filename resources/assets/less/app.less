@@ -1,4 +1,4 @@
-@import "bootstrap/bootstrap";
+//@import "bootstrap/bootstrap";
 
 @btn-font-weight: 300;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
@@ -16,8 +16,18 @@ body {
   font-family: 'Open Sans', Tahoma, Arial;
 }
 
+@import "superhero";
+
 a:hover, a:focus {
   text-decoration: none;
+}
+
+.inactive{
+  color: #a94442;
+}
+
+#login-row{
+  margin-top: 20px;
 }
 
 #wrapper {
@@ -48,13 +58,13 @@ a:hover, a:focus {
   position: fixed;
   opacity: .99;
   left: 0;
-  background: #64676c;
+  background: #3E4B58;
   height: 100%;
   overflow-y: auto;
   -webkit-transition: all .25s ease-in-out;
   -moz-transition: all .25s ease-in-out;
   transition: all .25s ease-in-out;
-  top: 50px;
+  top: 40px;
 }
 
 .main-nav {
@@ -70,8 +80,8 @@ a:hover, a:focus {
 .main-nav li {
   line-height: 40px;
   padding: 0 15px;
-  border-bottom: 1px solid #585858;
-  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid #FFFFFF;
+  /*box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.12);*/
 }
 
 .main-nav li.main-search {
@@ -147,7 +157,7 @@ a:hover, a:focus {
 
     .list-item {
 
-      border-top: 1px solid #dddddd;
+      border-top: 1px solid #4e5d6c;
 
       padding-bottom: 5px;
 
@@ -180,8 +190,7 @@ a:hover, a:focus {
   }
 
   .tab-content {
-    border: 1px solid #ddd;
-    border-top: none;
+    border: 1px solid #4e5d6c;
 
     .tab-view {
       padding: 10px 0;

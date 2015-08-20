@@ -1,1 +1,0 @@
-<p>This is an included blade template.</p>

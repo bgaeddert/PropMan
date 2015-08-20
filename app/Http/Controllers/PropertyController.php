@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Property;
+use \App\Owner;
 
 
 /**
@@ -18,6 +19,7 @@ class PropertyController extends Controller
      */
     public function __construct(){
         $this->middleware( 'auth' );
+        $this->org_id = \Auth::user()->org_id;
     }
 
     /**
@@ -29,7 +31,10 @@ class PropertyController extends Controller
 
         $input = \Request::all();
 
-        $properties = Property::with('Owner');
+        $properties = Property::select()
+            ->join('owners', 'owners.id', '=', 'properties.owner_id')
+            ->where('org_id',\Auth::User()->org_id)
+            ->with('Owner');
 
         if(!empty($input['owner_id']))
             $properties = $properties->where('owner_id', $input['owner_id']);
@@ -46,9 +51,22 @@ class PropertyController extends Controller
     /**
      * @return mixed
      */
-    public function create(){
+    public function store(){
 
         $input = \Request::all();
+
+        $validator = \Validator::make($input, [
+            'owner_id' => 'required',
+            'property_name' => 'required|max:255',
+        ]);
+
+        if($validator->fails())
+            \App::abort( 400, $validator->messages()->first() );
+
+        $owner = Owner::findOrFail($input['owner_id']);
+
+        if($owner->org_id != $this->org_id)
+            \App::abort( 400, 'Invalid Organization!' );
 
         $property = Property::create( $input );
 

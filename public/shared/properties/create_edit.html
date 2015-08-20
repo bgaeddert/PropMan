@@ -2,8 +2,8 @@
     <div class="col-md-12">
         <div class="row">
             <div class="property-title col-md-8">
-                <h2>{{property.name}}</h2>
-                <h2 ng-if="!property.name">Untitled</h2>
+                <h2>{{property.property_name}}</h2>
+                <h2 ng-if="!property.property_name">Untitled</h2>
             </div>
             <div class="property-title col-md-4">
                 <!--<a ui-sref="owners/create" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>-->
@@ -18,10 +18,10 @@
             <form name="propertyForm" class="form col-md-8" novalidate>
 
                 <!-- Property Name -->
-                <div class="form-group" ng-class="{ 'has-error' : propertyForm.name.$invalid && ! propertyForm.name.$pristine }">
-                    <label for="name"><b>Name:</b> <span class="label-note-required">Required</span></label>
-                    <input type="text" id="name" name="name" class="form-control" ng-model="property.name" required>
-                    <p ng-show="propertyForm.name.$invalid && ! propertyForm.name.$pristine" class="help-block">Property name is required.</p>
+                <div class="form-group" ng-class="{ 'has-error' : propertyForm.property_name.$invalid && ! propertyForm.property_name.$pristine }">
+                    <label for="property_name"><b>Name:</b> <span class="label-note-required">Required</span></label>
+                    <input type="text" id="property_name" name="property_name" class="form-control" ng-model="property.property_name" required>
+                    <p ng-show="propertyForm.property_name.$invalid && ! propertyForm.property_name.$pristine" class="help-block">Property name is required.</p>
                 </div>
                 <!-- ./ Property Name -->
 
@@ -30,15 +30,15 @@
                     <label for="owners"><b>Owner:</b> <span class="label-note-optional">Required</span></label>
                     <select id="owners" name="owners" class="form-control"
                             ng-disabled="property.owner_id"
-                            ng-options="owner.name for owner in property.owners | orderBy:'name' track by owner.id"
+                            ng-options="owner.owner_name for owner in property.owners | orderBy:'owner_name' track by owner.id"
                             ng-model="selected" required></select>
                 </div>
                 <!-- ./ Property Owner -->
 
                 <!-- Property Address -->
                 <div class="form-group">
-                    <label for="address"><b>Address:</b> <span class="label-note-optional">Optional</span></label>
-                    <textarea type="text" id="address" name="address" class="form-control" ng-model="property.address"></textarea>
+                    <label for="property_address"><b>Address:</b> <span class="label-note-optional">Optional</span></label>
+                    <textarea type="text" id="property_address" name="property_address" class="form-control" ng-model="property.property_address"></textarea>
                 </div>
                 <!-- ./ Property Address -->
 
@@ -46,7 +46,7 @@
                 <div class="pull-left">
                     <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
                     <button class="btn btn-success" ng-click="onUpdate()" ng-if="id" ng-disabled="propertyForm.$invalid">Update</button>
-                    <button class="btn btn-success" ng-click="onCreate()" ng-hide="id" ng-disabled="propertyForm.$invalid">Save</button>
+                    <button class="btn btn-success" ng-click="onStore()" ng-hide="id" ng-disabled="propertyForm.$invalid">Save</button>
                 </div>
                 <!-- ./ Buttons -->
 

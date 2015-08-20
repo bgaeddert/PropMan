@@ -17,12 +17,12 @@ angular.module('propman').factory('propertyFactory', function($http){
             });
             return response;
         },
-        getCreate: function(requestData){
-            var url = '/api/properties/create/' ;
+        postStore: function(requestData){
+            var url = '/api/properties/' ;
             var response = $http({
-                method: "get",
+                method: "post",
                 url: url,
-                params: requestData
+                data: requestData
             });
             return response;
         },

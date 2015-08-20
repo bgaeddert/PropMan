@@ -2,8 +2,8 @@
     <div class="col-md-12">
         <div class="row">
             <div class="owner-title col-md-8">
-                <h2>{{owner.name}}</h2>
-                <h2 ng-if="!owner.name">Untitled</h2>
+                <h2>{{owner.owner_name}}</h2>
+                <h2 ng-if="!owner.owner_name">Untitled</h2>
             </div>
             <div class="owner-title col-md-4">
                 <!--<a ui-sref="owners/create" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>-->
@@ -17,35 +17,37 @@
         <div class="row">
             <form name="ownerForm" class="form col-md-8" novalidate>
 
+                <input type="hidden" name="org_id" value="{{owner.org_id}}">
+
                 <!-- Owner Name -->
                 <div class="form-group" ng-class="{ 'has-error' : ownerForm.name.$invalid && ! ownerForm.name.$pristine }">
-                    <label for="name"><b>Name:</b> <span class="label-note-required">Required</span></label>
-                    <input type="text" id="name" name="name" class="form-control" ng-model="owner.name" required>
-                    <p ng-show="ownerForm.name.$invalid && ! ownerForm.name.$pristine" class="help-block">Owner name is required.</p>
+                    <label for="owner_name"><b>Name:</b> <span class="label-note-required">Required</span></label>
+                    <input type="text" id="owner_name" name="owner_name" class="form-control" ng-model="owner.owner_name" required>
+                    <p ng-show="ownerForm.owner_name.$invalid && ! ownerForm.owner_name.$pristine" class="help-block">Owner name is required.</p>
                 </div>
                 <!-- ./ Owner Name -->
 
                 <!-- Owner Email -->
                 <div class="form-group">
-                    <label for="email"><b>Email:</b> <span class="label-note-optional">Optional</span></label>
-                    <input type="email" id="email" name="email" class="form-control" ng-model="owner.email">
+                    <label for="owner_email"><b>Email:</b> <span class="label-note-optional">Optional</span></label>
+                    <input type="email" id="owner_email" name="owner_email" class="form-control" ng-model="owner.owner_email">
                 </div>
                 <!-- ./ Owner Email -->
 
                 <div class="form-group">
-                    <label for="phone"><b>Phone:</b> <span class="label-note-optional">Optional</span></label>
-                    <input type="phone" id="phone" name="phone" class="form-control" ng-model="owner.phone">
+                    <label for="owner_phone"><b>Phone:</b> <span class="label-note-optional">Optional</span></label>
+                    <input type="phone" id="owner_phone" name="owner_phone" class="form-control" ng-model="owner.owner_phone">
                 </div>
 
                 <div class="form-group">
-                    <label for="address"><b>Address:</b> <span class="label-note-optional">Optional</span></label>
-                    <textarea type="text" id="address"  name="address" class="form-control" ng-model="owner.address"></textarea>
+                    <label for="owner_address"><b>Address:</b> <span class="label-note-optional">Optional</span></label>
+                    <textarea type="text" id="owner_address"  name="owner_address" class="form-control" ng-model="owner.owner_address"></textarea>
                 </div>
 
                 <div class="pull-left">
                     <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
                     <button class="btn btn-success" ng-click="onUpdate()" ng-if="id" ng-disabled="ownerForm.$invalid">Update</button>
-                    <button class="btn btn-success" ng-click="onCreate()" ng-hide="id" ng-disabled="ownerForm.$invalid">Save</button>
+                    <button class="btn btn-success" ng-click="onStore()" ng-hide="id" ng-disabled="ownerForm.$invalid">Save</button>
                 </div>
             </form>
         </div>

@@ -15,13 +15,16 @@ class CreatePropertiesTable extends Migration {
 		Schema::create('properties', function(Blueprint $table)
 		{
 			$table->increments('id');
+
 			$table->integer('owner_id')->unsigned();
-			$table->string('name');
-			$table->longText('address')->nullable();
+			$table->foreign('owner_id')->references('id')->on('owners');
+
+			$table->boolean('property_active')->default(true);
+			$table->string('property_name');
+			$table->longText('property_address')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 
-			$table->foreign('owner_id')->references('id')->on('owners');
 		});
 	}
 

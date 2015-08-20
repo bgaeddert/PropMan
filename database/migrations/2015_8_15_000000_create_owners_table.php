@@ -15,10 +15,15 @@ class CreateOwnersTable extends Migration {
 		Schema::create('owners', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->string('email')->nullable();
-			$table->longText('address')->nullable();
-			$table->string('phone')->nullable();
+
+			$table->integer('org_id')->unsigned();
+			$table->foreign('org_id')->references('id')->on('orgs');
+
+			$table->boolean('owner_active')->default(true);
+			$table->string('owner_name');
+			$table->string('owner_email')->nullable();
+			$table->longText('owner_address')->nullable();
+			$table->string('owner_phone')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

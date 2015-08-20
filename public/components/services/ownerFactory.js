@@ -18,12 +18,12 @@ angular.module('propman').factory('ownerFactory', function($http){
             });
             return response;
         },
-        getCreate: function(requestData){
-            var url = '/api/owners/create/' ;
+        postStore: function(requestData){
+            var url = '/api/owners/' ;
             var response = $http({
-                method: "get",
+                method: "post",
                 url: url,
-                params: requestData
+                data: requestData
             });
             return response;
         },

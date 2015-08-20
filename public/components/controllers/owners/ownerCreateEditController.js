@@ -19,24 +19,24 @@ angular.module('propman').controller('ownerCreateEditController',
             ownerFactory.putUpdate(requestData)
                 .success(function(dataResponse){
                     $scope.owner = dataResponse.data;
-                    toastr.success('Owner ' + $scope.owner.name + ' updated!')
+                    successHandler('Owner ' + $scope.owner.owner_name + ' Updated!');
                 })
                 .error(function(error){
                     errorHandler(error)
                 });
         };
 
-        $scope.onCreate = function(){
+        $scope.onStore = function(){
 
             if ($scope.ownerForm.$invalid) {
                 return;
             }
 
             requestData = $scope.owner;
-            ownerFactory.getCreate(requestData)
+            ownerFactory.postStore(requestData)
                 .success(function(dataResponse){
                     $scope.owner = dataResponse.data;
-                    toastr.success('Owner ' + $scope.owner.name + ' created!')
+                    successHandler('Owner ' + $scope.owner.owner_name + ' created!');
                     history.go(-1);
                 })
                 .error(function(error){
@@ -76,6 +76,9 @@ angular.module('propman').controller('ownerCreateEditController',
 
         if($scope.id){
             $scope.getOwner();
+        }else{
+            $scope.owner = {};
+            $scope.owner.org_id = $rootScope.user.org_id
         }
 
     });
