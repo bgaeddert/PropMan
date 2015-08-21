@@ -1,13 +1,12 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Owner
  * @package App
  */
-class Owner extends Model{
+class Org extends Model{
 
 	use SoftDeletes;
 
@@ -16,19 +15,14 @@ class Owner extends Model{
 	 *
 	 * @var string
 	 */
-	protected $table = 'owners';
-
-	/**
-	 * @var array
-     */
-	protected $dates = ['deleted_at'];
+	protected $table = 'orgs';
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['org_id', 'owner_name', 'owner_email', 'owner_address', 'owner_phone'];
+	protected $fillable = [];
 
 	/**
 	 * Property relationship
@@ -37,9 +31,9 @@ class Owner extends Model{
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
-	public function Properties(){
+	public function Owners(){
 
-		return $this->hasMany('App\Property', 'id');
+		return $this->hasMany('App\Models\Owners', 'id');
 
 	}
 

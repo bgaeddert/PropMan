@@ -47,10 +47,6 @@
         //
         // Now set up the states
         $stateProvider
-            .state('home', {
-                url: "/",
-                templateUrl: "/shared/home.html"
-            })
 
             /*-----------------------------
              |  Owners
@@ -116,6 +112,12 @@
                 url: "/users",
                 templateUrl: "/shared/users/index.html"
             })
+
+
+            .state('home', {
+                url: "/",
+                templateUrl: "/shared/home.html"
+            })
         ;
 
         $locationProvider
@@ -127,7 +129,7 @@
 
 })();
 
-
+/*Javascript filter - Using angular instead*/
 /**
  * Returns a object in an array of objects
  * that has a property whose value matches
@@ -138,26 +140,26 @@
  * @param find
  * @returns {*}
  */
-function where(objectArray, property, find){
-
-    if( ! objectArray )      throw 'Argument 1 is required.';
-    if( ! property )    throw 'Argument 2 is required.';
-    if( ! find )        throw 'Argument 3 is required.';
-    if( typeof objectArray !== 'object' ) throw 'Argument 1 requires an objectArray but a ' + typeof object + ' provided.';
-    if( typeof property !== 'string' ) throw 'Argument 2 requires a string but a ' + typeof property + ' provided.';
-    if( typeof find !== 'string' ) throw 'Argument 3 requires a string but a ' + typeof find + ' provided.';
-
-    var index = null;
-
-    objectArray.map(function (value, key) {
-        if(value.hasOwnProperty(property)){
-            if(value.id == find){
-                index = key;
-            }
-        }else{
-            return -1;
-        }
-    });
-
-    return objectArray[index];
-}
+//function where(objectArray, property, find){
+//
+//    if( ! objectArray )      throw 'Argument 1 is required.';
+//    if( ! property )    throw 'Argument 2 is required.';
+//    if( ! find )        throw 'Argument 3 is required.';
+//    if( typeof objectArray !== 'object' ) throw 'Argument 1 requires an objectArray but a ' + typeof object + ' provided.';
+//    if( typeof property !== 'string' ) throw 'Argument 2 requires a string but a ' + typeof property + ' provided.';
+//    if( typeof find !== 'string' ) throw 'Argument 3 requires a string but a ' + typeof find + ' provided.';
+//
+//    var index = null;
+//
+//    objectArray.map(function (value, key) {
+//        if(value.hasOwnProperty(property)){
+//            if(value.id == find){
+//                index = key;
+//            }
+//        }else{
+//            return -1;
+//        }
+//    });
+//
+//    return objectArray[index];
+//}

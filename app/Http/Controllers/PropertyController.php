@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use \App\Property;
-use \App\Owner;
+use \App\Models\Property;
+use \App\Models\Owner;
 
 
 /**
@@ -31,13 +31,10 @@ class PropertyController extends Controller
 
         $input = \Request::all();
 
-        $properties = Property::select()
-            ->join('owners', 'owners.id', '=', 'properties.owner_id')
-            ->where('org_id',\Auth::User()->org_id)
-            ->with('Owner');
+        $properties = Property::with('Owner');
 
         if(!empty($input['owner_id']))
-            $properties = $properties->where('owner_id', $input['owner_id']);
+            $properties = Property::ByOwner($input['owner_id']);
 
         $properties = $properties->get();
 
@@ -63,12 +60,11 @@ class PropertyController extends Controller
         if($validator->fails())
             \App::abort( 400, $validator->messages()->first() );
 
-        $owner = Owner::findOrFail($input['owner_id']);
+        $property = new Property($input);
 
-        if($owner->org_id != $this->org_id)
-            \App::abort( 400, 'Invalid Organization!' );
+        $owner = Owner::find($input['owner_id']);
 
-        $property = Property::create( $input );
+        $property = $owner->Properties()->save($property);
 
         return \Response::json( [
             'success' => true,
@@ -99,7 +95,7 @@ class PropertyController extends Controller
      */
     public function edit( $id ){
 
-        $property = Property::findOrFail( $id );
+        $property = Property::with('Owner')->findOrFail( $id );
 
         return \Response::json( [
             'success' => true,

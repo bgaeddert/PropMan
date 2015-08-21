@@ -22,23 +22,23 @@ angular.module('propman').controller('propertyViewController',
         |
          */
 
-        $scope.tabs = [
-            {heading: "Tenants", route: "viewProperty.tenants", active: false},
-            {heading: "Transactions", route: "viewProperty.transactions", active: false}
-        ];
+        //$scope.tabs = [
+        //    {heading: "Units", route: "viewProperty.Units", active: false},
+        //    {heading: "Transactions", route: "viewProperty.transactions", active: false}
+        //];
 
-        $scope.go = function(route){
-            $state.go(route);
-        };
-
-        $scope.active = function(route){
-            return $state.is(route);
-        };
-
-        $scope.$on("$stateChangeSuccess", function() {
-            $scope.tabs.forEach(function(tab) {
-                tab.active = $scope.active(tab.route);
-            });
-        });
+        //$scope.go = function(route){
+        //    $state.go(route);
+        //};
+        //
+        //$scope.active = function(route){
+        //    return $state.is(route);
+        //};
+        //
+        //$scope.$on("$stateChangeSuccess", function() {
+        //    $scope.tabs.forEach(function(tab) {
+        //        tab.active = $scope.active(tab.route);
+        //    });
+        //});
 
     });

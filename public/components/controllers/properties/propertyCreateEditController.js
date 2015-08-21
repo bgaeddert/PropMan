@@ -68,6 +68,7 @@ angular.module('propman').controller('propertyCreateEditController',
             propertyFactory.getEdit(requestData)
                 .success(function(dataResponse){
                     $scope.property = dataResponse.data;
+                    $scope.loadOwnerOptions();
                 })
                 .error(function(error){
                     errorHandler(error)
@@ -77,10 +78,25 @@ angular.module('propman').controller('propertyCreateEditController',
         $scope.loadOwnerOptions = function(){
             propertyFactory.getOwnerOptions()
                 .success(function(dataResponse){
-                    $scope.property.owners = dataResponse.data;
+                    $scope.property.owners = $filter('filter')(dataResponse.data,{owner_active:1});
 
                     if($scope.property.hasOwnProperty('owner_id')){
-                        $scope.selected = where($scope.property.owners, 'id', $scope.property.owner_id);
+                        $scope.selected = $filter('filter')($scope.property.owners,{owner_id:$scope.property.owner_id});
+                    }
+
+                    $scope.tmp = {};
+
+                    if($scope.property.owners.length === 0){
+                        $scope.tmp.warn = true;
+                        $scope.tmp.warning = {};
+                        $scope.tmp.warning.title = $sce.trustAsHtml("<h2>You must create an owner first.</h2>");
+                    }else{
+                        $scope.tmp.warn = false;
+                        if($scope.id){
+                            $scope.tmp.edit = true;
+                        }else{
+                            $scope.tmp.create = true;
+                        }
                     }
                 })
                 .error(function(error){
@@ -99,17 +115,18 @@ angular.module('propman').controller('propertyCreateEditController',
         // Get params from router
         $scope.id = $stateParams.property_id;
 
+
         if($scope.id){
             // Edit property
             $scope.getProperty();
             $scope.loadOwnerOptions();
-
         }else{
             // Create property
             $scope.property = {};
-            $scope.property.owner_id = $stateParams.owner_id;
+            if($stateParams.owner_id){
+                $scope.property.owner_id = $stateParams.owner_id;
+            }
             $scope.loadOwnerOptions();
-
         }
 
     });

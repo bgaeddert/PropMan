@@ -1,14 +1,9 @@
-//@import "bootstrap/bootstrap";
 
 @btn-font-weight: 300;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 
 body, label, .checkbox label {
   font-weight: 300;
-}
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
-  display: none !important;
 }
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
@@ -23,7 +18,7 @@ a:hover, a:focus {
 }
 
 .inactive{
-  color: #a94442;
+  color: #E4211D;
 }
 
 #login-row{
@@ -171,9 +166,16 @@ a:hover, a:focus {
 
   padding-bottom: 10px;
 
-  .owner-title {
+  .index-title {
     h2 {
       margin-top: 0px;
+    }
+  }
+
+  .form-title {
+    h2 {
+      margin-top: 0px;
+      text-decoration: underline;
     }
   }
 }
@@ -202,7 +204,7 @@ a:hover, a:focus {
 .panel{
   .panel-heading{
     h1,h2,h3,h4,h5{
-      margin: 0;
+      margin: 0 0 5px 0;
     }
   }
   .panel-body{
@@ -216,3 +218,10 @@ a:hover, a:focus {
   }
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+  display: none !important;
+}
+
+.display{
+  display: block !important;
+}

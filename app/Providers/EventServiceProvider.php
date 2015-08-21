@@ -26,7 +26,7 @@ class EventServiceProvider extends ServiceProvider {
 	{
 		parent::boot($events);
 
-		\App\Owner::saving(function($owner)
+		\App\Models\Owner::saving(function($owner)
 		{
 			if(empty($owner->owner_name))
 				$owner->owner_name = null;
@@ -34,6 +34,16 @@ class EventServiceProvider extends ServiceProvider {
 			$owner->org_id = \Auth::User()->org_id;
 
 			return $owner;
+		});
+
+		\App\Models\Property::saving(function($property)
+		{
+			if(empty($property->property_name))
+				$property->owner_name = null;
+
+			$property->org_id = \Auth::User()->org_id;
+
+			return $property;
 		});
 	}
 

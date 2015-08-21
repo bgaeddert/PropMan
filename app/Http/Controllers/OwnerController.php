@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use \App\Owner;
+use \App\Models\Owner;
 
 
 /**
@@ -28,7 +28,7 @@ class OwnerController extends Controller
      */
     public function index(){
 
-        $owners = Owner::where('org_id', \Auth::user()->org_id)->get();
+        $owners = Owner::all();
 
         return \Response::json( [
             'success' => true,

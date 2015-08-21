@@ -1,5 +1,6 @@
-<?php namespace App;
+<?php namespace App\Models;
 
+use App\ModelScopes\PropertiesByOrgTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Property extends Model{
 
 	use SoftDeletes;
+	use PropertiesByOrgTrait;
 
 	/**
 	 * The database table used by the model.
@@ -28,7 +30,9 @@ class Property extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['owner_id', 'property_name', 'property_address'];
+	protected $fillable = ['org_id', 'owner_id', 'property_active', 'property_name', 'property_address'];
+
+	protected $guarded = ['id'];
 
 	/**
 	 * Owner relationship
@@ -39,8 +43,13 @@ class Property extends Model{
      */
 	public function Owner(){
 
-		return $this->belongsTo('App\Owner', 'owner_id');
+		return $this->belongsTo('App\Models\Owner');
 
+	}
+
+	public function scopeByOwner($query, $owner_id)
+	{
+		return $query->where('owner_id', '=', $owner_id);
 	}
 
 }

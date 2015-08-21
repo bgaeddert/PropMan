@@ -1,23 +1,37 @@
 <section id="control-bar" class="row">
     <div class="col-md-12">
         <div class="row">
-            <div class="owner-title col-md-8">
-                <h2>{{owner.owner_name}}</h2>
-                <h2 ng-if="!owner.owner_name">Untitled</h2>
-            </div>
-            <div class="owner-title col-md-4">
-                <!--<a ui-sref="owners/create" class="btn btn-info  pull-right"><i class="fa fa-plus"></i> Create</a>-->
+            <div class="form-title col-md-8">
+                <h2 ng-if="owner.id">Edit: Owner</h2>
+                <h2 ng-if="!owner.id">Create: Owner</h2>
+
             </div>
         </div>
     </div>
 </section>
 
 <section id="item-view" class="row">
-    <div class="col-md-12">
-        <div class="row">
-            <form name="ownerForm" class="form col-md-8" novalidate>
+    <div class="col-md-6">
+            <h3>
+                <i class="fa fa-briefcase"></i> {{owner.owner_name}}
+                <span ng-if="!owner.owner_name">Untitled</span>
+            </h3>
+            <h4>
+                <span class="label label-danger" ng-show="owner.owner_active == 0">INACTIVE</span>
+            </h4>
+            <form name="ownerForm" class="form" novalidate>
 
-                <input type="hidden" name="org_id" value="{{owner.org_id}}">
+                <!-- Owner Active -->
+                <div class="form-group">
+                    <label for="owner_active"><b>Active: </b>
+                        <input type="checkbox" id="owner_active" name="owner_active" class="form-control"
+                           ng-true-value="'1'"
+                           ng-false-value="'0'"
+                           ng-model="owner.owner_active"
+                           ng-checked="owner.owner_active === 1 || owner.owner_active === null"
+                        /></label>
+                </div>
+                <!-- ./ Owner Active -->
 
                 <!-- Owner Name -->
                 <div class="form-group" ng-class="{ 'has-error' : ownerForm.name.$invalid && ! ownerForm.name.$pristine }">
@@ -50,6 +64,5 @@
                     <button class="btn btn-success" ng-click="onStore()" ng-hide="id" ng-disabled="ownerForm.$invalid">Save</button>
                 </div>
             </form>
-        </div>
     </div>
 </section>

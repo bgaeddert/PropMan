@@ -5,15 +5,6 @@ label,
 .checkbox label {
   font-weight: 300;
 }
-[ng\:cloak],
-[ng-cloak],
-[data-ng-cloak],
-[x-ng-cloak],
-.ng-cloak,
-.x-ng-cloak,
-.ng-hide {
-  display: none !important;
-}
 body {
   font-family: 'Open Sans', Tahoma, Arial;
 }
@@ -6986,7 +6977,7 @@ a:focus {
   text-decoration: none;
 }
 .inactive {
-  color: #a94442;
+  color: #E4211D;
 }
 #login-row {
   margin-top: 20px;
@@ -7094,8 +7085,12 @@ a:focus {
 #control-bar {
   padding-bottom: 10px;
 }
-#control-bar .owner-title h2 {
+#control-bar .index-title h2 {
   margin-top: 0px;
+}
+#control-bar .form-title h2 {
+  margin-top: 0px;
+  text-decoration: underline;
 }
 .tab-section {
   margin-bottom: 10px;
@@ -7114,13 +7109,25 @@ a:focus {
 .panel .panel-heading h3,
 .panel .panel-heading h4,
 .panel .panel-heading h5 {
-  margin: 0;
+  margin: 0 0 5px 0;
 }
 .panel .panel-body .item {
   padding: 5px 0;
 }
 .panel .panel-body .sub-title {
   font-weight: bold;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+.display {
+  display: block !important;
 }
 
 /*# sourceMappingURL=app.css.map */

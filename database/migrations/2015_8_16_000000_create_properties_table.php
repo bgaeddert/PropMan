@@ -16,6 +16,9 @@ class CreatePropertiesTable extends Migration {
 		{
 			$table->increments('id');
 
+			$table->integer('org_id')->unsigned();
+			$table->foreign('org_id')->references('id')->on('orgs');
+
 			$table->integer('owner_id')->unsigned();
 			$table->foreign('owner_id')->references('id')->on('owners');
 

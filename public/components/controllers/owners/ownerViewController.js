@@ -60,8 +60,8 @@ angular.module('propman').controller('ownerViewController',
         $scope.id = $stateParams.owner_id;
 
         if($scope.id){
-            $scope.getOwner()
-            $scope.go("viewOwner.properties");
+            $scope.getOwner();
+            //$scope.go("viewOwner.properties");
         }
 
     });

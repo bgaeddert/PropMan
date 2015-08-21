@@ -1,7 +1,12 @@
 <section id="control-bar">
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h2>{{property.property_name}}&ensp;</h2></div>
+        <div class="panel-heading">
+            <h2><i class="fa fa-building"></i> {{property.property_name}}</h2>
+            <h4>
+                <span class="label label-danger" ng-show="property.property_active == 0">INACTIVE</span>
+            </h4>
+        </div>
         <div class="panel-body">
             <div class="col-md-6">
                 <div class="row item">
@@ -15,6 +20,11 @@
                     <div class="col-md-10">{{property.property_address}}</div>
                 </div>
             </div>
+        </div>
+        <div class="panel-footer">
+            <a ui-sref="editProperty({property_id : property.id})" class="btn btn-primary">
+                <i class="fa fa-pencil"></i> Edit
+            </a>
         </div>
     </div>
 
