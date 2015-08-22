@@ -1,5 +1,5 @@
 angular.module('propman').controller('ownerCreateEditController',
-    function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, ownerFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, ownerFactory){
 
         /*
          |-----------------------------------

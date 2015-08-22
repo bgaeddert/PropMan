@@ -1,5 +1,5 @@
 angular.module('propman').controller('propertyViewController',
-    function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, propertyFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, propertyFactory){
 
         $scope.id = $stateParams.property_id;
 

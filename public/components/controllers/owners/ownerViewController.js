@@ -1,5 +1,5 @@
 angular.module('propman').controller('ownerViewController',
-    function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, ownerFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, ownerFactory){
 
         /*
          |-----------------------------------
@@ -28,25 +28,25 @@ angular.module('propman').controller('ownerViewController',
         |
          */
 
-        $scope.tabs = [
-            {heading: "Properties", route: "viewOwner.properties", active: false},
-            {heading: "New Property", route: "viewOwner.createProperty", active: false},
-            {heading: "Transactions", route: "viewOwner.transactions", active: false}
-        ];
-
-        $scope.go = function(route){
-            $state.go(route);
-        };
-
-        $scope.active = function(route){
-            return $state.is(route);
-        };
-
-        $scope.$on("$stateChangeSuccess", function() {
-            $scope.tabs.forEach(function(tab) {
-                tab.active = $scope.active(tab.route);
-            });
-        });
+        //$scope.tabs = [
+        //    {heading: "Properties", route: "viewOwner.properties", active: false},
+        //    {heading: "New Property", route: "viewOwner.createProperty", active: false},
+        //    {heading: "Transactions", route: "viewOwner.transactions", active: false}
+        //];
+        //
+        //$scope.go = function(route){
+        //    $state.go(route);
+        //};
+        //
+        //$scope.active = function(route){
+        //    return $state.is(route);
+        //};
+        //
+        //$scope.$on("$stateChangeSuccess", function() {
+        //    $scope.tabs.forEach(function(tab) {
+        //        tab.active = $scope.active(tab.route);
+        //    });
+        //});
 
 
         /*

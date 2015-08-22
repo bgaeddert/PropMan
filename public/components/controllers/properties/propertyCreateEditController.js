@@ -1,5 +1,5 @@
 angular.module('propman').controller('propertyCreateEditController',
-    function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
 
         /*
         |-----------------------------------
@@ -81,8 +81,11 @@ angular.module('propman').controller('propertyCreateEditController',
                     $scope.property.owners = $filter('filter')(dataResponse.data,{owner_active:1});
 
                     if($scope.property.hasOwnProperty('owner_id')){
-                        $scope.selected = $filter('filter')($scope.property.owners,{owner_id:$scope.property.owner_id});
+                        $scope.selected = $filter('filter')($scope.property.owners,{id:$scope.property.owner_id});
+                        $scope.selected = $scope.selected[0];
                     }
+
+                    console.log($scope.selected);
 
                     $scope.tmp = {};
 
@@ -115,11 +118,9 @@ angular.module('propman').controller('propertyCreateEditController',
         // Get params from router
         $scope.id = $stateParams.property_id;
 
-
         if($scope.id){
             // Edit property
             $scope.getProperty();
-            $scope.loadOwnerOptions();
         }else{
             // Create property
             $scope.property = {};

@@ -1,5 +1,5 @@
 angular.module('propman').controller('propertyIndexController',
-    function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
 
     $scope.owner_id = $stateParams.owner_id;
 
@@ -13,6 +13,14 @@ angular.module('propman').controller('propertyIndexController',
             .error(function(error){
                 errorHandler(error)
             });
+    };
+
+    $scope.createRoute = function(){
+        if($stateParams.owner_id){
+            return 'viewOwner.createProperty';
+        }else{
+            return 'createProperty';
+        }
     };
 
     $scope.onGetProperties();

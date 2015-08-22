@@ -1,4 +1,5 @@
-angular.module('propman').controller('ownerIndexController', function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, ownerFactory){
+angular.module('propman').controller('ownerIndexController',
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, ownerFactory){
 
 
     $scope.onGetOwners = function(){

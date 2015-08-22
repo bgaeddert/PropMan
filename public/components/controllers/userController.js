@@ -1,4 +1,5 @@
-angular.module('propman').controller('userController', function($rootScope, $scope, $window, $http, $sce, $filter, $compile, $timeout, userFactory ){
+angular.module('propman').controller('userController',
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, userFactory ){
 
     $rootScope.user = {id:null};
 

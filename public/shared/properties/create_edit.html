@@ -2,8 +2,10 @@
     <div class="col-md-12">
         <div class="row">
             <div class="form-title col-md-8">
+                <!-- Page TITLE -->
                 <h2 ng-show="tmp.edit === true">Edit: Property</h2>
                 <h2 ng-show="tmp.create === true">Create: Property</h2>
+                <!-- ./ Page TITLE -->
             </div>
         </div>
     </div>
@@ -55,6 +57,7 @@
                     <div class="form-group">
                         <label for="owners"><b>Owner:</b> <span class="label-note-optional">Required</span></label>
                         <select id="owners" name="owners" class="form-control"
+                                ng-class="{disabled:owner}"
                                 ng-disabled="property.owner_id"
                                 ng-options="owner.owner_name for owner in property.owners | orderBy:'owner_name' track by owner.id"
                                 ng-model="selected" required></select>

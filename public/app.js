@@ -41,7 +41,7 @@
         //
         // For any unmatched url, redirect to /home
         $urlRouterProvider.otherwise(function($injector, $location){
-            return "home";
+            return "/";
         });
 
         //
@@ -77,7 +77,7 @@
             })
             // TODO BRIAN - fix outside route
             .state('viewOwner.createProperty', {
-                url: "properties/create/",
+                url: "properties/create",
                 templateUrl: '/shared/properties/create_edit.html',
                 controller: 'propertyCreateEditController'
             })
