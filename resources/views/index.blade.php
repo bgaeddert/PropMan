@@ -51,24 +51,31 @@
 <div id="wrapper">
     <aside id="sideBar">
         <ul class="main-nav">
-            <li>
+
+            <li ui-sref-active="active">
                 <a ui-sref="owners"><i class="fa fa-briefcase"></i> Owners</a>
             </li>
-            <li>
+
+            <li ui-sref-active="active">
                 <a ui-sref="properties"><i class="fa fa-building"></i> Properties</a>
             </li>
-            <li>
+
+            <li ui-sref-active="active">
                 <a ui-sref="units"><i class="fa fa-home"></i> Units</a>
             </li>
-            <li>
+
+            <li ui-sref-active="active">
                 <a ui-sref="tenants"><i class="fa fa-users"></i> Tenants</a>
             </li>
-            <li>
+
+            <li ui-sref-active="active">
                 <a ui-sref="transactions"><i class="fa fa-money"></i> Transactions</a>
             </li>
-            <li>
+
+            <li ui-sref-active="active">
                 <a ui-sref="reports "><i class="fa fa-list-alt"></i> Reports</a>
             </li>
+
         </ul>
     </aside>
 

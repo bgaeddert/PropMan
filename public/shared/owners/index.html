@@ -1,58 +1,66 @@
-<div ng-controller="ownerIndexController">
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="index-title col-md-8">
+                <h2><i class="fa fa-briefcase"></i> Owners</h2>
+            </div>
 
-    <section id="control-bar" class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="index-title col-md-8">
-                    <h2><i class="fa fa-briefcase"></i> Owners</h2>
-                </div>
-                <div class="col-md-4">
-                    <a ui-sref="createOwner" class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Create</a>
+            <!--Create Button-->
+            <div class="col-md-4">
+                <a ui-sref="owners.createOwner" class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Create</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="controls col-md-4">
+        <input class="form-control pull-right" placeholder="Search" ng-model="searchText"/>
+    </div>
+</section>
+
+<section class="list-con row">
+
+    <!--Owner List-->
+    <div id="owners-list" class="list col-md-12">
+        <div class="list-item listed-owner row"
+             ng-repeat="owner in owners | filter:searchText | orderBy:['-owner_active','owner_name']">
+
+            <div class="col-md-12">
+                <h3>
+                    <i class="fa fa-briefcase"></i>
+
+                    <!--View Link-->
+                    <a ui-sref="owners.viewOwner({owner_id : owner.id})">{{owner.owner_name}}</a>
+                </h3>
+                <h4>
+                    <span class="label label-danger" ng-show="owner.owner_active == 0">INACTIVE</span>
+                </h4>
+            </div>
+            <div class="col-md-8">
+                <div class="">{{owner.owner_email}}</div>
+                <div class="">{{owner.owner_phone}}</div>
+                <div class="">{{owner.owner_address}}</div>
+            </div>
+            <div class="buttons col-md-12">
+                <div class="pull-right">
+
+                    <!--View Button-->
+                    <a ui-sref="owners.viewOwner({owner_id : owner.id})" class="btn btn-info"><i class="fa fa-eye"></i>
+                        View</a>
+
+                    <!--Edit Button-->
+                    <a ui-sref="owners.editOwner({owner_id : owner.id})" class="btn btn-primary"><i
+                            class="fa fa-pencil"></i> Edit</a>
                 </div>
             </div>
         </div>
-        <div class="controls col-md-4">
-            <input class="form-control pull-right" placeholder="Search" ng-model="searchText"/>
+    </div>
+    <!--Empty-->
+    <div class="list col-md-12">
+
+        <!--Create Button-->
+        <div class="well">
+            <a ui-sref="owners.createOwner" class="btn btn-primary"><i class="fa fa-plus"></i> Create</a>
         </div>
-    </section>
 
-    <section class="list-con row">
-
-        <!--Owner List-->
-        <div id="owners-list" class="list col-md-12">
-            <div class="list-item listed-owner row"
-                 ng-repeat="owner in owners | filter:searchText | orderBy:['-owner_active','owner_name']">
-
-                <div class="col-md-12">
-                    <h3>
-                        <i class="fa fa-briefcase"></i>
-                        <a ui-sref="viewOwner.properties({owner_id : owner.id})">{{owner.owner_name}}</a>
-                    </h3>
-                    <h4>
-                        <span class="label label-danger" ng-show="owner.owner_active == 0">INACTIVE</span>
-                    </h4>
-                </div>
-                <div class="col-md-8">
-                    <div class="">{{owner.owner_email}}</div>
-                    <div class="">{{owner.owner_phone}}</div>
-                    <div class="">{{owner.owner_address}}</div>
-                </div>
-                <div class="buttons col-md-12">
-                    <div class="pull-right">
-                        <a ui-sref="viewOwner({owner_id : owner.id})" class="btn btn-info"><i class="fa fa-eye"></i>
-                            View</a>
-                        <a ui-sref="editOwner({owner_id : owner.id})" class="btn btn-primary"><i
-                                class="fa fa-pencil"></i> Edit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Empty-->
-        <div class="list col-md-12">
-            <div class="well">
-                <a ui-sref="createOwner" class="btn btn-primary"><i class="fa fa-plus"></i> Create</a>
-            </div>
-        </div>
-    </section>
-
-</div>
+    </div>
+</section>

@@ -17,7 +17,7 @@ angular.module('propman').controller('propertyIndexController',
 
     $scope.createRoute = function(){
         if($stateParams.owner_id){
-            return 'viewOwner.createProperty';
+            return 'owners.viewOwner.createProperty';
         }else{
             return 'createProperty';
         }

@@ -1,18 +1,19 @@
 angular.module('propman').controller('ownerIndexController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, ownerFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, ownerFactory, owners ){
 
+        $scope.owners = owners;
 
-    $scope.onGetOwners = function(){
-        requestData = {};
-        ownerFactory.getOwners(requestData)
-            .success(function(dataResponse){
-                $scope.owners = dataResponse.data;
-            })
-            .error(function(error){
-                errorHandler(error)
-            });
-    };
-
-    $scope.onGetOwners();
+    //$scope.onGetOwners = function(){
+    //    requestData = {};
+    //    ownerFactory.getOwners(requestData)
+    //        .success(function(dataResponse){
+    //            $scope.owners = dataResponse.data;
+    //        })
+    //        .error(function(error){
+    //            errorHandler(error)
+    //        });
+    //};
+    //
+    //$scope.onGetOwners();
 
 });

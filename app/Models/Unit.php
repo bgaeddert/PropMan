@@ -47,11 +47,6 @@ class Unit extends Model{
 
 	}
 
-	//public function Owner()
-	//{
-	//	return $this->Property->belongsTo('App\Models\Owner');
-	//}
-
 	public function scopeByProperty($query, $property_id)
 	{
 		return $query->where('property_id', '=', $property_id);

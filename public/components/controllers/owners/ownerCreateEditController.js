@@ -1,5 +1,5 @@
 angular.module('propman').controller('ownerCreateEditController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, ownerFactory, handlerFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, ownerFactory, handlerFactory, owner){
 
         /*
          |-----------------------------------
@@ -8,94 +8,24 @@ angular.module('propman').controller('ownerCreateEditController',
          |
          |
          */
-
-        /**
-         * Update Owner with new owner model.
-         *
-         * Success :
-         *  - Load current model with returned data.
-         *  - Display success.
-         *
-         * Error :
-         *  - Display error.
-         *
-         * Any :
-         *  - No redirect.
-         */
         $scope.onUpdate = function(){
 
             if ($scope.ownerForm.$invalid) {
                 return;
             }
 
-            requestData = $scope.owner;
-            ownerFactory.putUpdate(requestData)
-                .success(function(dataResponse){
-                    $scope.owner = dataResponse.data;
-                    handlerFactory.successHandler('Owner ' + $scope.owner.owner_name + ' Updated!');
-                })
-                .error(function(error){
-                    handlerFactory.errorHandler(error)
-                });
+            ownerFactory.putUpdate($scope.owner)
         };
 
-        /**
-         * Store New Owner with new owner model.
-         *
-         * Success :
-         *  - Load current model with returned data.
-         *  - Display success.
-         *  - Redirect to Owner's view
-         *
-         * Error :
-         *  - Display error.
-         *  - No redirect
-         */
         $scope.onStore = function(){
 
             if ($scope.ownerForm.$invalid) {
                 return;
             }
 
-            requestData = $scope.owner;
-            ownerFactory.postStore(requestData)
-                .success(function(dataResponse){
-                    $scope.owner = dataResponse.data;
-                    handlerFactory.successHandler('Owner ' + $scope.owner.owner_name + ' created!');
-                    $state.go('viewOwner',{owner_id:$scope.owner.id});
-                })
-                .error(function(error){
-                    handlerFactory.errorHandler(error)
-                });
-        };
-
-        /*
-         |-----------------------------------
-         |   Loaders
-         |-----------------------------------
-         |
-         |
-         */
-
-        /**
-         * Get owner's data.
-         *
-         * Success :
-         *  - Load current model with returned data.
-         *
-         * Error :
-         *  - Display error.
-         */
-        $scope.getOwner =  function(){
-            requestData = {};
-            requestData.id = $stateParams.owner_id;
-            ownerFactory.getEdit(requestData)
-                .success(function(dataResponse){
-                    $scope.owner = dataResponse.data;
-                })
-                .error(function(error){
-                    handlerFactory.errorHandler(error)
-                });
+            ownerFactory.postStore($scope.owner).then(function(owner){
+                $state.go('owners.viewOwner',{owner_id:owner.id});
+            });
         };
 
         /*
@@ -125,7 +55,7 @@ angular.module('propman').controller('ownerCreateEditController',
          */
         if($stateParams.owner_id){
             // Edit
-            $scope.getOwner();
+            $scope.owner = owner;
             $scope.tmp.edit = true;
         }else{
             // Create

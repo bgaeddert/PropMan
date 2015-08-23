@@ -14,25 +14,25 @@
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
 
-            $httpProvider.interceptors.push(function($q) {
+        $httpProvider.interceptors.push(function($q){
 
-                return {
+            return {
 
-                    'responseError': function(rejection){
+                'responseError': function(rejection){
 
-                        var defer = $q.defer();
+                    var defer = $q.defer();
 
-                        if(rejection.status == 401){
-                            window.location.replace("/");
-                        }
-
-                        defer.reject(rejection);
-
-                        return defer.promise;
-
+                    if(rejection.status == 401){
+                        window.location.replace("/");
                     }
-                };
-            });
+
+                    defer.reject(rejection);
+
+                    return defer.promise;
+
+                }
+            };
+        });
 
     }]);
 
@@ -50,38 +50,89 @@
 
             /*-----------------------------
              |  Owners
-             ----------------------------*/
+             ----------------------------
+             |
+             |  *************************
+             |     ROUTE ORDER MATTERS
+             |  *************************
+             |
+             */
+
+            /*Owner BASE*/
             .state('owners', {
                 url: "/owners/",
+                templateUrl: "/shared/owners/base.html",
+                redirectTo: 'owners.listOwners'
+            })
+
+            /*Owner BASE --> INDEX*/
+            .state('owners.listOwners', {
+                url: "index/",
                 templateUrl: "/shared/owners/index.html",
-                controller: 'ownerIndexController'
+                controller: 'ownerIndexController',
+                resolve: {
+                    owners: function(ownerFactory){
+                        return ownerFactory.getOwners()
+                    }
+                }
             })
-            .state('editOwner', {
-                url: "/owners/:owner_id/edit/",
+
+            /*Owner BASE --> CREATE*/
+            .state('owners.createOwner', {
+                url: "create/",
                 templateUrl: '/shared/owners/create_edit.html',
-                controller: 'ownerCreateEditController'
+                controller: 'ownerCreateEditController',
+                resolve: {
+                    owner: function(){
+                        return {};
+                    }
+                }
             })
-            .state('createOwner', {
-                url: "/owners/create/",
+
+            /*Owner BASE --> EDIT*/
+            .state('owners.editOwner', {
+                url: ":owner_id/edit/",
                 templateUrl: '/shared/owners/create_edit.html',
-                controller: 'ownerCreateEditController'
+                controller: 'ownerCreateEditController',
+                resolve: {
+                    owner: function($stateParams, ownerFactory){
+                        return ownerFactory.getEdit({id: $stateParams.owner_id})
+                    }
+                }
             })
-            .state('viewOwner', {
-                url: "/owners/:owner_id/",
+
+            /*Owner BASE --> VIEW*/
+            .state('owners.viewOwner', {
+                url: ":owner_id/",
                 templateUrl: '/shared/owners/view.html',
                 controller: 'ownerViewController',
-                redirectTo: 'viewOwner.properties',
+                resolve: {
+                    owner: function($stateParams, ownerFactory){
+                        return ownerFactory.getShow({id: $stateParams.owner_id})
+                    }
+                },
+                redirectTo: 'owners.viewOwner.properties'
             })
-            .state('viewOwner.properties', {
+
+            /*Owner BASE --> VIEW --> PROPERTY CREATE*/
+            .state('owners.viewOwner.createProperty', {
+                url: "properties/create/",
+                templateUrl: '/shared/properties/create_edit.html',
+                controller: 'propertyCreateEditController',
+                resolve: {
+                    owner: function(){
+                        return {};
+                    }
+                }
+            })
+
+            /*Owner BASE --> VIEW --> PROPERTY INDEX*/
+            .state('owners.viewOwner.properties', {
                 url: "properties/",
                 templateUrl: '/shared/properties/index.html',
                 controller: 'propertyIndexController'
             })
-            .state('viewOwner.createProperty', {
-                url: "properties/create/",
-                templateUrl: '/shared/properties/create_edit.html',
-                controller: 'propertyCreateEditController'
-            })
+
 
             /*-----------------------------
              |  Properties
@@ -166,10 +217,10 @@
             })
     });
 
-    propman.run(['$rootScope', '$state', function($rootScope, $state) {
+    propman.run(['$rootScope', '$state', function($rootScope, $state){
 
-        $rootScope.$on('$stateChangeStart', function(evt, to, params) {
-            if (to.redirectTo) {
+        $rootScope.$on('$stateChangeStart', function(evt, to, params){
+            if(to.redirectTo){
                 evt.preventDefault();
                 $state.go(to.redirectTo, params)
             }
