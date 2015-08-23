@@ -55,6 +55,16 @@ class EventServiceProvider extends ServiceProvider {
 
 			return $unit;
 		});
+
+		\App\Models\Tenant::saving(function($tenant)
+		{
+			if(empty($tenant->tenant_name))
+				$tenant->tenant_name = null;
+
+			$tenant->org_id = \Auth::User()->org_id;
+
+			return $tenant;
+		});
 	}
 
 }

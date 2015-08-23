@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="row">
             <div class="index-title col-md-8">
-                <h2><i class="fa fa-home"></i> Units</h2>
+                <h2><i class="fa fa-users"></i> Tenants</h2>
             </div>
 
             <!--Create Button-->
@@ -17,38 +17,38 @@
 </section>
 
 <section class="list-con row">
-    <!--Unit List-->
-    <div id="units-list" class="list col-md-12">
-        <div class="list-item listed-unit row"
-             ng-repeat="unit in units | filter:searchText | orderBy:['-unit_active','unit_name']">
+    <!--Tenant List-->
+    <div id="tenants-list" class="list col-md-12">
+        <div class="list-item listed-tenant row"
+             ng-repeat="tenant in tenants | filter:searchText | orderBy:['-tenant_active','tenant_name']">
 
             <div class="col-md-12">
                 <!-- View Link-->
                 <h3>
-                    <i class="fa fa-home"></i>
-                    <a ui-sref="units.viewUnit({unit_id : unit.id})">{{unit.unit_name}}</a>
+                    <i class="fa fa-users"></i>
+                    <a ui-sref="tenants.viewTenant({tenant_id : tenant.id})">{{tenant.tenant_name}}</a>
                 </h3>
                 <h4>
-                    <span class="label label-danger" ng-show="unit.unit_active == 0">INACTIVE</span>
+                    <span class="label label-danger" ng-show="tenant.tenant_active == 0">INACTIVE</span>
                 </h4>
             </div>
             <div class="col-md-8">
-                <!-- Property Link-->
-                <div class="" ng-show="!unit_view"><b>Property:</b> <a
-                        ui-sref="properties.viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a></div>
+                <!-- Unit Link-->
+                <div class="" ng-show="!tenant_view"><b>Unit:</b> <a
+                        ui-sref="units.viewUnit({unit_id : tenant.unit.id})">{{tenant.unit.unit_name}}</a></div>
 
-                <div class=""><b>Address:</b> {{unit.unit_address}}</div>
+                <div class=""><b>Phone:</b> {{tenant.tenant_phone}}</div>
             </div>
             <div class="buttons col-md-12">
                 <div class="pull-right">
 
                     <!-- View Button -->
-                    <a ui-sref="units.viewUnit({unit_id : unit.id})" class="btn btn-info">
+                    <a ui-sref="tenants.viewTenant({tenant_id : tenant.id})" class="btn btn-info">
                         <i class="fa fa-eye"></i> View
                     </a>
 
                     <!-- Edit Button -->
-                    <a ui-sref="units.editUnit({unit_id : unit.id})" class="btn btn-primary">
+                    <a ui-sref="tenants.editTenant({tenant_id : tenant.id})" class="btn btn-primary">
                         <i class="fa fa-pencil"></i> Edit
                     </a>
                 </div>
@@ -57,7 +57,7 @@
     </div>
 
     <!--Empty-->
-    <div class="list col-md-12" ng-show="!units.length">
+    <div class="list col-md-12" ng-show="!tenants.length">
         <div class="well">
             <a ui-sref="{{createRoute}}" class="btn btn-primary"><i class="fa fa-plus"></i> Create</a>
         </div>

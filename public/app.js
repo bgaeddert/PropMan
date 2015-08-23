@@ -7,8 +7,14 @@
     var propman = angular.module('propman', [
         'ngResource',
         'ui.bootstrap',
-        'ui.router'
+        'ui.router',
+        'angular-loading-bar',
+        'ngAnimate'
     ]);
+
+    propman.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+    }])
 
     propman.config(['$httpProvider', function($httpProvider){
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -47,6 +53,14 @@
         //
         // Now set up the states
         $stateProvider
+
+            /*-----------------------------
+             |   HOME
+             ----------------------------*/
+            .state('home', {
+                url: "/",
+                templateUrl: "/shared/home.html"
+            })
 
             /*-----------------------------
              |  Owners
@@ -130,7 +144,7 @@
                         return true;
                     },
                     owners: function(ownerFactory){
-                        return ownerFactory.getOwners({onlyActive:true})
+                        return ownerFactory.getOwners({onlyActive: true})
                     },
                     owner: function($stateParams, ownerFactory){
                         return ownerFactory.getShow({id: $stateParams.owner_id})
@@ -159,7 +173,7 @@
                     properties: function($stateParams, propertyFactory){
                         return propertyFactory.getProperties({owner_id: $stateParams.owner_id})
                     },
-                    createRoute : function(){
+                    createRoute: function(){
                         return 'owners.viewOwner.createProperty'
                     }
                 }
@@ -188,7 +202,7 @@
                     properties: function($stateParams, propertyFactory){
                         return propertyFactory.getProperties({owner_id: $stateParams.owner_id})
                     },
-                    createRoute : function(){
+                    createRoute: function(){
                         return 'properties.createProperty'
                     }
                 }
@@ -204,7 +218,7 @@
                         return false;
                     },
                     owners: function(ownerFactory){
-                        return ownerFactory.getOwners({onlyActive:true});
+                        return ownerFactory.getOwners({onlyActive: true});
                     },
                     owner: function($stateParams, ownerFactory){
                         return false;
@@ -231,7 +245,7 @@
                         return false;
                     },
                     owners: function(ownerFactory){
-                        return ownerFactory.getOwners({onlyActive:true});
+                        return ownerFactory.getOwners({onlyActive: true});
                     },
                     owner: function($stateParams, ownerFactory){
                         return false
@@ -276,7 +290,7 @@
                     units: function($stateParams, unitFactory){
                         return unitFactory.getUnits({property_id: $stateParams.property_id})
                     },
-                    createRoute : function(){
+                    createRoute: function(){
                         return 'properties.viewProperty.createUnit'
                     }
                 }
@@ -292,7 +306,7 @@
                         return true;
                     },
                     properties: function(propertyFactory){
-                        return propertyFactory.getProperties({onlyActive:true});
+                        return propertyFactory.getProperties({onlyActive: true});
                     },
                     unit: function($stateParams, propertyFactory){
                         return {
@@ -327,9 +341,9 @@
                         return false;
                     },
                     units: function($stateParams, unitFactory){
-                        return unitFactory.getUnits({property_id: $stateParams.property_id})
+                        return unitFactory.getUnits()
                     },
-                    createRoute : function(){
+                    createRoute: function(){
                         return 'units.createUnit'
                     }
                 }
@@ -345,7 +359,7 @@
                         return false;
                     },
                     properties: function(propertyFactory){
-                        return propertyFactory.getProperties({onlyActive:true});
+                        return propertyFactory.getProperties({onlyActive: true});
                     },
                     property: function($stateParams, propertyFactory){
                         return false;
@@ -372,7 +386,7 @@
                         return false;
                     },
                     properties: function(propertyFactory){
-                        return propertyFactory.getProperties({onlyActive:true});
+                        return propertyFactory.getProperties({onlyActive: true});
                     },
                     property: function($stateParams, propertyFactory){
                         return false
@@ -404,33 +418,176 @@
 
             /*Units BASE --> VIEW --> UNIT INDEX*/
             .state('units.viewUnit.tenants', {
+                url: "/tenants",
+                templateUrl: '/shared/tenants/index.html',
+                controller: 'tenantIndexController',
+                resolve: {
+                    unit_view: function(){
+                        return true;
+                    },
+                    tenants: function($stateParams, tenantFactory){
+                        return tenantFactory.getTenants({unit_id: $stateParams.unit_id})
+                    },
+                    createRoute: function(){
+                        return 'units.viewUnit.createTenant'
+                    }
+                }
+            })
+
+            /*Units BASE --> VIEW --> CREATE TENANT*/
+            .state('units.viewUnit.createTenant', {
+                url: "/tenants/create",
+                templateUrl: '/shared/tenants/create_edit.html',
+                controller: 'tenantCreateEditController',
+                resolve: {
+                    unit_view: function(){
+                        return true;
+                    },
+                    unit: function($stateParams, unitFactory){
+                        return unitFactory.getShow({id: $stateParams.unit_id})
+                    },
+                    units: function(unitFactory){
+                        return unitFactory.getUnits({onlyActive: true});
+                    },
+                    tenant: function($stateParams){
+                        return {
+                            unit_id: $stateParams.unit_id,
+                            tenant_active: '1'
+                        };
+                    },
+                    tenant_create: function(){
+                        return true;
+                    }
+                }
+            })
+
+        /*-----------------------------
+         |  Tenants
+         ----------------------------*/
+
+        /*Tenants BASE*/
+        .
+        state('tenants', {
+            url: "/tenants",
+            templateUrl: "/shared/tenants/base.html",
+            redirectTo: 'tenants.listTenants'
+        })
+
+            /*Tenants BASE --> INDEX*/
+            .state('tenants.listTenants', {
+                url: "/index",
+                templateUrl: "/shared/tenants/index.html",
+                controller: 'tenantIndexController',
+                resolve: {
+                    unit_view: function(){
+                        return false;
+                    },
+                    tenants: function($stateParams, tenantFactory){
+                        return tenantFactory.getTenants()
+                    },
+                    createRoute: function(){
+                        return 'tenants.createTenant'
+                    }
+                }
+            })
+
+            /*Tenants BASE --> CREATE*/
+            .state('tenants.createTenant', {
+                url: "/create",
+                templateUrl: '/shared/tenants/create_edit.html',
+                controller: 'tenantCreateEditController',
+                resolve: {
+                    unit_view: function(){
+                        return false;
+                    },
+                    units: function(unitFactory){
+                        return unitFactory.getUnits({onlyActive: true});
+                    },
+                    unit: function(){
+                        return false;
+                    },
+                    tenant: function($stateParams){
+                        return {
+                            unit_id: $stateParams.unit_id,
+                            tenant_active: '1'
+                        };
+                    },
+                    tenant_create: function(){
+                        return true;
+                    }
+                }
+            })
+
+            /*Tenants BASE --> EDIT*/
+            .state('tenants.editTenant', {
+                url: "/:tenant_id/edit",
+                templateUrl: '/shared/tenants/create_edit.html',
+                controller: 'tenantCreateEditController',
+                resolve: {
+                    tenant_view: function(){
+                        return false;
+                    },
+                    units: function(unitFactory){
+                        return unitFactory.getUnits({onlyActive: true});
+                    },
+                    unit: function(){
+                        return false
+                    },
+                    tenant: function($stateParams, tenantFactory){
+                        return tenantFactory.getEdit({id: $stateParams.tenant_id})
+                    },
+                    tenant_create: function(){
+                        return false;
+                    }
+                }
+            })
+
+            /*Tenants BASE --> VIEW*/
+            .state('tenants.viewTenant', {
+                url: "/:tenant_id",
+                templateUrl: '/shared/tenants/view.html',
+                controller: 'tenantViewController',
+                redirectTo: 'tenants.viewTenant.tenants',
+                resolve: {
+                    tenant_view: function(){
+                        return true;
+                    },
+                    tenant: function($stateParams, tenantFactory){
+                        return tenantFactory.getShow({id: $stateParams.tenant_id})
+                    }
+                }
+            })
+
+            /*Tenants BASE --> VIEW --> UNIT INDEX*/
+            .state('tenants.viewTenant.tenants', {
                 //url: "/tenants",
                 //templateUrl: '/shared/tenants/index.html',
                 //controller: 'tenantIndexController',
                 //resolve: {
-                //    unit_view: function(){
+                //    tenant_view: function(){
                 //        return true;
                 //    },
-                //    unit: function($stateParams, unitFactory){
-                //        return unitFactory.getShow({id: $stateParams.unit_id})
+                //    tenant: function($stateParams, tenantFactory){
+                //        return tenantFactory.getShow({id: $stateParams.tenant_id})
                 //    }
                 //}
             })
 
-            /*Units BASE --> VIEW --> CREATE TENENT*/
-            .state('units.viewUnit.createTenant', {
+            /*Tenants BASE --> VIEW --> CREATE TENENT*/
+            .state('tenants.viewTenant.createTenant', {
                 //url: "/tenants/create",
                 //templateUrl: '/shared/tenants/create_edit.html',
                 //controller: 'tenantCreateEditController',
                 //resolve: {
-                //    unit_view: function(){
+                //    tenant_view: function(){
                 //        return true;
                 //    },
-                //    unit: function($stateParams, unitFactory){
-                //        return unitFactory.getShow({id: $stateParams.unit_id})
+                //    tenant: function($stateParams, tenantFactory){
+                //        return tenantFactory.getShow({id: $stateParams.tenant_id})
                 //    }
                 //}
-            });
+            })
+        ;
 
         $locationProvider
             .html5Mode({

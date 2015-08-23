@@ -7138,5 +7138,12 @@ a:focus {
 .display {
   display: block !important;
 }
+#loading-bar .bar {
+  background: #df691a;
+  height: 6px;
+}
+#loading-bar .peg {
+  height: 6px;
+}
 
 /*# sourceMappingURL=app.css.map */

@@ -4,9 +4,10 @@
 <html ng-app="propman">
 <head>
     <title>PropMan</title>
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel='stylesheet' href='/assets/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
     <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/bower_components/toastr/toastr.min.css">
+    <link rel="stylesheet" href="/css/app.css">
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
 <body ng-cloak>
@@ -95,11 +96,12 @@
 <script type="text/javascript" src="/assets/bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular-resource/angular-resource.js"></script>
-<script type="text/javascript" src="/assets/bower_components/moment/moment.js"></script>
+<script type="text/javascript" src="/assets/bower_components/angular-animate/angular-animate.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script type='text/javascript' src='/assets/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+<script type="text/javascript" src="/assets/bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/bower_components/toastr/toastr.min.js"></script>
-
 
 <!-- Application Scripts -->
 <script type="text/javascript" src="/app.js"></script>
@@ -119,6 +121,11 @@
 <script type="text/javascript" src="/components/controllers/units/unitCreateEditController.js"></script>
 <script type="text/javascript" src="/components/controllers/units/unitViewController.js"></script>
 <script type="text/javascript" src="/components/services/unitFactory.js"></script>
+
+<script type="text/javascript" src="/components/controllers/tenants/tenantIndexController.js"></script>
+<script type="text/javascript" src="/components/controllers/tenants/tenantCreateEditController.js"></script>
+<script type="text/javascript" src="/components/controllers/tenants/tenantViewController.js"></script>
+<script type="text/javascript" src="/components/services/tenantFactory.js"></script>
 
 <script type="text/javascript" src="/components/services/handlerFactory.js"></script>
 

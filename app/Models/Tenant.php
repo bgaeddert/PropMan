@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Owner
  * @package App
  */
-class Unit extends Model{
+class Tenant extends Model{
 
 	use SoftDeletes;
 	use ByOrgTrait;
@@ -18,7 +18,7 @@ class Unit extends Model{
 	 *
 	 * @var string
 	 */
-	protected $table = 'units';
+	protected $table = 'tenants';
 
 	/**
 	 * @var array
@@ -30,32 +30,22 @@ class Unit extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['org_id', 'property_id', 'unit_active', 'unit_name', 'unit_address'];
+	protected $fillable = ['org_id', 'unit_id', 'tenant_active', 'tenant_name', 'tenant_phone'];
 
 	protected $guarded = ['id'];
 
 	/**
-	 * Owner relationship
-	 *
-	 * Property belong to an owner;
-	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-	public function Property(){
+	public function Unit(){
 
-		return $this->belongsTo('App\Models\Property');
-
-	}
-
-	public function Tenants(){
-
-		return $this->hasMany('App\Models\Tenant');
+		return $this->belongsTo('App\Models\Unit');
 
 	}
 
-	public function scopeByProperty($query, $property_id)
+	public function scopeByUnit($query, $unit_id)
 	{
-		return $query->where('property_id', '=', $property_id);
+		return $query->where('unit_id', '=', $unit_id);
 	}
 
 }

@@ -1,0 +1,110 @@
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-title col-md-8">
+                <!-- Page TITLE -->
+                <h2 ng-show="tenant_create === false">Edit: Tenant</h2>
+
+                <h2 ng-show="tenant_create === true">Create: Tenant</h2>
+
+                <!-- ./ Page TITLE -->
+
+                <h3>
+                    <i class="fa fa-users"></i>
+                    <span ng-show="tenant.tenant_name">
+                        {{tenant.tenant_name}}
+                    </span>
+                    <span ng-show="!tenant.tenant_name">Untitled</span>
+                </h3>
+
+                <!-- Unit Link -->
+                <h4 ng-show="tenant.unit.unit_name">
+                    Unit: <a ui-sref="units.viewUnit({unit_id : tenant.unit.id})">{{unit.unit_name}}</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-include src="'/shared/warning.html'" ng-show="tmp.warn === true"></ng-include>
+
+<div ng-show="tmp.warn === false">
+    <section id="item-view" class="row">
+
+
+        <div class="col-md-6">
+
+            <h4>
+                <span class="label label-danger" ng-show="tenant.tenant_active == 0">INACTIVE</span>
+            </h4>
+
+            <div class="row">
+                <form name="tenantForm" class="form col-md-8" novalidate>
+
+                    <!-- Tenant Active -->
+                    <div class="form-group">
+                        <label for="tenant_active"><b>Active: </b>
+                            <input type="checkbox" id="tenant_active" name="tenant_active" class="form-control"
+                                   ng-true-value="'1'"
+                                   ng-false-value="'0'"
+                                   ng-model="tenant.tenant_active"
+                                   ng-checked="tenant.tenant_active  === '1'"
+                                    />
+                        </label>
+
+                    </div>
+                    <!-- ./ Tenant Active -->
+
+                    <!-- Tenant Name -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : tenantForm.tenant_name.$invalid && ! tenantForm.tenant_name.$pristine }">
+                        <label for="tenant_name"><b>Name:</b> <span
+                                class="label-note-required">Required</span></label>
+                        <input type="text" id="tenant_name" name="tenant_name" class="form-control"
+                               ng-model="tenant.tenant_name" required>
+
+                        <p ng-show="tenantForm.tenant_name.$invalid && ! tenantForm.tenant_name.$pristine"
+                           class="help-block">Tenant name is required.</p>
+                    </div>
+                    <!-- ./ Tenant Name -->
+
+                    <!-- Tenant Unit -->
+                    <div class="form-group" >
+                        <label for="units"><b>Unit:</b> <span class="label-note-optional">Required</span></label>
+                        <select id="units" name="units" class="form-control"
+                                ng-disabled="unit_view === true"
+                                ng-options="unit.unit_name for unit in units | orderBy:'unit_name' track by unit.id"
+                                ng-model="unit" required></select>
+                    </div>
+                    <!-- ./ Tenant Unit -->
+
+                    <!-- Tenant Phone -->
+                    <div class="form-group">
+                        <label for="tenant_phone"><b>Phone:</b> <span class="label-note-optional">Optional</span></label>
+                        <input type="text" id="tenant_phone" name="tenant_phone" class="form-control"
+                                  ng-model="tenant.tenant_phone"/>
+                    </div>
+                    <!-- ./ Tenant Phone -->
+
+
+                    <!-- Buttons -->
+                    <div class="pull-left">
+                        <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+
+                        <!--Edit Button-->
+                        <button class="btn btn-success" ng-click="onUpdate()" ng-show="tenant_create === false"
+                                ng-disabled="tenantForm.$invalid">Update
+                        </button>
+
+                        <!--Create Button-->
+                        <button class="btn btn-success" ng-click="onStore()" ng-show="tenant_create === true"
+                                ng-disabled="tenantForm.$invalid">Save
+                        </button>
+                    </div>
+                    <!-- ./ Buttons -->
+
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

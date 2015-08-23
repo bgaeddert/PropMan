@@ -2,31 +2,31 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2><i class="fa fa-home"></i> {{unit.unit_name}}</h2>
+            <h2><i class="fa fa-users"></i> {{tenant.tenant_name}}</h2>
             <h4>
-                <span class="label label-danger" ng-show="unit.unit_active == 0">INACTIVE</span>
+                <span class="label label-danger" ng-show="tenant.tenant_active == 0">INACTIVE</span>
             </h4>
         </div>
         <div class="panel-body">
             <div class="col-md-6">
                 <div class="row item">
 
-                    <!--Property Link-->
-                    <div class="col-md-2 text-right sub-title">Property:</div>
-                        <div class="col-md-10"><a ui-sref="properties.viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a></div>
+                    <!--Unit Link-->
+                    <div class="col-md-2 text-right sub-title">Unit:</div>
+                        <div class="col-md-10"><a ui-sref="units.viewUnit({unit_id : tenant.unit.id})">{{tenant.unit.unit_name}}</a></div>
                 </div>
             </div>
             <div class="col-md-6 item">
                 <div class="row">
-                    <div class="col-md-2 text-right sub-title">Address:</div>
-                    <div class="col-md-10">{{unit.unit_address}}</div>
+                    <div class="col-md-2 text-right sub-title">Phone:</div>
+                    <div class="col-md-10">{{tenant.tenant_phone}}</div>
                 </div>
             </div>
         </div>
         <div class="panel-footer">
 
             <!--Edit Button-->
-            <a ui-sref="units.editProperty({unit_id : unit.id})" class="btn btn-primary">
+            <a ui-sref="tenants.editTenant({tenant_id : tenant.id})" class="btn btn-primary">
                 <i class="fa fa-pencil"></i> Edit
             </a>
         </div>
@@ -40,8 +40,8 @@
 
         <ul id="tabs" class="nav nav-tabs" ui-sref-active="active">
             <li ui-sref-active="active">
-                <a ui-sref="units.viewUnit.tenants" >Tenants</a>
-                <a ui-sref="units.viewUnit.createTenant" class="hide">New Tenant</a>
+                <a ui-sref="tenants.viewUnit.tenants" >Tenants</a>
+                <a ui-sref="tenants.viewUnit.createTenant" class="hide">New Unit</a>
             </li>
         </ul>
         <div class="tab-content col-md-12">
