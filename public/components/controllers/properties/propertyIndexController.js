@@ -1,27 +1,8 @@
 angular.module('propman').controller('propertyIndexController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory, owner_view, properties, createRoute){
 
-    $scope.owner_id = $stateParams.owner_id;
+        $scope.owner_view = owner_view;
+        $scope.properties = properties;
+        $scope.createRoute = createRoute;
 
-    $scope.onGetProperties = function(){
-        requestData = {};
-        requestData.owner_id = $scope.owner_id;
-        propertyFactory.getProperties(requestData)
-            .success(function(dataResponse){
-                $scope.properties = dataResponse.data;
-            })
-            .error(function(error){
-                errorHandler(error)
-            });
-    };
-
-    $scope.createRoute = function(){
-        if($stateParams.owner_id){
-            return 'owners.viewOwner.createProperty';
-        }else{
-            return 'createProperty';
-        }
-    };
-
-    $scope.onGetProperties();
-});
+    });

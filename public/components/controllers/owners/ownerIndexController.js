@@ -3,17 +3,4 @@ angular.module('propman').controller('ownerIndexController',
 
         $scope.owners = owners;
 
-    //$scope.onGetOwners = function(){
-    //    requestData = {};
-    //    ownerFactory.getOwners(requestData)
-    //        .success(function(dataResponse){
-    //            $scope.owners = dataResponse.data;
-    //        })
-    //        .error(function(error){
-    //            errorHandler(error)
-    //        });
-    //};
-    //
-    //$scope.onGetOwners();
-
 });

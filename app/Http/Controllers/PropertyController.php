@@ -34,7 +34,11 @@ class PropertyController extends Controller
         $properties = Property::with('Owner');
 
         if(!empty($input['owner_id']))
-            $properties = Property::ByOwner($input['owner_id']);
+            $properties = $properties->ByOwner($input['owner_id']);
+
+        if(!empty($input['onlyActive']))
+            if($input['onlyActive'] === "true")
+                $properties = $properties->OnlyActive();
 
         $properties = $properties->get();
 
@@ -84,7 +88,7 @@ class PropertyController extends Controller
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Owners Loaded.',
+            'message' => 'Property Loaded.',
             'data'    => $property
         ] );
     }

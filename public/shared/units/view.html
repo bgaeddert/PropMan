@@ -10,12 +10,10 @@
         <div class="panel-body">
             <div class="col-md-6">
                 <div class="row item">
-                    <div class="col-md-2 text-right sub-title">Owner:</div>
-                        <div class="col-md-10"><a ui-sref="viewOwner({owner_id : unit.property.owner_id})">{{unit.property.owner.owner_name}}</a></div>
-                </div>
-                <div class="row item">
+
+                    <!--Property Link-->
                     <div class="col-md-2 text-right sub-title">Property:</div>
-                    <div class="col-md-10"><a ui-sref="viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a></div>
+                        <div class="col-md-10"><a ui-sref="properties.viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a></div>
                 </div>
             </div>
             <div class="col-md-6 item">
@@ -26,7 +24,9 @@
             </div>
         </div>
         <div class="panel-footer">
-            <a ui-sref="editUnit({unit_id : unit.id})" class="btn btn-primary">
+
+            <!--Edit Button-->
+            <a ui-sref="units.editProperty({unit_id : unit.id})" class="btn btn-primary">
                 <i class="fa fa-pencil"></i> Edit
             </a>
         </div>
@@ -37,15 +37,13 @@
 
 <section class="tab-section row">
     <div class="col-md-12 hide-first">
-        <tabset>
-            <tab
-                    ng-repeat="t in tabs"
-                    heading="{{t.heading}}"
-                    select="go(t.route)"
-                    active="t.active">
-            </tab>
-        </tabset>
 
+        <ul id="tabs" class="nav nav-tabs" ui-sref-active="active">
+            <li ui-sref-active="active">
+                <a ui-sref="units.viewProperty.units" >Units</a>
+                <a ui-sref="units.viewProperty.createUnit" class="hide">New Property</a>
+            </li>
+        </ul>
         <div class="tab-content col-md-12">
             <div class="tab-view">
                 <div ui-view></div>

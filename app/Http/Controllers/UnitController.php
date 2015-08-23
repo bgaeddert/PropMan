@@ -35,7 +35,7 @@ class UnitController extends Controller
         $units = Unit::with('Property');
 
         if(!empty($input['property_id']))
-            $units = Unit::ByProperty($input['property_id']);
+            $units = $units->ByProperty($input['property_id']);
 
         $units = $units->get();
 
@@ -85,7 +85,7 @@ class UnitController extends Controller
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Properties Loaded.',
+            'message' => 'Units Loaded.',
             'data'    => $units
         ] );
     }

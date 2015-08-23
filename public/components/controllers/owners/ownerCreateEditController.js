@@ -1,5 +1,18 @@
 angular.module('propman').controller('ownerCreateEditController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, ownerFactory, handlerFactory, owner){
+    function($sce,
+             $http,
+             $state,
+             $scope,
+             $filter,
+             $window,
+             $compile,
+             $timeout,
+             $rootScope,
+             $stateParams,
+             ownerFactory,
+             handlerFactory,
+             owner,
+             owner_create){
 
         /*
          |-----------------------------------
@@ -10,7 +23,7 @@ angular.module('propman').controller('ownerCreateEditController',
          */
         $scope.onUpdate = function(){
 
-            if ($scope.ownerForm.$invalid) {
+            if($scope.ownerForm.$invalid){
                 return;
             }
 
@@ -19,12 +32,12 @@ angular.module('propman').controller('ownerCreateEditController',
 
         $scope.onStore = function(){
 
-            if ($scope.ownerForm.$invalid) {
+            if($scope.ownerForm.$invalid){
                 return;
             }
 
             ownerFactory.postStore($scope.owner).then(function(owner){
-                $state.go('owners.viewOwner',{owner_id:owner.id});
+                $state.go('owners.viewOwner', {owner_id: owner.id});
             });
         };
 
@@ -56,13 +69,13 @@ angular.module('propman').controller('ownerCreateEditController',
         if($stateParams.owner_id){
             // Edit
             $scope.owner = owner;
-            $scope.tmp.edit = true;
-        }else{
+            $scope.owner_create = owner_create;
+        } else {
             // Create
             $scope.owner = {};
             $scope.owner.org_id = $rootScope.user.org_id;
             $scope.owner.owner_active = '1';
-            $scope.tmp.create = true;
+            $scope.owner_create = owner_create;
         }
 
     });

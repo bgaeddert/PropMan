@@ -27,8 +27,13 @@ class OwnerController extends Controller
      * @return Response
      */
     public function index(){
+        $input = \Request::all();
 
         $owners = Owner::all();
+
+        if(!empty($input['onlyActive']))
+            if($input['onlyActive'] === "true")
+                $owners = Owner::OnlyActive()->get();
 
         return \Response::json( [
             'success' => true,

@@ -58,4 +58,9 @@ class Property extends Model{
 		return $query->where('owner_id', '=', $owner_id);
 	}
 
+	public function scopeOnlyActive($query)
+	{
+		return $query->where('properties.property_active', '=', '1');
+	}
+
 }

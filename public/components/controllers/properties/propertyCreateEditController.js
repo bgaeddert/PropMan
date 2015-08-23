@@ -1,5 +1,5 @@
 angular.module('propman').controller('propertyCreateEditController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory, handlerFactory){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, propertyFactory, handlerFactory, owner, owners, property, property_create){
 
         /*
          |-----------------------------------
@@ -19,16 +19,9 @@ angular.module('propman').controller('propertyCreateEditController',
             newProperty.owner_id = $scope.owner.id;
             delete newProperty.owners;
 
-            requestData = newProperty;
-            propertyFactory.putUpdate(requestData)
-                .success(function(dataResponse){
-                    $scope.property = dataResponse.data;
-                    $scope.loadOwnerOptions();
-                    handlerFactory.successHandler('Property ' + $scope.property.property_name + ' updated!');
-                })
-                .error(function(error){
-                    handlerFactory.errorHandler(error)
-                });
+            propertyFactory.putUpdate(newProperty).then(function(){
+                handlerFactory.successHandler('Property ' + $scope.property.property_name + ' updated!');
+            })
         };
 
         $scope.onStore = function(){
@@ -41,71 +34,10 @@ angular.module('propman').controller('propertyCreateEditController',
             newProperty.owner_id = $scope.owner.id;
             delete newProperty.owners;
 
-            requestData = newProperty;
-            propertyFactory.postStore(requestData)
-                .success(function(dataResponse){
-                    $scope.property = dataResponse.data;
-                    handlerFactory.successHandler('Property ' + $scope.property.property_name + ' created!');
-                    $state.go('viewProperty', {property_id: $scope.property.id});
-                })
-                .error(function(error){
-                    handlerFactory.errorHandler(error)
-                });
-        };
-
-        /*
-         |-----------------------------------
-         |   Loaders
-         |-----------------------------------
-         |
-         |
-         */
-
-        $scope.getProperty = function(){
-            requestData = {};
-            requestData.id = $stateParams.property_id;
-            propertyFactory.getEdit(requestData)
-                .success(function(dataResponse){
-                    $scope.property = dataResponse.data;
-                    $scope.loadOwnerOptions();
-                })
-                .error(function(error){
-                    handlerFactory.errorHandler(error)
-                });
-        };
-
-        $scope.loadOwnerOptions = function(){
-            propertyFactory.getOwnerOptions()
-                .success(function(dataResponse){
-
-                    var allOwners = dataResponse.data;
-
-                    $scope.property.owners = $filter('filter')(allOwners, {owner_active: 1});
-
-                    if($scope.property.hasOwnProperty('owner_id') && $scope.owner_view !== true){
-                        var propertyOwners = $filter('filter')(allOwners, {id: $scope.property.owner_id});
-                        $scope.owner = propertyOwners[0];
-                    }
-
-                    // Warn if no owners have been created
-                    if(allOwners.length === 0){
-                        handlerFactory.warningHandler($scope, "You must create an owner first.");
-                    }
-
-                    // Warn if property owner is inactive
-                    if($scope.hasOwnProperty('owner')){
-                        if($scope.owner.owner_active === '0'){
-                            handlerFactory.warningHandler($scope, "The owner of this property is inactive.");
-                        }
-                    }
-
-                    // Show form is in opposite state of warn
-                    $scope.tmp.showForm = !$scope.tmp.warn;
-
-                })
-                .error(function(error){
-                    errorHandler(error)
-                });
+            propertyFactory.postStore(newProperty).then(function(property){
+                handlerFactory.successHandler('Property ' + $scope.property.property_name + ' created!');
+                $state.go('properties.viewProperty', {property_id: property.id});
+            })
         };
 
         /*
@@ -120,20 +52,30 @@ angular.module('propman').controller('propertyCreateEditController',
         $scope.tmp = {};
         $scope.tmp.warn = false;
         $scope.tmp.showForm = false;
+        $scope.property = property;
+        $scope.owner = owner;
+        $scope.owners = owners;
+        $scope.property_create = property_create;
 
-        if($stateParams.property_id){
-            // Edit property
-            $scope.getProperty();
-            $scope.tmp.edit = true;
-        } else {
-            // Create property
-            $scope.property = {};
-            if($stateParams.owner_id){
-                $scope.property.owner_id = $stateParams.owner_id;
-            }
-            $scope.property.property_active = '1';
-            $scope.loadOwnerOptions();
-            $scope.tmp.create = true;
+        if($scope.owner === false){
+            $scope.owner = $scope.property.owner;
         }
+
+        if($scope.owner){
+            // Warn if owner in inactive
+            if($scope.owner.owner_active === '0'){
+                $scope.tmp.warn = true;
+                handlerFactory.warningHandler($scope, "The owner of this property is inactive.");
+            }
+        }
+
+        // Warn if no owners have been created
+        if($scope.owners.length === 0){
+            $scope.tmp.warn = true;
+            handlerFactory.warningHandler($scope, "You must create an owner first.");
+        }
+
+
+
 
     });

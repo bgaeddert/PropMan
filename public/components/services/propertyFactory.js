@@ -1,56 +1,88 @@
-angular.module('propman').factory('propertyFactory', function($http,$sce){
+angular.module('propman').factory('propertyFactory', function($http,$sce,$q,handlerFactory){
     return {
         getProperties: function(requestData){
+            var deferred = $q.defer();
             var url = '/api/properties';
-            var response = $http({
+
+            $http({
                 method: "get",
                 url: url,
                 params: requestData
+            })
+            .success(function(data, status) {
+                deferred.resolve(data.data);
+            }).error(function(data, status) {
+                deferred.reject(data);
+                handlerFactory.errorHandler(data)
             });
-            return response;
+
+            return deferred.promise;
         },
         getShow: function(requestData){
+            var deferred = $q.defer();
             var url = '/api/properties/'+ requestData.id;
-            var response = $http({
+            $http({
                 method: "get",
                 url: url
+            })
+            .success(function(data, status) {
+                deferred.resolve(data.data);
+            }).error(function(data, status) {
+                deferred.reject(data);
+                handlerFactory.errorHandler(data)
             });
-            return response;
+
+            return deferred.promise;
         },
         postStore: function(requestData){
+            var deferred = $q.defer();
             var url = '/api/properties/' ;
-            var response = $http({
+            $http({
                 method: "post",
                 url: url,
                 data: requestData
+            })
+            .success(function(data, status) {
+                deferred.resolve(data.data);
+            }).error(function(data, status) {
+                deferred.reject(data);
+                handlerFactory.errorHandler(data)
             });
-            return response;
+
+            return deferred.promise;
         },
         getEdit: function(requestData){
+            var deferred = $q.defer();
             var url = '/api/properties/'+ requestData.id + '/edit/' ;
-            var response = $http({
+            $http({
                 method: "get",
                 url: url
+            })
+            .success(function(data, status) {
+                deferred.resolve(data.data);
+            }).error(function(data, status) {
+                deferred.reject(data);
+                handlerFactory.errorHandler(data)
             });
-            return response;
+
+            return deferred.promise;
         },
         putUpdate: function(requestData){
+            var deferred = $q.defer();
             var url = '/api/properties/'+ requestData.id ;
-            var response = $http({
+            $http({
                 method: "put",
                 url: url,
                 data: requestData
+            })
+            .success(function(data, status) {
+                deferred.resolve(data.data);
+            }).error(function(data, status) {
+                deferred.reject(data);
+                handlerFactory.errorHandler(data)
             });
-            return response;
-        },
-        getOwnerOptions: function(requestData){
-            var url = '/api/owners';
-            var response = $http({
-                method: "get",
-                url: url,
-                params: requestData
-            });
-            return response;
+
+            return deferred.promise;
         }
     }
 });

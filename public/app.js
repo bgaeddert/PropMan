@@ -60,14 +60,14 @@
 
             /*Owner BASE*/
             .state('owners', {
-                url: "/owners/",
+                url: "/owners",
                 templateUrl: "/shared/owners/base.html",
                 redirectTo: 'owners.listOwners'
             })
 
             /*Owner BASE --> INDEX*/
             .state('owners.listOwners', {
-                url: "index/",
+                url: "/index",
                 templateUrl: "/shared/owners/index.html",
                 controller: 'ownerIndexController',
                 resolve: {
@@ -79,31 +79,37 @@
 
             /*Owner BASE --> CREATE*/
             .state('owners.createOwner', {
-                url: "create/",
+                url: "/create",
                 templateUrl: '/shared/owners/create_edit.html',
                 controller: 'ownerCreateEditController',
                 resolve: {
                     owner: function(){
                         return {};
+                    },
+                    owner_create: function(){
+                        return true;
                     }
                 }
             })
 
             /*Owner BASE --> EDIT*/
             .state('owners.editOwner', {
-                url: ":owner_id/edit/",
+                url: "/:owner_id/edit",
                 templateUrl: '/shared/owners/create_edit.html',
                 controller: 'ownerCreateEditController',
                 resolve: {
                     owner: function($stateParams, ownerFactory){
                         return ownerFactory.getEdit({id: $stateParams.owner_id})
+                    },
+                    owner_create: function(){
+                        return false;
                     }
                 }
             })
 
             /*Owner BASE --> VIEW*/
             .state('owners.viewOwner', {
-                url: ":owner_id/",
+                url: "/:owner_id",
                 templateUrl: '/shared/owners/view.html',
                 controller: 'ownerViewController',
                 resolve: {
@@ -116,99 +122,315 @@
 
             /*Owner BASE --> VIEW --> PROPERTY CREATE*/
             .state('owners.viewOwner.createProperty', {
-                url: "properties/create/",
+                url: "/properties/create",
                 templateUrl: '/shared/properties/create_edit.html',
                 controller: 'propertyCreateEditController',
                 resolve: {
-                    owner: function(){
-                        return {};
+                    owner_view: function(){
+                        return true;
+                    },
+                    owners: function(ownerFactory){
+                        return ownerFactory.getOwners({onlyActive:true})
+                    },
+                    owner: function($stateParams, ownerFactory){
+                        return ownerFactory.getShow({id: $stateParams.owner_id})
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return {
+                            owner_id: $stateParams.owner_id,
+                            property_active: '1'
+                        };
+                    },
+                    property_create: function(){
+                        return true;
                     }
                 }
             })
 
             /*Owner BASE --> VIEW --> PROPERTY INDEX*/
             .state('owners.viewOwner.properties', {
-                url: "properties/",
+                url: "/properties",
                 templateUrl: '/shared/properties/index.html',
-                controller: 'propertyIndexController'
+                controller: 'propertyIndexController',
+                resolve: {
+                    owner_view: function(){
+                        return true;
+                    },
+                    properties: function($stateParams, propertyFactory){
+                        return propertyFactory.getProperties({owner_id: $stateParams.owner_id})
+                    },
+                    createRoute : function(){
+                        return 'owners.viewOwner.createProperty'
+                    }
+                }
             })
 
 
             /*-----------------------------
              |  Properties
              ----------------------------*/
+            /*Properties BASE*/
             .state('properties', {
-                url: "/properties/",
+                url: "/properties",
+                templateUrl: "/shared/properties/base.html",
+                redirectTo: 'properties.listProperties'
+            })
+
+            /*Properties BASE --> INDEX*/
+            .state('properties.listProperties', {
+                url: "/index",
                 templateUrl: "/shared/properties/index.html",
-                controller: 'propertyIndexController'
+                controller: 'propertyIndexController',
+                resolve: {
+                    owner_view: function(){
+                        return false;
+                    },
+                    properties: function($stateParams, propertyFactory){
+                        return propertyFactory.getProperties({owner_id: $stateParams.owner_id})
+                    },
+                    createRoute : function(){
+                        return 'properties.createProperty'
+                    }
+                }
             })
-            .state('createProperty', {
-                url: "/properties/create/",
+
+            /*Properties BASE --> CREATE*/
+            .state('properties.createProperty', {
+                url: "/create",
                 templateUrl: '/shared/properties/create_edit.html',
-                controller: 'propertyCreateEditController'
+                controller: 'propertyCreateEditController',
+                resolve: {
+                    owner_view: function(){
+                        return false;
+                    },
+                    owners: function(ownerFactory){
+                        return ownerFactory.getOwners({onlyActive:true});
+                    },
+                    owner: function($stateParams, ownerFactory){
+                        return false;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return {
+                            owner_id: $stateParams.owner_id,
+                            property_active: '1'
+                        };
+                    },
+                    property_create: function(){
+                        return true;
+                    }
+                }
             })
-            .state('editProperty', {
-                url: "/properties/:property_id/edit/",
+
+            /*Properties BASE --> CREATE*/
+            .state('properties.editProperty', {
+                url: "/:property_id/edit",
                 templateUrl: '/shared/properties/create_edit.html',
-                controller: 'propertyCreateEditController'
+                controller: 'propertyCreateEditController',
+                resolve: {
+                    owner_view: function(){
+                        return false;
+                    },
+                    owners: function(ownerFactory){
+                        return ownerFactory.getOwners({onlyActive:true});
+                    },
+                    owner: function($stateParams, ownerFactory){
+                        return false
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return propertyFactory.getEdit({id: $stateParams.property_id})
+                    },
+                    property_create: function(){
+                        return false;
+                    }
+                }
             })
-            .state('viewProperty', {
-                url: "/properties/:property_id/",
+
+            /*Properties BASE --> VIEW*/
+            .state('properties.viewProperty', {
+                url: "/:property_id",
                 templateUrl: '/shared/properties/view.html',
                 controller: 'propertyViewController',
-                redirectTo: 'viewProperty.units'
+                redirectTo: 'properties.viewProperty.units',
+                resolve: {
+                    property_view: function(){
+                        return true;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return propertyFactory.getShow({id: $stateParams.property_id})
+                    }
+                }
             })
-            .state('viewProperty.units', {
-                url: "units/",
+
+            /*Properties BASE --> VIEW --> UNIT INDEX*/
+            .state('properties.viewProperty.units', {
+                url: "/units",
                 templateUrl: '/shared/units/index.html',
-                controller: 'unitIndexController'
+                controller: 'unitIndexController',
+                resolve: {
+                    property_view: function(){
+                        return true;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return propertyFactory.getShow({id: $stateParams.property_id})
+                    },
+                    units: function($stateParams, unitFactory){
+                        return unitFactory.getUnits({property_id: $stateParams.property_id})
+                    },
+                    createRoute : function(){
+                        return 'properties.viewProperty.createUnit'
+                    }
+                }
             })
-            .state('viewProperty.createUnit', {
-                url: "units/create/",
+
+            /*Properties BASE --> VIEW --> Create UNIT*/
+            .state('properties.viewProperty.createUnit', {
+                url: "/units/create",
                 templateUrl: '/shared/units/create_edit.html',
-                controller: 'unitCreateEditController'
+                controller: 'unitCreateEditController',
+                resolve: {
+                    property_view: function(){
+                        return true;
+                    },
+                    properties: function(propertyFactory){
+                        return propertyFactory.getProperties({onlyActive:true});
+                    },
+                    unit: function($stateParams, propertyFactory){
+                        return {
+                            property_id: $stateParams.property_id,
+                            unit_active: '1'
+                        };
+                    },
+                    unit_create: function(){
+                        return true;
+                    }
+                }
             })
 
             /*-----------------------------
              |  Units
              ----------------------------*/
+
+            /*Units BASE*/
             .state('units', {
-                url: "/units/",
+                url: "/units",
+                templateUrl: "/shared/units/base.html",
+                redirectTo: 'units.listUnits'
+            })
+
+            /*Units BASE --> INDEX*/
+            .state('units.listUnits', {
+                url: "/index",
                 templateUrl: "/shared/units/index.html",
-                controller: 'unitIndexController'
+                controller: 'unitIndexController',
+                resolve: {
+                    property_view: function(){
+                        return false;
+                    },
+                    units: function($stateParams, unitFactory){
+                        return unitFactory.getUnits({property_id: $stateParams.property_id})
+                    },
+                    createRoute : function(){
+                        return 'units.createUnit'
+                    }
+                }
             })
-            .state('createUnit', {
-                url: "/units/create/",
+
+            /*Units BASE --> CREATE*/
+            .state('units.createUnit', {
+                url: "/create",
                 templateUrl: '/shared/units/create_edit.html',
-                controller: 'unitCreateEditController'
+                controller: 'unitCreateEditController',
+                resolve: {
+                    property_view: function(){
+                        return false;
+                    },
+                    properties: function(propertyFactory){
+                        return propertyFactory.getProperties({onlyActive:true});
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return false;
+                    },
+                    unit: function($stateParams, unitFactory){
+                        return {
+                            property_id: $stateParams.property_id,
+                            unit_active: '1'
+                        };
+                    },
+                    unit_create: function(){
+                        return true;
+                    }
+                }
             })
-            .state('editUnit', {
-                url: "/units/:unit_id/edit/",
+
+            /*Units BASE --> EDIT*/
+            .state('units.editUnit', {
+                url: "/:unit_id/edit",
                 templateUrl: '/shared/units/create_edit.html',
-                controller: 'unitCreateEditController'
+                controller: 'unitCreateEditController',
+                resolve: {
+                    unit_view: function(){
+                        return false;
+                    },
+                    properties: function(propertyFactory){
+                        return propertyFactory.getProperties({onlyActive:true});
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return false
+                    },
+                    unit: function($stateParams, unitFactory){
+                        return unitFactory.getEdit({id: $stateParams.unit_id})
+                    },
+                    unit_create: function(){
+                        return false;
+                    }
+                }
             })
-            .state('viewUnit', {
-                url: "/units/:unit_id/",
+
+            /*Units BASE --> VIEW*/
+            .state('units.viewUnit', {
+                url: "/:unit_id",
                 templateUrl: '/shared/units/view.html',
-                controller: 'unitViewController'
+                controller: 'unitViewController',
+                redirectTo: 'units.viewUnit.tenants',
+                resolve: {
+                    unit_view: function(){
+                        return true;
+                    },
+                    unit: function($stateParams, unitFactory){
+                        return unitFactory.getShow({id: $stateParams.unit_id})
+                    }
+                }
             })
 
-            /*-----------------------------
-             |   Users
-             ----------------------------*/
-            .state('users', {
-                url: "/users/",
-                templateUrl: "/shared/users/index.html"
+            /*Units BASE --> VIEW --> UNIT INDEX*/
+            .state('units.viewUnit.tenants', {
+                //url: "/tenants",
+                //templateUrl: '/shared/tenants/index.html',
+                //controller: 'tenantIndexController',
+                //resolve: {
+                //    unit_view: function(){
+                //        return true;
+                //    },
+                //    unit: function($stateParams, unitFactory){
+                //        return unitFactory.getShow({id: $stateParams.unit_id})
+                //    }
+                //}
             })
 
-            /*-----------------------------
-             |   HOME
-             ----------------------------*/
-            .state('home', {
-                url: "/",
-                templateUrl: "/shared/home.html"
-            })
-        ;
+            /*Units BASE --> VIEW --> CREATE TENENT*/
+            .state('units.viewUnit.createTenant', {
+                //url: "/tenants/create",
+                //templateUrl: '/shared/tenants/create_edit.html',
+                //controller: 'tenantCreateEditController',
+                //resolve: {
+                //    unit_view: function(){
+                //        return true;
+                //    },
+                //    unit: function($stateParams, unitFactory){
+                //        return unitFactory.getShow({id: $stateParams.unit_id})
+                //    }
+                //}
+            });
 
         $locationProvider
             .html5Mode({

@@ -70,4 +70,11 @@ class Owner extends Model{
 	}
 
 
+
+	public function scopeOnlyActive($query)
+	{
+		return $query->where('owners.owner_active', '=', '1');
+	}
+
+
 }

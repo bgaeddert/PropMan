@@ -3,9 +3,9 @@
         <div class="row">
             <div class="form-title col-md-8">
                 <!-- Page TITLE -->
-                <h2 ng-show="tmp.edit === true">Edit: Unit</h2>
+                <h2 ng-show="unit_create === false">Edit: Unit</h2>
 
-                <h2 ng-show="tmp.create === true">Create: Unit</h2>
+                <h2 ng-show="unit_create === true">Create: Unit</h2>
 
                 <!-- ./ Page TITLE -->
 
@@ -16,8 +16,10 @@
                     </span>
                     <span ng-show="!unit.unit_name">Untitled</span>
                 </h3>
+
+                <!-- Property Link -->
                 <h4 ng-show="unit.property.property_name">
-                    Property: <a ui-sref="viewUnit({property_id : unit.property.id})">{{unit.property.property_name}}</a>
+                    Property: <a ui-sref="properties.viewProperty({property_id : unit.property.id})">{{property.property_name}}</a>
                 </h4>
             </div>
         </div>
@@ -26,7 +28,7 @@
 
 <ng-include src="'/shared/warning.html'" ng-show="tmp.warn === true"></ng-include>
 
-<div ng-show="tmp.showForm === true">
+<div ng-show="tmp.warn === false">
     <section id="item-view" class="row">
 
 
@@ -67,10 +69,11 @@
                     <!-- ./ Unit Name -->
 
                     <!-- Unit Property -->
-                    <div class="form-group" ng-show="property_view !== true">
+                    <div class="form-group" >
                         <label for="properties"><b>Property:</b> <span class="label-note-optional">Required</span></label>
                         <select id="properties" name="properties" class="form-control"
-                                ng-options="property.property_name for property in unit.properties | orderBy:'property_name' track by property.id"
+                                ng-disabled="property_view === true"
+                                ng-options="property.property_name for property in properties | orderBy:'property_name' track by property.id"
                                 ng-model="property" required></select>
                     </div>
                     <!-- ./ Unit Property -->
@@ -87,10 +90,14 @@
                     <!-- Buttons -->
                     <div class="pull-left">
                         <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
-                        <button class="btn btn-success" ng-click="onUpdate()" ng-show="tmp.edit === true"
+
+                        <!--Edit Button-->
+                        <button class="btn btn-success" ng-click="onUpdate()" ng-show="unit_create === false"
                                 ng-disabled="unitForm.$invalid">Update
                         </button>
-                        <button class="btn btn-success" ng-click="onStore()" ng-show="tmp.create === true"
+
+                        <!--Create Button-->
+                        <button class="btn btn-success" ng-click="onStore()" ng-show="unit_create === true"
                                 ng-disabled="unitForm.$invalid">Save
                         </button>
                     </div>

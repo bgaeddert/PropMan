@@ -10,8 +10,10 @@
         <div class="panel-body">
             <div class="col-md-6">
                 <div class="row item">
+
+                    <!--Owner Link-->
                     <div class="col-md-2 text-right sub-title">Owner:</div>
-                        <div class="col-md-10"><a ui-sref="viewOwner({owner_id : property.owner.id})">{{property.owner.owner_name}}</a></div>
+                        <div class="col-md-10"><a ui-sref="owners.viewOwner({owner_id : property.owner.id})">{{property.owner.owner_name}}</a></div>
                 </div>
             </div>
             <div class="col-md-6 item">
@@ -22,7 +24,9 @@
             </div>
         </div>
         <div class="panel-footer">
-            <a ui-sref="editProperty({property_id : property.id})" class="btn btn-primary">
+
+            <!--Edit Button-->
+            <a ui-sref="properties.editProperty({property_id : property.id})" class="btn btn-primary">
                 <i class="fa fa-pencil"></i> Edit
             </a>
         </div>
@@ -36,8 +40,8 @@
 
         <ul id="tabs" class="nav nav-tabs" ui-sref-active="active">
             <li ui-sref-active="active">
-                <a ui-sref="viewProperty.units" >Units</a>
-                <a ui-sref="viewProperty.createUnit" class="hide">New Property</a>
+                <a ui-sref="properties.viewProperty.units" >Units</a>
+                <a ui-sref="properties.viewProperty.createUnit" class="hide">New Property</a>
             </li>
         </ul>
         <div class="tab-content col-md-12">
