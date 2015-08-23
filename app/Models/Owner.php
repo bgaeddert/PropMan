@@ -1,6 +1,6 @@
 <?php namespace App\Models;
 
-use App\ModelScopes\OwnersByOrgTrait;
+use App\ModelScopes\ByOrgTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Owner extends Model{
 
 	use SoftDeletes;
-	use OwnersByOrgTrait;
+	use ByOrgTrait;
 
 	/**
 	 * The database table used by the model.
@@ -62,6 +62,11 @@ class Owner extends Model{
 
 		return $this->hasMany('App\Models\Property');
 
+	}
+
+	public function Units()
+	{
+		return $this->hasManyThrough('App\Models\Unit', 'App\Models\Property');
 	}
 
 

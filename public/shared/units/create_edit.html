@@ -1,0 +1,103 @@
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-title col-md-8">
+                <!-- Page TITLE -->
+                <h2 ng-show="tmp.edit === true">Edit: Unit</h2>
+
+                <h2 ng-show="tmp.create === true">Create: Unit</h2>
+
+                <!-- ./ Page TITLE -->
+
+                <h3>
+                    <i class="fa fa-building"></i>
+                    <span ng-show="unit.unit_name">
+                        {{unit.unit_name}}
+                    </span>
+                    <span ng-show="!unit.unit_name">Untitled</span>
+                </h3>
+                <h4 ng-show="unit.property.property_name">
+                    Property: <a ui-sref="viewUnit({property_id : unit.property.id})">{{unit.property.property_name}}</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-include src="'/shared/warning.html'" ng-show="tmp.warn === true"></ng-include>
+
+<div ng-show="tmp.showForm === true">
+    <section id="item-view" class="row">
+
+
+        <div class="col-md-6">
+
+            <h4>
+                <span class="label label-danger" ng-show="unit.unit_active == 0">INACTIVE</span>
+            </h4>
+
+            <div class="row">
+                <form name="unitForm" class="form col-md-8" novalidate>
+
+                    <!-- Unit Active -->
+                    <div class="form-group">
+                        <label for="unit_active"><b>Active: </b>
+                            <input type="checkbox" id="unit_active" name="unit_active" class="form-control"
+                                   ng-true-value="'1'"
+                                   ng-false-value="'0'"
+                                   ng-model="unit.unit_active"
+                                   ng-checked="unit.unit_active  === '1'"
+                                    />
+                        </label>
+
+                    </div>
+                    <!-- ./ Unit Active -->
+
+                    <!-- Unit Name -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : unitForm.unit_name.$invalid && ! unitForm.unit_name.$pristine }">
+                        <label for="unit_name"><b>Name:</b> <span
+                                class="label-note-required">Required</span></label>
+                        <input type="text" id="unit_name" name="unit_name" class="form-control"
+                               ng-model="unit.unit_name" required>
+
+                        <p ng-show="unitForm.unit_name.$invalid && ! unitForm.unit_name.$pristine"
+                           class="help-block">Unit name is required.</p>
+                    </div>
+                    <!-- ./ Unit Name -->
+
+                    <!-- Unit Property -->
+                    <div class="form-group" ng-show="property_view !== true">
+                        <label for="properties"><b>Property:</b> <span class="label-note-optional">Required</span></label>
+                        <select id="properties" name="properties" class="form-control"
+                                ng-options="property.property_name for property in unit.properties | orderBy:'property_name' track by property.id"
+                                ng-model="property" required></select>
+                    </div>
+                    <!-- ./ Unit Property -->
+
+                    <!-- Unit Address -->
+                    <div class="form-group">
+                        <label for="unit_address"><b>Address:</b> <span class="label-note-optional">Optional</span></label>
+                        <textarea type="text" id="unit_address" name="unit_address" class="form-control"
+                                  ng-model="unit.unit_address"></textarea>
+                    </div>
+                    <!-- ./ Unit Address -->
+
+
+                    <!-- Buttons -->
+                    <div class="pull-left">
+                        <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+                        <button class="btn btn-success" ng-click="onUpdate()" ng-show="tmp.edit === true"
+                                ng-disabled="unitForm.$invalid">Update
+                        </button>
+                        <button class="btn btn-success" ng-click="onStore()" ng-show="tmp.create === true"
+                                ng-disabled="unitForm.$invalid">Save
+                        </button>
+                    </div>
+                    <!-- ./ Buttons -->
+
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

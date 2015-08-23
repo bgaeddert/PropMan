@@ -33,15 +33,13 @@
 
 <section class="tab-section row">
     <div class="col-md-12 hide-first">
-        <tabset>
-            <tab
-                    ng-repeat="t in tabs"
-                    heading="{{t.heading}}"
-                    select="go(t.route)"
-                    active="t.active">
-            </tab>
-        </tabset>
 
+        <ul id="tabs" class="nav nav-tabs" ui-sref-active="active">
+            <li ui-sref-active="active">
+                <a ui-sref="viewProperty.units" >Properties</a>
+                <a ui-sref="viewProperty.createUnit" class="hide">New Property</a>
+            </li>
+        </ul>
         <div class="tab-content col-md-12">
             <div class="tab-view">
                 <div ui-view></div>

@@ -52,8 +52,9 @@
              |  Owners
              ----------------------------*/
             .state('owners', {
-                url: "/owners",
+                url: "/owners/",
                 templateUrl: "/shared/owners/index.html",
+                controller: 'ownerIndexController'
             })
             .state('editOwner', {
                 url: "/owners/:owner_id/edit/",
@@ -68,16 +69,16 @@
             .state('viewOwner', {
                 url: "/owners/:owner_id/",
                 templateUrl: '/shared/owners/view.html',
-                controller: 'ownerViewController'
+                controller: 'ownerViewController',
+                redirectTo: 'viewOwner.properties',
             })
             .state('viewOwner.properties', {
                 url: "properties/",
                 templateUrl: '/shared/properties/index.html',
                 controller: 'propertyIndexController'
             })
-            // TODO BRIAN - fix outside route
             .state('viewOwner.createProperty', {
-                url: "properties/create",
+                url: "properties/create/",
                 templateUrl: '/shared/properties/create_edit.html',
                 controller: 'propertyCreateEditController'
             })
@@ -86,8 +87,9 @@
              |  Properties
              ----------------------------*/
             .state('properties', {
-                url: "/properties",
+                url: "/properties/",
                 templateUrl: "/shared/properties/index.html",
+                controller: 'propertyIndexController'
             })
             .state('createProperty', {
                 url: "/properties/create/",
@@ -100,20 +102,57 @@
                 controller: 'propertyCreateEditController'
             })
             .state('viewProperty', {
-                url: "/property/:property_id/",
+                url: "/properties/:property_id/",
                 templateUrl: '/shared/properties/view.html',
-                controller: 'propertyViewController'
+                controller: 'propertyViewController',
+                redirectTo: 'viewProperty.units'
+            })
+            .state('viewProperty.units', {
+                url: "units/",
+                templateUrl: '/shared/units/index.html',
+                controller: 'unitIndexController'
+            })
+            .state('viewProperty.createUnit', {
+                url: "units/create/",
+                templateUrl: '/shared/units/create_edit.html',
+                controller: 'unitCreateEditController'
+            })
+
+            /*-----------------------------
+             |  Units
+             ----------------------------*/
+            .state('units', {
+                url: "/units/",
+                templateUrl: "/shared/units/index.html",
+                controller: 'unitIndexController'
+            })
+            .state('createUnit', {
+                url: "/units/create/",
+                templateUrl: '/shared/units/create_edit.html',
+                controller: 'unitCreateEditController'
+            })
+            .state('editUnit', {
+                url: "/units/:unit_id/edit/",
+                templateUrl: '/shared/units/create_edit.html',
+                controller: 'unitCreateEditController'
+            })
+            .state('viewUnit', {
+                url: "/units/:unit_id/",
+                templateUrl: '/shared/units/view.html',
+                controller: 'unitViewController'
             })
 
             /*-----------------------------
              |   Users
              ----------------------------*/
             .state('users', {
-                url: "/users",
+                url: "/users/",
                 templateUrl: "/shared/users/index.html"
             })
 
-
+            /*-----------------------------
+             |   HOME
+             ----------------------------*/
             .state('home', {
                 url: "/",
                 templateUrl: "/shared/home.html"
@@ -126,6 +165,16 @@
                 requireBase: false
             })
     });
+
+    propman.run(['$rootScope', '$state', function($rootScope, $state) {
+
+        $rootScope.$on('$stateChangeStart', function(evt, to, params) {
+            if (to.redirectTo) {
+                evt.preventDefault();
+                $state.go(to.redirectTo, params)
+            }
+        });
+    }]);
 
 })();
 

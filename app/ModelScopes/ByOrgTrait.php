@@ -1,6 +1,6 @@
 <?php namespace App\ModelScopes;
 
-trait OwnersByOrgTrait {
+trait ByOrgTrait {
     /**
      * Boot the scope.
      *
@@ -8,6 +8,6 @@ trait OwnersByOrgTrait {
      */
     public static function bootOwnersByOrgTrait()
     {
-        static::addGlobalScope(new OwnersByOrgScope);
+        static::addGlobalScope(new ByOrgScope);
     }
 }

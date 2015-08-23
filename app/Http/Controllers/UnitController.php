@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use \App\Models\Property;
 use \App\Models\Owner;
+use \App\Models\Unit;
 
 
 /**
  * Class OwnerController
  * @package App\Http\Controllers
  */
-class PropertyController extends Controller
+class UnitController extends Controller
 {
 
 
     /**
      * Create a new controller instance.
      */
-    public function __construct(Property $property){
+    public function __construct(Unit $unit){
         $this->middleware( 'auth' );
-        $this->property = $property;
+        $this->unit = $unit;
     }
 
     /**
@@ -31,17 +32,17 @@ class PropertyController extends Controller
 
         $input = \Request::all();
 
-        $properties = Property::with('Owner');
+        $units = Unit::with('Property');
 
-        if(!empty($input['owner_id']))
-            $properties = Property::ByOwner($input['owner_id']);
+        if(!empty($input['property_id']))
+            $units = Unit::ByProperty($input['property_id']);
 
-        $properties = $properties->get();
+        $units = $units->get();
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Owners Loaded.',
-            'data'    => $properties
+            'message' => 'Units Loaded.',
+            'data'    => $units
         ] );
     }
 
@@ -53,23 +54,23 @@ class PropertyController extends Controller
         $input = \Request::all();
 
         $validator = \Validator::make($input, [
-            'owner_id' => 'required',
-            'property_name' => 'required|max:255',
+            'property_id' => 'required',
+            'unit_name' => 'required|max:255',
         ]);
 
         if($validator->fails())
             \App::abort( 400, $validator->messages()->first() );
 
-        $property = new Property($input);
+        $unit = new Unit($input);
 
-        $owner = Owner::find($input['owner_id']);
+        $property = Property::find($input['property_id']);
 
-        $property = $owner->Properties()->save($property);
+        $unit = $property->Units()->save($unit);
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Property Created.',
-            'data'    => $property
+            'message' => 'Unit Created.',
+            'data'    => $unit
         ] );
     }
 
@@ -80,12 +81,12 @@ class PropertyController extends Controller
      */
     public function show( $id ){
 
-        $property = Property::with('Owner')->findOrFail( $id );
+        $units = Unit::with(['Property','Property.Owner'])->findOrFail( $id );
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Owners Loaded.',
-            'data'    => $property
+            'message' => 'Properties Loaded.',
+            'data'    => $units
         ] );
     }
 
@@ -95,12 +96,12 @@ class PropertyController extends Controller
      */
     public function edit( $id ){
 
-        $property = Property::with('Owner')->findOrFail( $id );
+        $units = Unit::with('Property')->findOrFail( $id );
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Property Loaded.',
-            'data'    => $property
+            'message' => 'Unit Loaded.',
+            'data'    => $units
         ] );
     }
 
@@ -112,14 +113,14 @@ class PropertyController extends Controller
 
         $input = \Request::all();
 
-        $property = Property::findOrFail( $id );
+        $units = Unit::findOrFail( $id );
 
-        $property->update( $input );
+        $units->update( $input );
 
         return \Response::json( [
             'success' => true,
-            'message' => 'Owner Updated.',
-            'data'    => $property
+            'message' => 'Unit Updated.',
+            'data'    => $units
         ] );
     }
 }

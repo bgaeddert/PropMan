@@ -1,0 +1,55 @@
+<section id="control-bar">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2><i class="fa fa-building"></i> {{unit.unit_name}}</h2>
+            <h4>
+                <span class="label label-danger" ng-show="unit.unit_active == 0">INACTIVE</span>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                <div class="row item">
+                    <div class="col-md-2 text-right sub-title">Owner:</div>
+                        <div class="col-md-10"><a ui-sref="viewOwner({owner_id : unit.property.owner_id})">{{unit.property.owner.owner_name}}</a></div>
+                </div>
+                <div class="row item">
+                    <div class="col-md-2 text-right sub-title">Property:</div>
+                    <div class="col-md-10"><a ui-sref="viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a></div>
+                </div>
+            </div>
+            <div class="col-md-6 item">
+                <div class="row">
+                    <div class="col-md-2 text-right sub-title">Address:</div>
+                    <div class="col-md-10">{{unit.unit_address}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a ui-sref="editUnit({unit_id : unit.id})" class="btn btn-primary">
+                <i class="fa fa-pencil"></i> Edit
+            </a>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="tab-section row">
+    <div class="col-md-12 hide-first">
+        <tabset>
+            <tab
+                    ng-repeat="t in tabs"
+                    heading="{{t.heading}}"
+                    select="go(t.route)"
+                    active="t.active">
+            </tab>
+        </tabset>
+
+        <div class="tab-content col-md-12">
+            <div class="tab-view">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+</section>

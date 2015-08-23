@@ -39,11 +39,21 @@ class EventServiceProvider extends ServiceProvider {
 		\App\Models\Property::saving(function($property)
 		{
 			if(empty($property->property_name))
-				$property->owner_name = null;
+				$property->property_name = null;
 
 			$property->org_id = \Auth::User()->org_id;
 
 			return $property;
+		});
+
+		\App\Models\Unit::saving(function($unit)
+		{
+			if(empty($unit->unit_name))
+				$unit->unit_name = null;
+
+			$unit->org_id = \Auth::User()->org_id;
+
+			return $unit;
 		});
 	}
 

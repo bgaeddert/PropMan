@@ -1,0 +1,59 @@
+<div>
+    <section id="control-bar" class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="index-title col-md-8">
+                    <h2><i class="fa fa-building"></i> Units</h2>
+                </div>
+                <div class="col-md-4">
+                    <a ui-sref="{{createUnitRoute()}}" class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Create</a>
+                </div>
+            </div>
+        </div>
+        <div class="controls col-md-4">
+            <input class="form-control pull-right" placeholder="Search" ng-model="searchText"/>
+        </div>
+    </section>
+
+    <section class="list-con row">
+
+        <!--Property List-->
+        <div id="units-list" class="list col-md-12">
+            <div class="list-item listed-unit row"
+                 ng-repeat="unit in units | filter:searchText | orderBy:['-unit_active','unit_name']">
+
+                <div class="col-md-12">
+                    <h3>
+                        <i class="fa fa fa-building"></i>
+                        <a ui-sref="viewUnit({unit_id : unit.id})">{{unit.unit_name}}</a>
+                    </h3>
+                    <h4>
+                        <span class="label label-danger" ng-show="unit.unit_active == 0">INACTIVE</span>
+                    </h4>
+                </div>
+                <div class="col-md-8">
+                    <div class="" ng-if="!property_id"><b>Property:</b>
+                        <a ui-sref="viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a>
+                    </div>
+                    <div class=""><b>Address:</b> {{unit.unit_address}}</div>
+                </div>
+                <div class="buttons col-md-12">
+                    <div class="pull-right">
+                        <a ui-sref="viewUnit({unit_id : unit.id})" class="btn btn-info"><i
+                                class="fa fa-eye"></i> View</a>
+                        <a ui-sref="editUnit({unit_id : unit.id})" class="btn btn-primary"><i
+                                class="fa fa-pencil"></i> Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Empty-->
+        <div class="list col-md-12" ng-show="!units.length">
+            <div class="well">
+                <a ui-sref="{{createUnitRoute()}}" class="btn btn-primary"><i class="fa fa-plus"></i> Create</a>
+            </div>
+        </div>
+    </section>
+
+</div>

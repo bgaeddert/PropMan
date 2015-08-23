@@ -1,4 +1,4 @@
-angular.module('propman').factory('ownerFactory', function($http){
+angular.module('propman').factory('ownerFactory', function($http,$sce){
     return {
         getOwners: function(requestData){
             var url = '/api/owners';

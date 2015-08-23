@@ -1,7 +1,7 @@
-angular.module('propman').factory('propertyFactory', function($http,$sce){
+angular.module('propman').factory('unitFactory', function($http,$sce){
     return {
-        getProperties: function(requestData){
-            var url = '/api/properties';
+        getAll: function(requestData){
+            var url = '/api/units';
             var response = $http({
                 method: "get",
                 url: url,
@@ -10,7 +10,7 @@ angular.module('propman').factory('propertyFactory', function($http,$sce){
             return response;
         },
         getShow: function(requestData){
-            var url = '/api/properties/'+ requestData.id;
+            var url = '/api/units/'+ requestData.id;
             var response = $http({
                 method: "get",
                 url: url
@@ -18,7 +18,7 @@ angular.module('propman').factory('propertyFactory', function($http,$sce){
             return response;
         },
         postStore: function(requestData){
-            var url = '/api/properties/' ;
+            var url = '/api/units/' ;
             var response = $http({
                 method: "post",
                 url: url,
@@ -27,7 +27,7 @@ angular.module('propman').factory('propertyFactory', function($http,$sce){
             return response;
         },
         getEdit: function(requestData){
-            var url = '/api/properties/'+ requestData.id + '/edit/' ;
+            var url = '/api/units/'+ requestData.id + '/edit/' ;
             var response = $http({
                 method: "get",
                 url: url
@@ -35,7 +35,7 @@ angular.module('propman').factory('propertyFactory', function($http,$sce){
             return response;
         },
         putUpdate: function(requestData){
-            var url = '/api/properties/'+ requestData.id ;
+            var url = '/api/units/'+ requestData.id ;
             var response = $http({
                 method: "put",
                 url: url,
@@ -43,8 +43,8 @@ angular.module('propman').factory('propertyFactory', function($http,$sce){
             });
             return response;
         },
-        getOwnerOptions: function(requestData){
-            var url = '/api/owners';
+        getPropertyOptions: function(requestData){
+            var url = '/api/properties/';
             var response = $http({
                 method: "get",
                 url: url,

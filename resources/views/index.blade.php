@@ -106,9 +106,14 @@
 <script type="text/javascript" src="/components/controllers/properties/propertyIndexController.js"></script>
 <script type="text/javascript" src="/components/controllers/properties/propertyCreateEditController.js"></script>
 <script type="text/javascript" src="/components/controllers/properties/propertyViewController.js"></script>
-
-{{--<script type="text/javascript" src="/components/controllers/owners/propertyViewController.js"></script>--}}
 <script type="text/javascript" src="/components/services/propertyFactory.js"></script>
+
+<script type="text/javascript" src="/components/controllers/units/unitIndexController.js"></script>
+<script type="text/javascript" src="/components/controllers/units/unitCreateEditController.js"></script>
+<script type="text/javascript" src="/components/controllers/units/unitViewController.js"></script>
+<script type="text/javascript" src="/components/services/unitFactory.js"></script>
+
+<script type="text/javascript" src="/components/services/handlerFactory.js"></script>
 
 
 <script type="text/javascript" src="/components/controllers/userController.js"></script>

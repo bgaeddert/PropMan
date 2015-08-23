@@ -1,11 +1,9 @@
 angular.module('propman').controller('propertyViewController',
     function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, propertyFactory){
 
-        $scope.id = $stateParams.property_id;
-
-        if($scope.id){
+        if($stateParams.property_id){
             requestData = {};
-            requestData.id = $scope.id;
+            requestData.id = $stateParams.property_id;
             propertyFactory.getShow(requestData)
                 .success(function(dataResponse){
                     $scope.property = dataResponse.data;
@@ -14,31 +12,5 @@ angular.module('propman').controller('propertyViewController',
                     errorHandler(error)
                 });
         }
-
-        /*
-        |------------------------------
-        | Tabs
-        |------------------------------
-        |
-         */
-
-        //$scope.tabs = [
-        //    {heading: "Units", route: "viewProperty.Units", active: false},
-        //    {heading: "Transactions", route: "viewProperty.transactions", active: false}
-        //];
-
-        //$scope.go = function(route){
-        //    $state.go(route);
-        //};
-        //
-        //$scope.active = function(route){
-        //    return $state.is(route);
-        //};
-        //
-        //$scope.$on("$stateChangeSuccess", function() {
-        //    $scope.tabs.forEach(function(tab) {
-        //        tab.active = $scope.active(tab.route);
-        //    });
-        //});
 
     });

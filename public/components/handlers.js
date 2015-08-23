@@ -16,3 +16,10 @@ function successHandler(message){
 
     toastr.success(message);
 }
+
+function warningHandler(scope,message){
+    scope.tmp.warn = true;
+    scope.tmp.warning = {};
+    scope.tmp.warning.title = $sce.trustAsHtml(message);
+    console.log(scope);
+}

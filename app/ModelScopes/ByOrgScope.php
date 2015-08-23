@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ScopeInterface;
 
-class PropertiesByOrgScope implements ScopeInterface {
+class ByOrgScope implements ScopeInterface {
 
     /**
      * Apply scope on the query.
