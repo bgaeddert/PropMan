@@ -4,9 +4,9 @@
 <html ng-app="propman">
 <head>
     <title>PropMan</title>
-    <link rel='stylesheet' href='/assets/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
     <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/bower_components/toastr/toastr.min.css">
+    <link rel='stylesheet' href='/assets/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
     <link rel="stylesheet" href="/css/app.css">
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
@@ -41,6 +41,9 @@
                             router directly to redirect to the log out page
                         -------------------------------------------------------->
                         <li><a href="/auth/logout" target="_self">Logout</a></li>
+
+                        <!-- Setting Link -->
+                        <li><a ui-sref="settings">Settings</a></li>
                     </ul>
                 </li>
             </ul>
@@ -94,9 +97,9 @@
 <!-- Application Dependencies -->
 <script type="text/javascript" src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="/assets/bower_components/angular-animate/angular-animate.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular-resource/angular-resource.js"></script>
-<script type="text/javascript" src="/assets/bower_components/angular-animate/angular-animate.js"></script>
 <script type="text/javascript" src="/assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script type='text/javascript' src='/assets/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
 <script type="text/javascript" src="/assets/bower_components/moment/moment.js"></script>
@@ -126,6 +129,9 @@
 <script type="text/javascript" src="/components/controllers/tenants/tenantCreateEditController.js"></script>
 <script type="text/javascript" src="/components/controllers/tenants/tenantViewController.js"></script>
 <script type="text/javascript" src="/components/services/tenantFactory.js"></script>
+
+<script type="text/javascript" src="/components/controllers/orgs/orgEditController.js"></script>
+<script type="text/javascript" src="/components/services/orgFactory.js"></script>
 
 <script type="text/javascript" src="/components/services/handlerFactory.js"></script>
 

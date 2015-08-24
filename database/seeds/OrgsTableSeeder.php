@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 class OrgsTableSeeder extends Seeder
 {
 
-    public function run() {
+    public function run(){
 
         $org = array (
             array (
-                'id'                  => '1',
-                'name'             => '1',
-                'created_at'          => new DateTime,
-                'updated_at'          => new DateTime,
+                'id'         => '1',
+                'name'       => 'PROPERTY MANAGEMENT',
+                'phone'      => '506-8888-8888',
+                'address'    => 'COMPANY ADDRESS',
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime,
             ),
         );
 

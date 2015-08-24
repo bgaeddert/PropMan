@@ -14,7 +14,8 @@
 
     propman.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
-    }])
+        cfpLoadingBarProvider.latencyThreshold = 50;
+    }]);
 
     propman.config(['$httpProvider', function($httpProvider){
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -46,7 +47,7 @@
 
         //
         // For any unmatched url, redirect to /home
-        $urlRouterProvider.otherwise(function($injector, $location){
+        $urlRouterProvider.otherwise(function($injector, $location ){
             return "/";
         });
 
@@ -60,6 +61,17 @@
             .state('home', {
                 url: "/",
                 templateUrl: "/shared/home.html"
+            })
+
+            .state('settings', {
+                url: "/settings",
+                templateUrl: "/shared/settings.html",
+                controller: 'orgEditController',
+                resolve: {
+                    org: function(orgFactory){
+                        return orgFactory.getEdit()
+                    }
+                }
             })
 
             /*-----------------------------

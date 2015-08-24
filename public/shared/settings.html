@@ -1,0 +1,66 @@
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-title col-md-8">
+                <!-- Page TITLE -->
+                <h2><i class="fa fa-gear"></i> Settings</h2>
+                <!-- ./ Page TITLE -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<div>
+    <section id="item-view" class="row">
+
+        <div class="col-md-6">
+
+            <div class="row">
+                <form name="orgForm" class="form col-md-8" novalidate>
+
+                    <!-- Org Name -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : orgForm.name.$invalid && ! orgForm.name.$pristine }">
+                        <label for="name"><b>Organization Name:</b> <span
+                                class="label-note-required">Required</span></label>
+                        <input type="text" id="name" name="name" class="form-control"
+                               ng-model="org.name" required>
+
+                        <p ng-show="orgForm.name.$invalid && ! orgForm.name.$pristine"
+                           class="help-block">Organization name is required.</p>
+                    </div>
+                    <!-- ./ Org Name -->
+
+                    <!-- Org Address -->
+                    <div class="form-group">
+                        <label for="address"><b>Organization Address:</b> <span class="label-note-optional">Optional</span></label>
+                        <textarea type="text" id="address" name="address" class="form-control"
+                                  ng-model="org.address"></textarea>
+                    </div>
+                    <!-- ./ Org Address -->
+
+                    <!-- Org Phone -->
+                    <div class="form-group">
+                        <label for="address"><b>Organization Phone:</b> <span class="label-note-optional">Optional</span></label>
+                        <input type="text" id="phone" name="phone" class="form-control"
+                                  ng-model="org.phone"/>
+                    </div>
+                    <!-- ./ Org Phone -->
+
+
+                    <!-- Buttons -->
+                    <div class="pull-left">
+                        <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+
+                        <!--Edit Button-->
+                        <button class="btn btn-success" ng-click="onUpdate()"
+                                ng-disabled="orgForm.$invalid">Update
+                        </button>
+                    </div>
+                    <!-- ./ Buttons -->
+
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

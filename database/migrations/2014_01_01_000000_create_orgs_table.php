@@ -16,6 +16,8 @@ class CreateOrgsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->string('phone')->nullable();
+			$table->longText('address')->nullable();
 			$table->timestamps();
 		});
 	}

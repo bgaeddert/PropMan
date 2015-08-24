@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Org extends Model{
 
-	use SoftDeletes;
-
 	/**
 	 * The database table used by the model.
 	 *
@@ -22,7 +20,7 @@ class Org extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name'];
+	protected $fillable = ['name','address','phone'];
 
 	/**
 	 * Property relationship
