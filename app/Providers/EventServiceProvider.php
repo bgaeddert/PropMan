@@ -65,6 +65,13 @@ class EventServiceProvider extends ServiceProvider {
 
 			return $tenant;
 		});
+
+		\App\Models\Transaction::saving(function($transaction)
+		{
+			$transaction->org_id = \Auth::User()->org_id;
+
+			return $transaction;
+		});
 	}
 
 }

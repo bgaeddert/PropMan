@@ -12,7 +12,7 @@
         'ngAnimate'
     ]);
 
-    propman.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    propman.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider){
         cfpLoadingBarProvider.includeSpinner = false;
         cfpLoadingBarProvider.latencyThreshold = 50;
     }]);
@@ -47,7 +47,7 @@
 
         //
         // For any unmatched url, redirect to /home
-        $urlRouterProvider.otherwise(function($injector, $location ){
+        $urlRouterProvider.otherwise(function($injector, $location){
             return "/";
         });
 
@@ -332,6 +332,65 @@
                 }
             })
 
+            /*Properties BASE --> VIEW --> transaction INDEX*/
+            .state('properties.viewProperty.transactions', {
+                url: "/transactions",
+                templateUrl: '/shared/transactions/index.html',
+                controller: 'transactionIndexController',
+                resolve: {
+                    tenant_view: function(){
+                        return false;
+                    },
+                    property_view: function(){
+                        return true;
+                    },
+                    tenant: function($stateParams, tenantFactory){
+                        return false;
+                    },
+                    transactions: function($stateParams, transactionFactory){
+                        return transactionFactory.getTransactions({property_id: $stateParams.property_id})
+                    },
+                    sort: function(){
+                        return {type: 'paid_at', reverse: 'true'}
+                    },
+                    createRoute: function(){
+                        return 'properties.viewProperty.createTransaction'
+                    }
+                }
+            })
+            /*Properties BASE --> VIEW --> transaction CREATE*/
+            .state('properties.viewProperty.createTransaction', {
+                url: "/transactions/create",
+                templateUrl: '/shared/transactions/create_edit.html',
+                controller: 'transactionCreateEditController',
+                resolve: {
+                    tenant_view: function(){
+                        return false;
+                    },
+                    property_view: function(){
+                        return true;
+                    },
+                    tenant: function(){
+                        return false;
+                    },
+                    tenants: function(){
+                        return false;
+                    },
+                    transaction: function($stateParams, propertyFactory){
+                        return {
+                            property_id: $stateParams.property_id,
+                            paid_at: new Date()
+                        };
+                    },
+                    transaction_create: function(){
+                        return true;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return propertyFactory.getShow({id: $stateParams.property_id});
+                    }
+                }
+            })
+
             /*-----------------------------
              |  Units
              ----------------------------*/
@@ -473,17 +532,17 @@
                 }
             })
 
-        /*-----------------------------
-         |  Tenants
-         ----------------------------*/
+            /*-----------------------------
+             |  Tenants
+             ----------------------------*/
 
-        /*Tenants BASE*/
-        .
-        state('tenants', {
-            url: "/tenants",
-            templateUrl: "/shared/tenants/base.html",
-            redirectTo: 'tenants.listTenants'
-        })
+            /*Tenants BASE*/
+            .
+            state('tenants', {
+                url: "/tenants",
+                templateUrl: "/shared/tenants/base.html",
+                redirectTo: 'tenants.listTenants'
+            })
 
             /*Tenants BASE --> INDEX*/
             .state('tenants.listTenants', {
@@ -559,43 +618,212 @@
                 url: "/:tenant_id",
                 templateUrl: '/shared/tenants/view.html',
                 controller: 'tenantViewController',
-                redirectTo: 'tenants.viewTenant.tenants',
+                redirectTo: 'tenants.viewTenant.transactions',
                 resolve: {
                     tenant_view: function(){
                         return true;
                     },
                     tenant: function($stateParams, tenantFactory){
-                        return tenantFactory.getShow({id: $stateParams.tenant_id})
+                        return tenantFactory.getShow({id: $stateParams.tenant_id});
                     }
                 }
             })
 
-            /*Tenants BASE --> VIEW --> UNIT INDEX*/
-            .state('tenants.viewTenant.tenants', {
-                //url: "/tenants",
-                //templateUrl: '/shared/tenants/index.html',
-                //controller: 'tenantIndexController',
+            /*Tenants BASE --> VIEW --> transaction INDEX*/
+            .state('tenants.viewTenant.transactions', {
+                url: "/transactions",
+                templateUrl: '/shared/transactions/index.html',
+                controller: 'transactionIndexController',
+                resolve: {
+                    tenant_view: function(){
+                        return true;
+                    },
+                    property_view: function(){
+                        return false;
+                    },
+                    tenant: function($stateParams, tenantFactory){
+                        return tenantFactory.getShow({id: $stateParams.tenant_id})
+                    },
+                    transactions: function($stateParams, transactionFactory){
+                        return transactionFactory.getTransactions({tenant_id: $stateParams.tenant_id})
+                    },
+                    sort: function(){
+                        return {type: 'paid_at', reverse: 'true'}
+                    },
+                    createRoute: function(){
+                        return 'tenants.viewTenant.createTransaction'
+                    }
+                }
+            })
+
+            /*Tenant BASE --> VIEW --> transaction CREATE*/
+            .state('tenants.viewTenant.createTransaction', {
+                url: "/transactions/create",
+                templateUrl: '/shared/transactions/create_edit.html',
+                controller: 'transactionCreateEditController',
+                resolve: {
+                    tenant_view: function(){
+                        return true;
+                    },
+                    property_view: function(){
+                        return false;
+                    },
+                    tenant: function($stateParams, tenantFactory){
+                        return tenantFactory.getShow({id: $stateParams.tenant_id});
+                    },
+                    tenants: function(){
+                        return false;
+                    },
+                    transaction: function($stateParams, propertyFactory){
+                        return {
+                            tenant_id: $stateParams.tenant_id,
+                            paid_at: new Date()
+                        };
+                    },
+                    transaction_create: function(){
+                        return true;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return false;
+                    }
+                }
+            })
+
+            /*-----------------------------
+             |  Transactions
+             ----------------------------*/
+
+            /*Transactions BASE*/
+            .
+            state('transactions', {
+                url: "/transactions",
+                templateUrl: "/shared/transactions/base.html",
+                redirectTo: 'transactions.listTransactions'
+            })
+
+            /*Transactions BASE --> INDEX*/
+            .state('transactions.listTransactions', {
+                url: "/index",
+                templateUrl: "/shared/transactions/index.html",
+                controller: 'transactionIndexController',
+                resolve: {
+                    tenant_view: function(){
+                        return false;
+                    },
+                    property_view: function(){
+                        return false;
+                    },
+                    transaction_view: function(){
+                        return true;
+                    },
+                    transactions: function($stateParams, transactionFactory){
+                        return transactionFactory.getTransactions()
+                    },
+                    sort: function(){
+                        return {type: 'paid_at', reverse: 'true'}
+                    },
+                    createRoute: function(){
+                        return 'transactions.createTransaction'
+                    }
+                }
+            })
+
+            /*Transactions BASE --> CREATE*/
+            .state('transactions.createTransaction', {
+                url: "/create",
+                templateUrl: '/shared/transactions/create_edit.html',
+                controller: 'transactionCreateEditController',
+                resolve: {
+                    tenant_view: function(){
+                        return false;
+                    },
+                    property_view: function(){
+                        return false;
+                    },
+                    tenants: function(tenantFactory){
+                        return tenantFactory.getUnits({onlyActive: true});
+                    },
+                    tenant: function(){
+                        return false;
+                    },
+                    transaction: function($stateParams){
+                        return {
+                            tenant_id: $stateParams.tenant_id,
+                            transaction_active: '1'
+                        };
+                    },
+                    transaction_create: function(){
+                        return true;
+                    }
+                }
+            })
+
+            /*Transactions BASE --> EDIT*/
+            .state('transactions.editTransaction', {
+                url: "/:transaction_id/edit",
+                templateUrl: '/shared/transactions/create_edit.html',
+                controller: 'transactionCreateEditController',
+                resolve: {
+                    transaction_view: function(){
+                        return false;
+                    },
+                    tenants: function(tenantFactory){
+                        return tenantFactory.getUnits({onlyActive: true});
+                    },
+                    tenant: function(){
+                        return false
+                    },
+                    transaction: function($stateParams, transactionFactory){
+                        return transactionFactory.getEdit({id: $stateParams.transaction_id})
+                    },
+                    transaction_create: function(){
+                        return false;
+                    }
+                }
+            })
+
+            /*Transactions BASE --> VIEW*/
+            .state('transactions.viewTransaction', {
+                url: "/:transaction_id",
+                templateUrl: '/shared/transactions/view.html',
+                controller: 'transactionViewController',
+                redirectTo: 'transactions.viewTransaction.transactions',
+                resolve: {
+                    transaction_view: function(){
+                        return true;
+                    },
+                    transaction: function($stateParams, transactionFactory){
+                        return transactionFactory.getShow({id: $stateParams.transaction_id})
+                    }
+                }
+            })
+
+            /*Transactions BASE --> VIEW --> UNIT INDEX*/
+            .state('transactions.viewTransaction.transactions', {
+                //url: "/transactions",
+                //templateUrl: '/shared/transactions/index.html',
+                //controller: 'transactionIndexController',
                 //resolve: {
-                //    tenant_view: function(){
+                //    transaction_view: function(){
                 //        return true;
                 //    },
-                //    tenant: function($stateParams, tenantFactory){
-                //        return tenantFactory.getShow({id: $stateParams.tenant_id})
+                //    transaction: function($stateParams, transactionFactory){
+                //        return transactionFactory.getShow({id: $stateParams.transaction_id})
                 //    }
                 //}
             })
 
-            /*Tenants BASE --> VIEW --> CREATE TENENT*/
-            .state('tenants.viewTenant.createTenant', {
-                //url: "/tenants/create",
-                //templateUrl: '/shared/tenants/create_edit.html',
-                //controller: 'tenantCreateEditController',
+            /*Transactions BASE --> VIEW --> CREATE TENENT*/
+            .state('transactions.viewTransaction.createTransaction', {
+                //url: "/transactions/create",
+                //templateUrl: '/shared/transactions/create_edit.html',
+                //controller: 'transactionCreateEditController',
                 //resolve: {
-                //    tenant_view: function(){
+                //    transaction_view: function(){
                 //        return true;
                 //    },
-                //    tenant: function($stateParams, tenantFactory){
-                //        return tenantFactory.getShow({id: $stateParams.tenant_id})
+                //    transaction: function($stateParams, transactionFactory){
+                //        return transactionFactory.getShow({id: $stateParams.transaction_id})
                 //    }
                 //}
             })

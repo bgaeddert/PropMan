@@ -34,6 +34,10 @@ class Tenant extends Model{
 
 	protected $guarded = ['id'];
 
+	public function Org(){
+		return $this->belongsTo('App\Models\Org');
+	}
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -34,13 +34,10 @@ class Property extends Model{
 
 	protected $guarded = ['id'];
 
-	/**
-	 * Owner relationship
-	 *
-	 * Property belong to an owner;
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+	public function Org(){
+		return $this->belongsTo('App\Models\Org');
+	}
+
 	public function Owner(){
 
 		return $this->belongsTo('App\Models\Owner');

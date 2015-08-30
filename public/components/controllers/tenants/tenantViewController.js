@@ -1,5 +1,5 @@
 angular.module('propman').controller('tenantViewController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $state, $stateParams, tenantFactory, tenant, tenant_view){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, tenantFactory, tenant, tenant_view){
 
         /*
          |-----------------------------------

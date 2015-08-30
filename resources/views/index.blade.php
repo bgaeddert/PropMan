@@ -61,7 +61,7 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="properties"><i class="fa fa-building"></i> Properties</a>
+                <a ui-sref="properties"><i class="fa fa-building"></i> Properties <i class="fa fa-money"></i></a>
             </li>
 
             <li ui-sref-active="active">
@@ -69,7 +69,7 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="tenants"><i class="fa fa-users"></i> Tenants</a>
+                <a ui-sref="tenants"><i class="fa fa-users"></i> Tenants <i class="fa fa-money"></i></a>
             </li>
 
             <li ui-sref-active="active">
@@ -109,6 +109,7 @@
 <!-- Application Scripts -->
 <script type="text/javascript" src="/app.js"></script>
 <script type="text/javascript" src="/components/handlers.js"></script>
+<script type="text/javascript" src="/components/filters.js"></script>
 
 <script type="text/javascript" src="/components/controllers/owners/ownerIndexController.js"></script>
 <script type="text/javascript" src="/components/controllers/owners/ownerCreateEditController.js"></script>
@@ -129,6 +130,11 @@
 <script type="text/javascript" src="/components/controllers/tenants/tenantCreateEditController.js"></script>
 <script type="text/javascript" src="/components/controllers/tenants/tenantViewController.js"></script>
 <script type="text/javascript" src="/components/services/tenantFactory.js"></script>
+
+<script type="text/javascript" src="/components/controllers/transactions/transactionIndexController.js"></script>
+<script type="text/javascript" src="/components/controllers/transactions/transactionCreateEditController.js"></script>
+<script type="text/javascript" src="/components/controllers/transactions/transactionViewController.js"></script>
+<script type="text/javascript" src="/components/services/transactionFactory.js"></script>
 
 <script type="text/javascript" src="/components/controllers/orgs/orgEditController.js"></script>
 <script type="text/javascript" src="/components/services/orgFactory.js"></script>

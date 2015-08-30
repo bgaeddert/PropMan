@@ -84,7 +84,7 @@ class PropertyController extends Controller
      */
     public function show( $id ){
 
-        $property = Property::with('Owner')->findOrFail( $id );
+        $property = Property::with('Owner')->with('Org')->findOrFail( $id );
 
         return \Response::json( [
             'success' => true,

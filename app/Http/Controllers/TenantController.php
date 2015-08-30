@@ -82,7 +82,7 @@ class TenantController extends Controller
      */
     public function show( $id ){
 
-        $tenants = Tenant::with(['Unit','Unit.Property'])->findOrFail( $id );
+        $tenants = Tenant::with(['Unit','Unit.Property'])->with('Org')->findOrFail( $id );
 
         return \Response::json( [
             'success' => true,

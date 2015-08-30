@@ -1,0 +1,178 @@
+<section id="control-bar" class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-title col-md-8">
+                <!-- Page TITLE -->
+                <h2 ng-show="transaction_create === false">Edit: Transaction</h2>
+
+                <h2 ng-show="transaction_create === true">Create: Transaction</h2>
+
+                <!-- Unit Link -->
+                <h4 ng-show="transaction.unit.unit_name">
+                    Unit: <a ui-sref="units.viewUnit({unit_id : transaction.unit.id})">{{unit.unit_name}}</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-include src="'/shared/warning.html'" ng-show="tmp.warn === true"></ng-include>
+
+<div ng-show="tmp.warn === false">
+    <section id="item-view" class="row">
+
+
+        <div class="col-md-6">
+
+            <h4>
+                <span class="label label-danger" ng-show="transaction.transaction_active == 0">INACTIVE</span>
+            </h4>
+
+            <div class="row">
+                <form name="transactionForm" class="form col-md-8" novalidate>
+
+                    <!-- Transaction Paid -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : transactionForm.paid_at.$invalid && ! transactionForm.paid_at.$pristine }"
+                            >
+                        <label for="paid_at"><b>Date Paid:</b> <span class="label-paid_at-optional">Optional</span></label>
+                        <input type="text" id="paid_at" name="paid_at" class="form-control date-popup" datepicker-popup="{{format}}" ng-click="openStart($event)" ng-model="transaction.paid_at" is-open="startOpened"  datepicker-options="dateOptions" ng-required="true" show-weeks="false" close-text="Close" required/>
+                        <p ng-show="transactionForm.paid_at.$invalid && ! transactionForm.paid_at.$pristine"
+                           class="help-block">Payment date is required.</p>
+                    </div>
+                    <!-- ./ Transaction Paid -->
+
+                    <!---------------------->
+                    <!-- PROPERTY OPTIONS -->
+                    <!---------------------->
+
+                    <!-- Transaction Property Payer -->
+                    <div class="form-group" ng-show="property_view === true">
+                        <label for="payer"><b>From:</b> <span class="label-note-optional">Required</span></label>
+                        <select id="payer" name="payer" class="form-control" ng-model="propertyPayer"
+                                ng-change="onPropertyPayChange()"
+                                ng-required="property_view === true"
+                                >
+                            <option value="1">{{property.org.name}}</option>
+                            <option value="2">{{property.property_name}}</option>
+                        </select>
+                    </div>
+                    <!-- ./ Transaction Property Payer -->
+
+                    <!-- Transaction Property Payee -->
+                    <div class="form-group" ng-show="property_view === true">
+                        <label for="payee"><b>To:</b> <span class="label-note-optional">Required</span></label>
+                        <select id="payee" name="payee" class="form-control" ng-model="propertyPayee"
+                                ng-change="onPropertyPayChange()"
+                                ng-required="property_view === true"
+                                >
+                            <option value="1">{{property.org.name}}</option>
+                            <option value="2">{{property.property_name}}</option>
+                            <option value="3">Third Party</option>
+                        </select>
+                    </div>
+                    <!-- ./ Transaction Property Payee -->
+
+                    <!-- Transaction Third party -->
+                    <div class="form-group" ng-show="propertyPayee == 3 && property_view === true"
+                         ng-class="{ 'has-error' : transactionForm.outside_name.$invalid && ! transactionForm.outside_name.$pristine }"
+                            >
+                        <label for="outside_name"><b>Third Party Name:</b> <span class="label-outside_name-optional">Required</span></label>
+                        <input type="text" id="outside_name" name="outside_name" class="form-control"
+                               ng-model="transaction.outside_name"
+                               ng-required="propertyPayee === '3' && property_view === true"
+                                />
+                        <p ng-show="transactionForm.outside_name.$invalid && ! transactionForm.outside_name.$pristine"
+                           class="help-block">Third party name is required.</p>
+                    </div>
+                    <!-- ./ Transaction Third party -->
+
+                    <!---------------------->
+                    <!--  TENANT OPTIONS  -->
+                    <!---------------------->
+
+                    <!-- Transaction Tenant Payer -->
+                    <div class="form-group" ng-show="tenant_view === true">
+                        <label for="payer"><b>From:</b> <span class="label-note-optional">Required</span></label>
+                        <select id="payer" name="payer" class="form-control" ng-model="tenantPayer"
+                                ng-change="onTenantPayChange()"
+                                ng-required="tenant_view === true"
+                                disabled
+                                >
+                            <option value="1">{{tenant.tenant_name}}</option>
+                        </select>
+                    </div>
+                    <!-- ./ Transaction Tenant Payer -->
+
+                    <!-- Transaction Tenant Payee -->
+                    <div class="form-group" ng-show="tenant_view === true">
+                        <label for="payee"><b>To:</b> <span class="label-note-optional">Required</span></label>
+                        <select id="payee" name="payee" class="form-control" ng-model="tenantPayee"
+                                ng-change="onTenantPayChange()"
+                                ng-required="tenant_view === true"
+                                >
+                            <option value="2">{{tenant.org.name}}</option>
+                            <option value="3">{{tenant.unit.property.property_name}}</option>
+                        </select>
+                    </div>
+                    <!-- ./ Transaction Tenant Payee -->
+
+                    <!-- Transaction Note -->
+                    <div class="form-group">
+                        <label for="note"><b>Note:</b> <span class="label-note-optional">Optional</span></label>
+                        <input type="text" id="note" name="note" class="form-control"
+                                  ng-model="transaction.note"/>
+                    </div>
+                    <!-- ./ Transaction Note -->
+
+                    <!-- Transaction Colones -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : transactionForm.colones.$invalid && ! transactionForm.colones.$pristine }"
+                            >
+                        <label for="colones"><b>Colones:</b> <span class="label-colones-optional">Required if dollars are empty</span></label>
+                        <input type="text" id="colones" name="colones" class="form-control"
+                               ng-model="transaction.colones"
+                               ng-required="!transaction.dollars || transaction.dollars == 'undefined'"
+                               ng-change="transaction.dollars = ''"
+                                />
+                        <p ng-show="transactionForm.colones.$invalid && ! transactionForm.colones.$pristine"
+                           class="help-block">Colones required if dollars are empty!</p>
+                    </div>
+                    <!-- ./ Transaction Colones -->
+
+                    <!-- Transaction Dollars -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : transactionForm.dollars.$invalid && ! transactionForm.dollars.$pristine }"
+                            >
+                        <label for="dollars"><b>Dollars:</b> <span class="label-dollars-optional">Required if colones are empty</span></label>
+                        <input type="text" id="dollars" name="dollars" class="form-control"
+                               ng-model="transaction.dollars"
+                               ng-required="!transaction.colones || transaction.colones == 'undefined'"
+                               ng-change="transaction.colones = ''"
+                                />
+                        <p ng-show="transactionForm.dollars.$invalid && ! transactionForm.dollars.$pristine"
+                           class="help-block">Dollars required if colones are empty!</p>
+                    </div>
+                    <!-- ./ Transaction Dollars -->
+
+                    <!-- Buttons -->
+                    <div class="pull-left">
+                        <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+
+                        <!--Edit Button-->
+                        <button class="btn btn-success" ng-click="onUpdate()" ng-show="transaction_create === false"
+                                ng-disabled="transactionForm.$invalid">Update
+                        </button>
+
+                        <!--Create Button-->
+                        <button class="btn btn-success" ng-click="onStore()" ng-show="transaction_create === true"
+                                ng-disabled="transactionForm.$invalid">Save
+                        </button>
+                    </div>
+                    <!-- ./ Buttons -->
+
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
