@@ -44,6 +44,13 @@
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
+            <th style="width:50px;">
+                <a href="#" ng-click="sort.type = 'id'; sort.reverse = !sort.reverse">
+                    ID
+                    <span ng-show="sort.type == 'id' && !sort.reverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sort.type == 'id' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
             <th style="width:90px;">
                 <a href="#" ng-click="sort.type = 'paid_at'; sort.reverse = !sort.reverse">
                     Paid
@@ -93,6 +100,15 @@
         </thead>
         <tbody>
         <tr ng-class="{danger : transaction.payer == 'property_id' && property_view === true}" ng-repeat="transaction in transactions | filter:searchText | daterange:{ start_date: startDate, end_date:endDate } | orderBy:sort.type:sort.reverse">
+
+            <!-- ID -->
+            <td>
+                <span>
+                    {{transaction.id}}
+                </span>
+            </td>
+
+            <!-- Date -->
             <td>{{transaction.paid_at | timestampToString}}</td>
 
             <!-- PAYER -->
@@ -132,7 +148,7 @@
             <td>{{transaction.dollars | number:2}}</td>
             <td>
                 <!-- Edit Button -->
-                <a ui-sref="transactions.editTransaction({transaction_id : transaction.id})"
+                <a ui-sref="properties.viewProperty.editTransaction({transaction_id : transaction.id})"
                    class="btn btn-primary  btn-xs">
                     <i class="fa fa-pencil"></i>
                 </a>

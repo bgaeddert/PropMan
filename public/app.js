@@ -351,7 +351,7 @@
                         return transactionFactory.getTransactions({property_id: $stateParams.property_id})
                     },
                     sort: function(){
-                        return {type: 'paid_at', reverse: 'true'}
+                        return {type: 'id', reverse: 'true'}
                     },
                     createRoute: function(){
                         return 'properties.viewProperty.createTransaction'
@@ -379,11 +379,43 @@
                     transaction: function($stateParams, propertyFactory){
                         return {
                             property_id: $stateParams.property_id,
-                            paid_at: new Date()
+                            payer: 'property_id',
+                            payee: 'org_id',
+                            paid_at: moment.utc().format('MMM DD, YYYY')
                         };
                     },
                     transaction_create: function(){
                         return true;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return propertyFactory.getShow({id: $stateParams.property_id});
+                    }
+                }
+            })
+
+            /*Properties BASE --> VIEW --> transaction Edit*/
+            .state('properties.viewProperty.editTransaction', {
+                url: "/transactions/:transaction_id/edit/",
+                templateUrl: '/shared/transactions/create_edit.html',
+                controller: 'transactionCreateEditController',
+                resolve: {
+                    tenant_view: function(){
+                        return false;
+                    },
+                    property_view: function(){
+                        return true;
+                    },
+                    tenant: function(){
+                        return false;
+                    },
+                    tenants: function(){
+                        return false;
+                    },
+                    transaction: function($stateParams, transactionFactory){
+                        return transactionFactory.getShow({id: $stateParams.transaction_id});
+                    },
+                    transaction_create: function(){
+                        return false;
                     },
                     property: function($stateParams, propertyFactory){
                         return propertyFactory.getShow({id: $stateParams.property_id});
@@ -648,7 +680,7 @@
                         return transactionFactory.getTransactions({tenant_id: $stateParams.tenant_id})
                     },
                     sort: function(){
-                        return {type: 'paid_at', reverse: 'true'}
+                        return {type: 'id', reverse: 'true'}
                     },
                     createRoute: function(){
                         return 'tenants.viewTenant.createTransaction'
@@ -677,6 +709,8 @@
                     transaction: function($stateParams, propertyFactory){
                         return {
                             tenant_id: $stateParams.tenant_id,
+                            payer: 'tenant_id',
+                            payee: 'property_id',
                             paid_at: new Date()
                         };
                     },
@@ -720,7 +754,7 @@
                         return transactionFactory.getTransactions()
                     },
                     sort: function(){
-                        return {type: 'paid_at', reverse: 'true'}
+                        return {type: 'id', reverse: 'true'}
                     },
                     createRoute: function(){
                         return 'transactions.createTransaction'

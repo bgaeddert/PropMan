@@ -49,12 +49,13 @@
                     <!-- Transaction Property Payer -->
                     <div class="form-group" ng-show="property_view === true">
                         <label for="payer"><b>From:</b> <span class="label-note-optional">Required</span></label>
-                        <select id="payer" name="payer" class="form-control" ng-model="propertyPayer"
-                                ng-change="onPropertyPayChange()"
+                        <select id="payer" name="payer" class="form-control"
+                                ng-model="transaction.payer"
+                                ng-change="onPayChange()"
                                 ng-required="property_view === true"
                                 >
-                            <option value="1">{{property.org.name}}</option>
-                            <option value="2">{{property.property_name}}</option>
+                            <option value="org_id">{{property.org.name}}</option>
+                            <option value="property_id">{{property.property_name}}</option>
                         </select>
                     </div>
                     <!-- ./ Transaction Property Payer -->
@@ -62,25 +63,26 @@
                     <!-- Transaction Property Payee -->
                     <div class="form-group" ng-show="property_view === true">
                         <label for="payee"><b>To:</b> <span class="label-note-optional">Required</span></label>
-                        <select id="payee" name="payee" class="form-control" ng-model="propertyPayee"
-                                ng-change="onPropertyPayChange()"
+                        <select id="payee" name="payee" class="form-control"
+                                ng-model="transaction.payee"
+                                ng-change="onPayChange()"
                                 ng-required="property_view === true"
                                 >
-                            <option value="1">{{property.org.name}}</option>
-                            <option value="2">{{property.property_name}}</option>
-                            <option value="3">Third Party</option>
+                            <option value="org_id">{{property.org.name}}</option>
+                            <option value="property_id">{{property.property_name}}</option>
+                            <option value="outside_name">Third Party</option>
                         </select>
                     </div>
                     <!-- ./ Transaction Property Payee -->
 
                     <!-- Transaction Third party -->
-                    <div class="form-group" ng-show="propertyPayee == 3 && property_view === true"
+                    <div class="form-group" ng-show="transaction.payee == 'outside_name' && property_view === true"
                          ng-class="{ 'has-error' : transactionForm.outside_name.$invalid && ! transactionForm.outside_name.$pristine }"
                             >
                         <label for="outside_name"><b>Third Party Name:</b> <span class="label-outside_name-optional">Required</span></label>
                         <input type="text" id="outside_name" name="outside_name" class="form-control"
                                ng-model="transaction.outside_name"
-                               ng-required="propertyPayee === '3' && property_view === true"
+                               ng-required="transaction.payee === 'outside_name' && property_view === true"
                                 />
                         <p ng-show="transactionForm.outside_name.$invalid && ! transactionForm.outside_name.$pristine"
                            class="help-block">Third party name is required.</p>
@@ -94,12 +96,13 @@
                     <!-- Transaction Tenant Payer -->
                     <div class="form-group" ng-show="tenant_view === true">
                         <label for="payer"><b>From:</b> <span class="label-note-optional">Required</span></label>
-                        <select id="payer" name="payer" class="form-control" ng-model="tenantPayer"
-                                ng-change="onTenantPayChange()"
+                        <select id="payer" name="payer" class="form-control"
+                                ng-model="transaction.payer"
+                                ng-change="onPayChange()"
                                 ng-required="tenant_view === true"
                                 disabled
                                 >
-                            <option value="1">{{tenant.tenant_name}}</option>
+                            <option value="tenant_id">{{tenant.tenant_name}}</option>
                         </select>
                     </div>
                     <!-- ./ Transaction Tenant Payer -->
@@ -107,12 +110,13 @@
                     <!-- Transaction Tenant Payee -->
                     <div class="form-group" ng-show="tenant_view === true">
                         <label for="payee"><b>To:</b> <span class="label-note-optional">Required</span></label>
-                        <select id="payee" name="payee" class="form-control" ng-model="tenantPayee"
-                                ng-change="onTenantPayChange()"
+                        <select id="payee" name="payee" class="form-control"
+                                ng-model="transaction.payee"
+                                ng-change="onPayChange()"
                                 ng-required="tenant_view === true"
                                 >
-                            <option value="2">{{tenant.org.name}}</option>
-                            <option value="3">{{tenant.unit.property.property_name}}</option>
+                            <option value="org_id">{{tenant.org.name}}</option>
+                            <option value="property_id">{{tenant.unit.property.property_name}}</option>
                         </select>
                     </div>
                     <!-- ./ Transaction Tenant Payee -->

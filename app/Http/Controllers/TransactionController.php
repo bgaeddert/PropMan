@@ -66,11 +66,11 @@ class TransactionController extends Controller
      * @param $id
      * @return mixed
      */
-    public function update( ){
+    public function update( $id ){
 
         $input = \Request::all();
 
-        $transaction = Transaction::findOrFail( \Auth::user()->org_id );
+        $transaction = Transaction::findOrFail( $id );
 
         $transaction->update( $input );
 

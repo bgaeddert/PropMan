@@ -1,7 +1,36 @@
+angular.module('propman').filter('num', function() {
+    return function(input, property) {
+
+        var result = [];
+
+        // if the items are loaded
+        items = input;
+        if (items && items.length > 0)
+        {
+            $.each(items, function (index, item)
+            {
+                item[property] = parseInt(item[property]);
+
+                result.push(item);
+            });
+
+            return result;
+        }
+    };
+});
+
+angular.module('propman').filter('int', function() {
+    return function(input) {
+
+        //return typeof input;
+        return parseInt(input);
+    };
+});
+
 angular.module('propman').filter('timestampToString', function($sce){
 
     return function(input){
-        return moment.utc(input, 'X').format('MMM DD, YYYY')
+        return moment.utc(input, 'X').startOf('day').format('MMM DD, YYYY')
     };
 });
 

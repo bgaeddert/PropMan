@@ -3,7 +3,10 @@ angular.module('propman').controller('transactionIndexController',
 
         $scope.property_view = property_view;
         $scope.tenant_view = tenant_view;
-        $scope.transactions = transactions;
+        $scope.transactions = $filter('num')(transactions,'id');
+        $scope.transactions = $filter('num')(transactions,'paid_at');
+
+
         $scope.createRoute = createRoute;
         $scope.sort = sort;
 
