@@ -148,7 +148,7 @@
             <td>{{transaction.dollars | number:2}}</td>
             <td>
                 <!-- Edit Button -->
-                <a ui-sref="properties.viewProperty.editTransaction({transaction_id : transaction.id})"
+                <a ui-sref="{{editRoute}}"
                    class="btn btn-primary  btn-xs">
                     <i class="fa fa-pencil"></i>
                 </a>

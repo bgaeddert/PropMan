@@ -1,5 +1,5 @@
 angular.module('propman').controller('transactionIndexController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, transactionFactory, property_view, tenant_view, transactions, createRoute, sort){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, transactionFactory, property_view, tenant_view, transactions, createRoute, editRoute, sort){
 
         $scope.property_view = property_view;
         $scope.tenant_view = tenant_view;
@@ -7,7 +7,9 @@ angular.module('propman').controller('transactionIndexController',
         $scope.transactions = $filter('num')(transactions,'paid_at');
 
 
+
         $scope.createRoute = createRoute;
+        $scope.editRoute = editRoute;
         $scope.sort = sort;
 
         var startDate = new Date();

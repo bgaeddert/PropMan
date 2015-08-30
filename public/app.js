@@ -355,6 +355,9 @@
                     },
                     createRoute: function(){
                         return 'properties.viewProperty.createTransaction'
+                    },
+                    editRoute: function(){
+                        return 'properties.viewProperty.editTransaction({transaction_id: transaction.id})';
                     }
                 }
             })
@@ -684,6 +687,9 @@
                     },
                     createRoute: function(){
                         return 'tenants.viewTenant.createTransaction'
+                    },
+                    editRoute: function(){
+                        return 'tenants.viewTenant.editTransaction({transaction_id: transaction.id})';
                     }
                 }
             })
@@ -716,6 +722,36 @@
                     },
                     transaction_create: function(){
                         return true;
+                    },
+                    property: function($stateParams, propertyFactory){
+                        return false;
+                    }
+                }
+            })
+
+            /*tenants BASE --> VIEW --> transaction Edit*/
+            .state('tenants.viewTenant.editTransaction', {
+                url: "/transactions/:transaction_id/edit/",
+                templateUrl: '/shared/transactions/create_edit.html',
+                controller: 'transactionCreateEditController',
+                resolve: {
+                    tenant_view: function(){
+                        return true;
+                    },
+                    property_view: function(){
+                        return false;
+                    },
+                    tenant: function($stateParams, tenantFactory){
+                        return tenantFactory.getShow({id: $stateParams.tenant_id});
+                    },
+                    tenants: function(){
+                        return false;
+                    },
+                    transaction: function($stateParams, transactionFactory){
+                        return transactionFactory.getShow({id: $stateParams.transaction_id});
+                    },
+                    transaction_create: function(){
+                        return false;
                     },
                     property: function($stateParams, propertyFactory){
                         return false;
@@ -758,6 +794,9 @@
                     },
                     createRoute: function(){
                         return 'transactions.createTransaction'
+                    },
+                    editRoute: function(){
+                        return false;
                     }
                 }
             })
