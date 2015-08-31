@@ -124,6 +124,10 @@ angular.module('propman').controller('transactionCreateEditController',
             $scope.tenant = $scope.transaction.tenant;
         }
 
+        if($scope.property === false){
+            $scope.property = $scope.tenant.property;
+        }
+
         if($scope.property){
             // Warn if tenant in inactive
             if($scope.property.property_active === '0'){
