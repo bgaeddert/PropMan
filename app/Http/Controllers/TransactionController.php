@@ -106,7 +106,7 @@ class TransactionController extends Controller
      */
     public function show( $id ){
 
-        $transactions = Transaction::findOrFail( $id );
+        $transactions = Transaction::with( 'Tenant' )->with('Property')->with('Org')->findOrFail( $id );
 
         return \Response::json( [
             'success' => true,

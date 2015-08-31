@@ -21,7 +21,6 @@
 <div ng-show="tmp.warn === false">
     <section id="item-view" class="row">
 
-
         <div class="col-md-6">
 
             <h4>
@@ -32,7 +31,6 @@
                 <form name="transactionForm" class="form col-md-8" novalidate>
 
                     <!-- Transaction Paid -->
-                    ->{{transaction.paid_at}}<br>
                     <div class="form-group"
                          ng-class="{ 'has-error' : transactionForm.paid_at.$invalid && ! transactionForm.paid_at.$pristine }"
                             >
@@ -58,7 +56,7 @@
                                 >
                             <option value="tenant_id"
                                     ng-show="tenant_view === true || transaction_create === false"
-                                    >{{tenant.tenant_name}}</option>
+                                    >{{transaction.tenant.tenant_name || tenant.tenant_name}}</option>
 
                             <option value="org_id"
                                     ng-show="property_view === true || transaction_create === false"

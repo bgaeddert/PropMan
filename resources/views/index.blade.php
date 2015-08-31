@@ -76,9 +76,9 @@
                 <a ui-sref="transactions"><i class="fa fa-money"></i> Transactions</a>
             </li>
 
-            <li ui-sref-active="active">
+            {{--<li ui-sref-active="active">
                 <a ui-sref="reports "><i class="fa fa-list-alt"></i> Reports</a>
-            </li>
+            </li>--}}
 
         </ul>
     </aside>
