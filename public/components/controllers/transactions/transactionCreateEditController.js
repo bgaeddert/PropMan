@@ -114,12 +114,6 @@ angular.module('propman').controller('transactionCreateEditController',
         $scope.property_view = property_view;
         $scope.tenant_view = tenant_view;
 
-
-        // sanitize
-        if(typeof $scope.transaction.paid_at == 'number'){
-            $scope.transaction.paid_at = new Date(moment.utc($scope.transaction.paid_at, 'X').format('MMM DD, YYYY'));
-        }
-
         if($scope.tenant === false){
             $scope.tenant = $scope.transaction.tenant;
         }
@@ -127,6 +121,15 @@ angular.module('propman').controller('transactionCreateEditController',
         if($scope.property === false){
             $scope.property = $scope.tenant.property;
         }
+
+        $scope.property_id = $scope.property.id;
+
+
+        // sanitize
+        if(typeof $scope.transaction.paid_at == 'number'){
+            $scope.transaction.paid_at = new Date(moment.utc($scope.transaction.paid_at, 'X').format('MMM DD, YYYY'));
+        }
+
 
         if($scope.property){
             // Warn if tenant in inactive
