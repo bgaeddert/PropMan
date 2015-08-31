@@ -4,10 +4,10 @@
 <html ng-app="propman">
 <head>
     <title>PropMan</title>
-    <link rel="stylesheet" href="/assets/bower_components/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/assets/bower_components/toastr/toastr.min.css">
-    <link rel='stylesheet' href='/assets/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{URL::to('/')}}/assets/bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="{{URL::to('/')}}/assets/bower_components/toastr/toastr.min.css">
+    <link rel='stylesheet' href='{{URL::to('/')}}/assets/bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="{{URL::to('/')}}/css/app.css">
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 </head>
 <body ng-cloak>
@@ -95,55 +95,55 @@
 </body>
 
 <!-- Application Dependencies -->
-<script type="text/javascript" src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/bower_components/angular/angular.js"></script>
-<script type="text/javascript" src="/assets/bower_components/angular-animate/angular-animate.js"></script>
-<script type="text/javascript" src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script type="text/javascript" src="/assets/bower_components/angular-resource/angular-resource.js"></script>
-<script type="text/javascript" src="/assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script type='text/javascript' src='/assets/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
-<script type="text/javascript" src="/assets/bower_components/moment/moment.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script type='text/javascript' src='{{URL::to('/')}}/assets/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assets/bower_components/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/toastr/toastr.min.js"></script>
 
 <!-- Application Scripts -->
-<script type="text/javascript" src="/app.js"></script>
-<script type="text/javascript" src="/components/handlers.js"></script>
-<script type="text/javascript" src="/components/filters.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/app.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/handlers.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/filters.js"></script>
 
-<script type="text/javascript" src="/components/controllers/owners/ownerIndexController.js"></script>
-<script type="text/javascript" src="/components/controllers/owners/ownerCreateEditController.js"></script>
-<script type="text/javascript" src="/components/controllers/owners/ownerViewController.js"></script>
-<script type="text/javascript" src="/components/services/ownerFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerIndexController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerCreateEditController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerViewController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/ownerFactory.js"></script>
 
-<script type="text/javascript" src="/components/controllers/properties/propertyIndexController.js"></script>
-<script type="text/javascript" src="/components/controllers/properties/propertyCreateEditController.js"></script>
-<script type="text/javascript" src="/components/controllers/properties/propertyViewController.js"></script>
-<script type="text/javascript" src="/components/services/propertyFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/properties/propertyIndexController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/properties/propertyCreateEditController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/properties/propertyViewController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/propertyFactory.js"></script>
 
-<script type="text/javascript" src="/components/controllers/units/unitIndexController.js"></script>
-<script type="text/javascript" src="/components/controllers/units/unitCreateEditController.js"></script>
-<script type="text/javascript" src="/components/controllers/units/unitViewController.js"></script>
-<script type="text/javascript" src="/components/services/unitFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/units/unitIndexController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/units/unitCreateEditController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/units/unitViewController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/unitFactory.js"></script>
 
-<script type="text/javascript" src="/components/controllers/tenants/tenantIndexController.js"></script>
-<script type="text/javascript" src="/components/controllers/tenants/tenantCreateEditController.js"></script>
-<script type="text/javascript" src="/components/controllers/tenants/tenantViewController.js"></script>
-<script type="text/javascript" src="/components/services/tenantFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/tenants/tenantIndexController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/tenants/tenantCreateEditController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/tenants/tenantViewController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/tenantFactory.js"></script>
 
-<script type="text/javascript" src="/components/controllers/transactions/transactionIndexController.js"></script>
-<script type="text/javascript" src="/components/controllers/transactions/transactionCreateEditController.js"></script>
-<script type="text/javascript" src="/components/controllers/transactions/transactionViewController.js"></script>
-<script type="text/javascript" src="/components/services/transactionFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/transactions/transactionIndexController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/transactions/transactionCreateEditController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/transactions/transactionViewController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/transactionFactory.js"></script>
 
-<script type="text/javascript" src="/components/controllers/orgs/orgEditController.js"></script>
-<script type="text/javascript" src="/components/services/orgFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/orgs/orgEditController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/orgFactory.js"></script>
 
-<script type="text/javascript" src="/components/services/handlerFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/handlerFactory.js"></script>
 
 
-<script type="text/javascript" src="/components/controllers/userController.js"></script>
-<script type="text/javascript" src="/components/services/userFactory.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/userController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/services/userFactory.js"></script>
 
 
 <script>
