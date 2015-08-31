@@ -99,7 +99,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-class="{danger : transaction.payer == 'property_id' && property_view === true}" ng-repeat="transaction in transactions | filter:searchText | daterange:{ start_date: startDate, end_date:endDate } | orderBy:sort.type:sort.reverse">
+        <tr ng-class="{danger : ( transaction.payer == 'property_id' ) && property_view === true}" ng-repeat="transaction in transactions | filter:searchText | daterange:{ start_date: startDate, end_date:endDate } | orderBy:sort.type:sort.reverse">
 
             <!-- ID -->
             <td>
@@ -109,7 +109,7 @@
             </td>
 
             <!-- Date -->
-            <td>{{transaction.paid_at | timestampToString}}</td>
+            <td>{{transaction}}</td>
 
             <!-- PAYER -->
             <td>
