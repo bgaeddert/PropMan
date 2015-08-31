@@ -384,7 +384,7 @@
                             property_id: $stateParams.property_id,
                             payer: 'property_id',
                             payee: 'org_id',
-                            paid_at: moment.utc().format('MMM DD, YYYY')
+                            paid_at: new Date()
                         };
                     },
                     transaction_create: function(){
