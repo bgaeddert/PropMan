@@ -144,8 +144,8 @@
             </td>
 
             <td>{{transaction.note}}</td>
-            <td>{{transaction.colones | number:2}}</td>
-            <td>{{transaction.dollars | number:2}}</td>
+            <td>{{transaction.colones | number:2 | zeroToDashes}}</td>
+            <td>{{transaction.dollars | number:2 | zeroToDashes}}</td>
             <td>
                 <!-- Edit Button -->
                 <a ui-sref="{{editRoute}}"

@@ -27,6 +27,17 @@ angular.module('propman').filter('int', function() {
     };
 });
 
+angular.module('propman').filter('zeroToDashes', function() {
+    return function(input) {
+
+        if(input == 0.00){
+            return '--';
+        }
+
+        return input;
+    };
+});
+
 angular.module('propman').filter('timestampToString', function($sce){
 
     return function(input){
