@@ -119,10 +119,10 @@ angular.module('propman').controller('transactionCreateEditController',
         }
 
         if($scope.property === false){
-            $scope.property = $scope.tenant.property;
+            $scope.property = $scope.tenant.unit.property;
         }
 
-        $scope.property_id = $scope.property.id;
+        $scope.transaction.property_id = $scope.property.id;
 
 
         // sanitize
