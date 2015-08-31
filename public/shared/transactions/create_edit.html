@@ -76,7 +76,7 @@
                                 ng-change="onPayChange()"
                                 ng-required="property_view === true"
                                 >
-                            <option value="org_id">{{property.org.name}}</option>
+                            <option value="org_id">{{property.org.name || tenant.org.name}}</option>
                             <option value="property_id">{{property.property_name}}</option>
                             <option value="outside_name"
                                     ng-show="property_view === true || transaction_create === false"
