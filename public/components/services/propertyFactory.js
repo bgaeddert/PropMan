@@ -10,6 +10,7 @@ angular.module('propman').factory('propertyFactory', function($http,$sce,$q,hand
                 params: requestData
             })
             .success(function(data, status) {
+                    console.log(data);
                 deferred.resolve(data.data);
             }).error(function(data, status) {
                 deferred.reject(data);
