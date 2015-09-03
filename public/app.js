@@ -344,6 +344,9 @@
                     property_view: function(){
                         return true;
                     },
+                    transaction_view: function(){
+                        return false;
+                    },
                     tenant: function($stateParams, tenantFactory){
                         return false;
                     },
@@ -674,6 +677,9 @@
                         return true;
                     },
                     property_view: function(){
+                        return false;
+                    },
+                    transaction_view: function(){
                         return false;
                     },
                     tenant: function($stateParams, tenantFactory){

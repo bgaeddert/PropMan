@@ -6,7 +6,8 @@
             </div>
 
             <!--Create Button-->
-            <div class="col-md-4">
+            {{transaction_view}}
+            <div class="col-md-4" ng-hide="transaction_view == true">
                 <a ui-sref="{{createRoute}}" class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Create</a>
             </div>
         </div>
@@ -149,7 +150,9 @@
             <td>
                 <!-- Edit Button -->
                 <a ui-sref="{{editRoute}}"
-                   class="btn btn-primary  btn-xs">
+                   class="btn btn-primary  btn-xs"
+                   ng-hide="transaction_view == true"
+                        >
                     <i class="fa fa-pencil"></i>
                 </a>
             </td>

@@ -1,8 +1,9 @@
 angular.module('propman').controller('transactionIndexController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, transactionFactory, property_view, tenant_view, transactions, createRoute, editRoute, sort){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, transactionFactory, property_view, tenant_view, transaction_view, transactions, createRoute, editRoute, sort){
 
         $scope.property_view = property_view;
         $scope.tenant_view = tenant_view;
+        $scope.transaction_view = transaction_view;
         $scope.transactions = $filter('num')(transactions,'id');
         $scope.transactions = $filter('num')(transactions,'paid_at');
 
