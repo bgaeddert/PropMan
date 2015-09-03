@@ -44,7 +44,7 @@ class PropertyController extends Controller
 
         return \Response::json( [
             'success' => true,
-            'message' => $_REQUEST,
+            'message' => 'Owners Loaded.',
             'data'    => $properties
         ] );
     }
