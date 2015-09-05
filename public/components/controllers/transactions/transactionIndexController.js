@@ -36,7 +36,7 @@ angular.module('propman').controller('transactionIndexController',
             $scope.endOpened = true;
         };
 
-        $scope.format = 'MMM dd, yyyy';
+        $scope.format = 'dd/MM/yyyy';
 
         $scope.dateOptions = {
             formatYear: 'yy',

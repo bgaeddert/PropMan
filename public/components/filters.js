@@ -46,7 +46,7 @@ angular.module('propman').filter('zeroToDashes', function() {
 angular.module('propman').filter('timestampToString', function($sce){
 
     return function(input){
-        return moment.utc(input, 'X').startOf('day').format('MMM DD, YYYY')
+        return moment.utc(input, 'X').startOf('day').format('DD/MM/YYYY')
     };
 });
 
@@ -69,7 +69,7 @@ angular.module('propman').filter('daterange', function ()
         {
             $.each(items, function (index, item)
             {
-                var itemDate = moment.utc(item.paid_at, 'X').format('MMM DD, YYYY')
+                var itemDate = moment.utc(item.paid_at, 'X').format('MMM DD, YYYY');
                 var itemDate = Date.parse(itemDate);
 
                 if (itemDate >= start_date && itemDate <= end_date)
