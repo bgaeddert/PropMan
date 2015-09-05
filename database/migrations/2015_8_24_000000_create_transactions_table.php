@@ -35,6 +35,9 @@ class CreateTransactionsTable extends Migration {
 
 			$table->longText('note')->nullable();
 
+			$table->string('trans_num')->nullable();
+			$table->string('tipo')->nullable();
+
 
 			$table->timestamp('paid_at');
 

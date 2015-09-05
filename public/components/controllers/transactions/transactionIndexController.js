@@ -6,6 +6,7 @@ angular.module('propman').controller('transactionIndexController',
         $scope.transaction_view = transaction_view;
         $scope.transactions = $filter('num')(transactions,'id');
         $scope.transactions = $filter('num')(transactions,'paid_at');
+        $scope.transactions = $filter('num')(transactions,'trans_num');
 
 
 

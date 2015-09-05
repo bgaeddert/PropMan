@@ -43,6 +43,8 @@ class Transaction extends Model{
 		'dollars',
 		'note',
 		'paid_at',
+		'trans_num',
+		'tipo',
 	];
 
 	protected $guarded = ['id'];

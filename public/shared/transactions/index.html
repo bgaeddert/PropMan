@@ -73,6 +73,13 @@
                     <span ng-show="sort.type == 'payee' && sort.reverse" class="fa fa-caret-up"></span>
                 </a>
             </th>
+            <th style="width:100px;">
+                <a href="#" ng-click="sort.type = 'trans_num'; sort.reverse = !sort.reverse">
+                    Transaction
+                    <span ng-show="sort.type == 'trans_num' && !sort.reverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sort.type == 'trans_num' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
             <th>
                 <a href="#" ng-click="sort.type = 'note'; sort.reverse = !sort.reverse">
                     Notes
@@ -143,7 +150,7 @@
                 <span ng-show="transaction.payee == 'org_id'">{{transaction.org.name}}</span>
                 <span ng-show="transaction.payee == 'outside_name'">{{transaction.outside_name}}</span>
             </td>
-
+            <td>{{transaction.trans_num}}</td>
             <td>{{transaction.note}}</td>
             <td>{{transaction.colones | number:2 | zeroToDashes}}</td>
             <td>{{transaction.dollars | number:2 | zeroToDashes}}</td>

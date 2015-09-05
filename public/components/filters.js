@@ -9,9 +9,14 @@ angular.module('propman').filter('num', function() {
         {
             $.each(items, function (index, item)
             {
-                item[property] = parseInt(item[property]);
+                var number = parseInt(item[property]);
+
+                if(! isNaN(number)){
+                    item[property] = number;
+                }
 
                 result.push(item);
+
             });
 
             return result;
