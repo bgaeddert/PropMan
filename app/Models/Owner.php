@@ -30,7 +30,7 @@ class Owner extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['org_id', 'owner_active', 'owner_name', 'owner_email', 'owner_address', 'owner_phone'];
+	protected $fillable = ['org_id', 'owner_active', 'owner_name', 'owner_email', 'owner_address', 'owner_phone', 'note'];
 
 	/**
 	 * @var array

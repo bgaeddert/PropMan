@@ -25,6 +25,8 @@ class CreateTenantsTable extends Migration {
 			$table->boolean('tenant_active')->default(true);
 			$table->string('tenant_name');
 			$table->string('tenant_phone')->nullable();
+			$table->longText('note')->nullable();
+
 			$table->timestamps();
 			$table->softDeletes();
 

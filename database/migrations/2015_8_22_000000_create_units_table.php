@@ -25,6 +25,8 @@ class CreateUnitsTable extends Migration {
 			$table->boolean('unit_active')->default(true);
 			$table->string('unit_name');
 			$table->longText('unit_address')->nullable();
+			$table->longText('note')->nullable();
+
 			$table->timestamps();
 			$table->softDeletes();
 

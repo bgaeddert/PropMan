@@ -32,13 +32,21 @@
                     <span class="label label-danger" ng-show="unit.unit_active == 0">INACTIVE</span>
                 </h4>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <!-- Property Link-->
                 <div class="" ng-show="!unit_view"><b>Property:</b> <a
                         ui-sref="properties.viewProperty({property_id : unit.property.id})">{{unit.property.property_name}}</a></div>
 
                 <div class=""><b>Address:</b> {{unit.unit_address}}</div>
             </div>
+
+            <!--Note-->
+            <div class="col-md-4">
+                <div class="" ng-show="unit.note"><b>Notes:</b></div>
+                <div class="">{{unit.note}}</div>
+            </div>
+
+
             <div class="buttons col-md-12">
                 <div class="pull-right">
 

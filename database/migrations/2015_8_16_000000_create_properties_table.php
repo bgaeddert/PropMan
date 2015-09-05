@@ -25,6 +25,7 @@ class CreatePropertiesTable extends Migration {
 			$table->boolean('property_active')->default(true);
 			$table->string('property_name');
 			$table->longText('property_address')->nullable();
+			$table->longText('note')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 

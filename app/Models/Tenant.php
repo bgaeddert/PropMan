@@ -30,7 +30,7 @@ class Tenant extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['org_id', 'unit_id', 'tenant_active', 'tenant_name', 'tenant_phone'];
+	protected $fillable = ['org_id', 'unit_id', 'tenant_active', 'tenant_name', 'tenant_phone', 'note'];
 
 	protected $guarded = ['id'];
 

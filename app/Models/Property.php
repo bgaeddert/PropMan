@@ -30,7 +30,7 @@ class Property extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['org_id', 'owner_id', 'property_active', 'property_name', 'property_address'];
+	protected $fillable = ['org_id', 'owner_id', 'property_active', 'property_name', 'property_address', 'note'];
 
 	protected $guarded = ['id'];
 

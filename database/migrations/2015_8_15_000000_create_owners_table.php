@@ -24,6 +24,7 @@ class CreateOwnersTable extends Migration {
 			$table->string('owner_email')->nullable();
 			$table->longText('owner_address')->nullable();
 			$table->string('owner_phone')->nullable();
+			$table->longText('note')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

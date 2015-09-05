@@ -30,7 +30,7 @@ class Unit extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['org_id', 'property_id', 'unit_active', 'unit_name', 'unit_address'];
+	protected $fillable = ['org_id', 'property_id', 'unit_active', 'unit_name', 'unit_address', 'note'];
 
 	protected $guarded = ['id'];
 
