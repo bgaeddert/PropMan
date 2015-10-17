@@ -11,7 +11,7 @@ angular.module('propman').controller('ownerReportController',
         console.log(array);
 
         var startDate = new Date();
-        startDate.setDate (startDate.getDate() - 90);
+        startDate.setDate (startDate.getDate() - 30);
         $scope.startDate = startDate;
 
         var endDate = new Date();
