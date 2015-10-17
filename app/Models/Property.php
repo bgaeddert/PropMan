@@ -50,6 +50,12 @@ class Property extends Model{
 
 	}
 
+	public function Transactions(){
+
+		return $this->hasMany('App\Models\Transaction');
+
+	}
+
 	public function scopeByOwner($query, $owner_id)
 	{
 		return $query->where('owner_id', '=', $owner_id);
@@ -60,4 +66,33 @@ class Property extends Model{
 		return $query->where('properties.property_active', '=', '1');
 	}
 
+	public function allTransactions(){
+
+		$transactions = Transaction::select([
+			'transactions.*',
+			'orgs.name as org_name',
+			'property_name',
+			'tenant_name',
+			\DB::raw("
+				if(
+					transactions.note IS NULL OR transactions.note = '',
+					if(	transactions.payer = 'tenant_id',
+						concat('Alquiler ',units.unit_name),
+						'--'
+					),
+					transactions.note
+				) as detail"
+			)
+			] )
+			->leftJoin( 'orgs', 'orgs.id', '=', 'transactions.org_id' )
+			->leftJoin( 'properties', 'properties.id', '=', 'transactions.property_id' )
+			->leftJoin( 'tenants', 'tenants.id', '=', 'transactions.tenant_id' )
+			->leftJoin( 'units', 'units.id', '=', 'tenants.unit_id' )
+			->where( 'transactions.property_id', $this->id )
+			->orderBy('paid_at')
+			->get();
+
+		return $transactions;
+
+	}
 }

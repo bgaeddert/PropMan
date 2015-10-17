@@ -77,7 +77,7 @@
             </li>
 
             {{--<li ui-sref-active="active">
-                <a ui-sref="reports "><i class="fa fa-list-alt"></i> Reports</a>
+                <a ui-sref="owners.report"><i class="fa fa-list-alt"></i> Reports</a>
             </li>--}}
 
         </ul>
@@ -105,6 +105,7 @@
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
 <!-- Application Scripts -->
 <script type="text/javascript" src="{{URL::to('/')}}/app.js"></script>
@@ -114,6 +115,7 @@
 <script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerIndexController.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerCreateEditController.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerViewController.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/components/controllers/owners/ownerReportController.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/components/services/ownerFactory.js"></script>
 
 <script type="text/javascript" src="{{URL::to('/')}}/components/controllers/properties/propertyIndexController.js"></script>
@@ -168,5 +170,6 @@
         $(elem).height(maxHeight);
         return $(elem);
     }
+
 </script>
 </html>

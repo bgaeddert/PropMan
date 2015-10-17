@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Models\Owner;
+use App\Models\Property;
 
 
 /**
@@ -29,11 +30,13 @@ class OwnerController extends Controller
     public function index(){
         $input = \Request::all();
 
-        $owners = Owner::all();
+        $owners = Owner::with('Properties.Transactions')->with('Properties.Units.Tenants.Transactions');
 
         if(!empty($input['onlyActive']))
             if($input['onlyActive'] === "true")
-                $owners = Owner::OnlyActive()->get();
+                $owners = Owner::OnlyActive();
+
+        $owners = $owners->get();
 
         return \Response::json( [
             'success' => true,
@@ -49,6 +52,13 @@ class OwnerController extends Controller
     public function show( $id ){
 
         $owner = Owner::findOrFail( $id );
+
+        $owner->Properties = $owner->Properties;
+
+        foreach ( $owner->Properties as $property ) {
+            $allTransactions = Property::find($property->id)->allTransactions();
+            $property->transactions = $allTransactions;
+        }
 
         return \Response::json( [
             'success' => true,

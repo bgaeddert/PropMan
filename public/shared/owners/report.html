@@ -1,0 +1,348 @@
+<div id="printable">
+    <div id="print-content">
+        <section id="control-bar" class="row no-print">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="index-title col-md-6">
+                        <h2><i class="fa fa-list-alt"></i> Report</h2>
+                    </div>
+                    <div class="index-title col-md-6">
+                        <h2 class="pull-right"><a href="javascript:;" id="print"><i class="fa fa-print"></i> Print</a>​</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="controls col-md-4">
+                <span>Start Date : Day/Month/Year</span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control date-popup" datepicker-popup="{{format}}"
+                               ng-click="openStart($event)" ng-model="startDate" is-open="startOpened"
+                               datepicker-options="dateOptions" ng-required="true" show-weeks="false" close-text="Close"/>
+                        <span class="input-group-addon">
+                            <span ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="controls col-md-4">
+                <span>End Date : Day/Month/Year</span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control date-popup" datepicker-popup="{{format}}"
+                               ng-click="openEnd($event)" ng-model="endDate" is-open="endOpened"
+                               datepicker-options="dateOptions" ng-required="true" show-weeks="false" close-text="Close"/>
+                        <span class="input-group-addon">
+                            <span ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+
+            *{
+                font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            }
+
+            /*9 cols*/
+
+            .table-id {
+                width: 4%;
+            }
+
+            .table-fecha {
+                width: 8%;
+            }
+
+            /*3x*/
+            .table-std {
+                width: 18%;
+            }
+
+            /*3x*/
+            .table-money {
+                width: 10%;
+            }
+
+            .table-tipo {
+                width: 4%;
+            }
+
+            #report-table td:nth-child(7){
+                text-align: right;
+            }
+
+            #report-table td:nth-child(8){
+                text-align: right;
+            }
+
+            #report-table td:nth-child(9){
+                text-align: right;
+            }
+
+            .main-td{
+                padding: 0 !important;
+                border: none;
+            }
+
+            .print-preview .no-print *{
+                display: none;
+            }
+
+            .ng-hide{
+                display: none;
+            }
+
+
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            .main-td{
+                border:none;
+            }
+
+            #report-table {
+                width: 100%;
+                border-width: 1px;
+                border-color: #666666;
+                border-collapse: collapse;
+            }
+            #report-table th {
+                padding: 8px;
+
+                border-width: 1px;
+                border-style: solid;
+                border-color: #ccc;
+                background-color: #dedede;
+            }
+            #report-table tbody td {
+                font-family: verdana,arial,sans-serif;
+                font-size:13px;
+                color:#333333;
+                padding: 2px 4px;
+                border-width: 1px;
+                border-style: solid;
+                border-color: #ccc;
+                background-color: #ffffff;
+            }
+
+            #report-table td h3{
+                font-size: 25px;
+                margin: 0px;
+                padding: 2px;
+            }
+
+            #report-table td h4{
+                font-size: 20px;
+                margin: 0px;
+                padding: 2px;
+            }
+
+            #report-table td h5{
+                font-size: 14px;
+                margin: 0px;
+                padding: 2px;
+            }
+
+            .total-row h5{
+                text-align: right;
+            }
+
+            @media print {
+                .page-break {page-break-after: always;}
+            }
+
+
+        </style>
+
+        <section class="list-con row">
+            <div class="col-md-12">
+                    <div><b>{{user.name}}</b></div>
+                    <div>{{org.name}}</div>
+                    <div>{{org.phone}}</div>
+                    <div>{{user.email}}</div>
+            </div>
+
+            <div class="col-md-12">
+                <h2>{{owner.owner_name}}</h2>
+            </div>
+
+            <table id="report-table" class="table table-bordered">
+
+                <tbody>
+                <tr ng-repeat-start="property in owner.properties">
+                </tr>
+                <tr>
+                    <td style="border: none;"><h4>{{property.property_name}} - INGRESOS | {{startDate.getDate()}}/{{startDate.getMonth()+ 1}}/{{startDate.getFullYear()}}  - {{endDate.getDate()}}/{{endDate.getMonth()+ 1}}/{{endDate.getFullYear()}}</h4></td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td class="main-td" style="border: none;">
+                        <table style="width:100%">
+                            <thead>
+                            <th class="table-id">ID</th>
+                            <th class="table-fecha">FECHA</th>
+                            <th class="table-std">PAGADOR</th>
+                            <th class="table-std">TENEDOR</th>
+                            <th class="table-money">TRANSACCION</th>
+                            <th class="table-std">DETALLE</th>
+                            <th class="table-money">COLONES</th>
+                            <th class="table-money">DOLORES</th>
+                            <th class="table-tipo">TIPO</th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="transaction in property.transactions | filter:{payee:'property_id'} | daterange:{ start_date: startDate, end_date:endDate }">
+
+
+                                <!-- ID -->
+                                <td>
+                                    <span>
+                                        {{transaction.id}}
+                                    </span>
+                                </td>
+
+                                <!-- Date -->
+                                <td>{{transaction.paid_at | timestampToString}}</td>
+
+                                <!-- PAYER -->
+                                <td>
+                                    <span ng-show="transaction.payer == 'tenant_id'">
+                                            {{transaction.tenant_name}}
+                                    </span>
+                                    <span ng-show="transaction.payer == 'property_id'">
+                                            {{transaction.property_name}}
+                                    </span>
+                                    <span ng-show="transaction.payer == 'org_id'">{{transaction.org_name}}</span>
+                                    <span ng-show="transaction.payer == 'outside_name'">{{transaction.outside_name}}</span>
+                                </td>
+
+                                <!-- PAYEE -->
+                                <td>
+                                    <span ng-show="transaction.payee == 'tenant_id'">
+                                            {{transaction.tenant_name}}
+                                    </span>
+                                    <span ng-show="transaction.payee == 'property_id'">
+                                            {{transaction.property_name}}
+                                    </span>
+                                    <span ng-show="transaction.payee == 'org_id'">{{transaction.org_name}}</span>
+                                    <span ng-show="transaction.payee == 'outside_name'">{{transaction.outside_name}}</span>
+                                </td>
+
+                                <td>{{transaction.trans_num}}</td>
+                                <td>{{transaction.detail}}</td>
+                                <td>{{transaction.colones | number:2 | zeroToDashes}}</td>
+                                <td>{{transaction.dollars | number:2 | zeroToDashes}}</td>
+                                <td>{{transaction.tipo}}</td>
+                            </tr>
+                            <tr class="total-row">
+                                <th colspan="6"><h5><b>TOTAL</b></h5></th>
+                                <td class="table-money"><h5><b>{{ property.transactions | filter:{payee:'property_id'} | daterange:{ start_date: startDate, end_date:endDate } |
+                                    colonesTotal:{column:'colones'} | number:2 | zeroToDashes }}</b></h5></td>
+                                <td class="table-money"><h5><b>{{ property.transactions | filter:{payee:'property_id'} | daterange:{ start_date: startDate, end_date:endDate } |
+                                    colonesTotal:{column:'dollars'} | number:2 | zeroToDashes }}</b></h5></td>
+                                <th class="table-tipo"></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table style="width:100%">
+                            <tbody>
+                            <tr>
+                                <td style="border: none;"><h4>{{property.property_name}} - EGRESOS | {{startDate | timestampToString}} - {{startDate | timestampToString}}</h4></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="width:100%">
+                            <thead>
+                            <th class="table-id">ID</th>
+                            <th class="table-fecha">FECHA</th>
+                            <th class="table-std">PAGADOR</th>
+                            <th class="table-std">TENEDOR</th>
+                            <th class="table-money">TRANSACCION</th>
+                            <th class="table-std">DETALLE</th>
+                            <th class="table-money">COLONES</th>
+                            <th class="table-money">DOLORES</th>
+                            <th class="table-tipo">TIPO</th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="transaction in property.transactions | filter:{payer:'property_id'} | daterange:{ start_date: startDate, end_date:endDate }">
+                                <!-- ID -->
+                                <td>
+                                    <span>
+                                        {{transaction.id}}
+                                    </span>
+                                </td>
+
+                                <!-- Date -->
+                                <td>{{transaction.paid_at | timestampToString}}</td>
+
+                                <!-- PAYER -->
+                                <td>
+                                    <span ng-show="transaction.payer == 'tenant_id'">
+                                            {{transaction.tenant_name}}
+                                    </span>
+                                    <span ng-show="transaction.payer == 'property_id'">
+                                            {{transaction.property_name}}
+                                    </span>
+                                    <span ng-show="transaction.payer == 'org_id'">{{transaction.org_name}}</span>
+                                    <span ng-show="transaction.payer == 'outside_name'">{{transaction.outside_name}}</span>
+                                </td>
+
+                                <!-- PAYEE -->
+                                <td>
+                                    <span ng-show="transaction.payee == 'tenant_id'">
+                                            {{transaction.tenant_name}}
+                                    </span>
+                                    <span ng-show="transaction.payee == 'property_id'">
+                                            {{transaction.property_name}}
+                                    </span>
+                                    <span ng-show="transaction.payee == 'org_id'">{{transaction.org_name}}</span>
+                                    <span ng-show="transaction.payee == 'outside_name'">{{transaction.outside_name}}</span>
+                                </td>
+
+                                <td>{{transaction.trans_num}}</td>
+                                <td>{{transaction.detail}}</td>
+                                <td>{{transaction.colones | number:2 | zeroToDashes}}</td>
+                                <td>{{transaction.dollars | number:2 | zeroToDashes}}</td>
+                                <td>{{transaction.tipo}}</td>
+                            </tr>
+                            <tr class="total-row">
+                                <th colspan="6"><h5><b>TOTAL</b></h5></th>
+                                <td class="table-money"><h5><b>{{ property.transactions | filter:{payer:'property_id'} | daterange:{ start_date: startDate, end_date:endDate } |
+                                    colonesTotal:{column:'colones'} | number:2 | zeroToDashes }}</b></h5></td>
+                                <td class="table-money"><h5><b>{{ property.transactions | filter:{payer:'property_id'} | daterange:{ start_date: startDate, end_date:endDate } |
+                                    colonesTotal:{column:'dollars'} | number:2 | zeroToDashes }}</b></h5></td>
+                                <th class="table-tipo"></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="page-break"></div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+
+
+        </section>
+    </div>
+</div>
+
+<script>
+    function nWin() {
+        var w = window.open();
+        var $html = $($("#printable").html());
+
+        $html.addClass('print-preview');
+        $(w.document.body).html($html);
+    }
+
+    $(function() {
+        $("a#print").click(nWin);
+    });
+</script>

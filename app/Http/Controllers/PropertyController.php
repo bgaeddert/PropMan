@@ -31,7 +31,7 @@ class PropertyController extends Controller
 
         $input = \Request::all();
 
-        $properties = Property::with('Owner');
+        $properties = Property::with('Owner')->with('Org');
 
         if(!empty($input['owner_id']))
             $properties = $properties->ByOwner($input['owner_id']);

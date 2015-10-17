@@ -47,6 +47,12 @@ class Tenant extends Model{
 
 	}
 
+	public function Transactions(){
+
+		return $this->hasMany('App\Models\Transaction');
+
+	}
+
 	public function scopeByUnit($query, $unit_id)
 	{
 		return $query->where('unit_id', '=', $unit_id);

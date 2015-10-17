@@ -82,3 +82,21 @@ angular.module('propman').filter('daterange', function ()
         }
     };
 });
+
+angular.module('propman').filter('colonesTotal', function() {
+    return function(input,params) {
+
+        var col = params.column;
+
+        var total = 0;
+
+        angular.forEach(input, function(item,key){
+            if(item[col] != null || item[col] != '' && typeof item[col] == 'string'){
+
+                total = total + parseFloat(item[col]);
+            }
+        });
+
+        return total;
+    };
+});

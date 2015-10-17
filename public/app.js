@@ -91,6 +91,21 @@
                 redirectTo: 'owners.listOwners'
             })
 
+            /*Owner BASE --> Report*/
+            .state('owners.viewOwner.report', {
+                url: "/report",
+                templateUrl: "/shared/owners/report.html",
+                controller: 'ownerReportController',
+                resolve: {
+                    owner: function($stateParams, ownerFactory){
+                        return ownerFactory.getShow({id: $stateParams.owner_id})
+                    },
+                    org: function(orgFactory){
+                        return orgFactory.getEdit()
+                    }
+                }
+            })
+
             /*Owner BASE --> INDEX*/
             .state('owners.listOwners', {
                 url: "/index",
@@ -364,6 +379,7 @@
                     }
                 }
             })
+
             /*Properties BASE --> VIEW --> transaction CREATE*/
             .state('properties.viewProperty.createTransaction', {
                 url: "/transactions/create",
@@ -925,6 +941,8 @@
         });
     }]);
 
+
+
 })();
 
 /*Javascript filter - Using angular instead*/
@@ -961,3 +979,29 @@
 //
 //    return objectArray[index];
 //}
+
+
+var mergeDeepNested = function(object, str){
+
+    var mergeArray = [];
+
+    var pushDeep = function(object, str){
+        if (typeof object === 'object') {
+            angular.forEach(object,function(value, key){
+                if(key == str){
+                    angular.forEach(value,function(v, k){
+                        mergeArray.push(v);
+                    });
+                }else if(typeof value === 'object'){
+                    pushDeep(value,str)
+                }
+            });
+        }
+    };
+
+    pushDeep(object, str);
+
+    return mergeArray;
+
+};
+
