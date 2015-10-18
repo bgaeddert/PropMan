@@ -9,7 +9,8 @@
         'ui.bootstrap',
         'ui.router',
         'angular-loading-bar',
-        'ngAnimate'
+        'ngAnimate',
+        'pascalprecht.translate'
     ]);
 
     propman.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider){
@@ -941,7 +942,37 @@
         });
     }]);
 
-
+    propman.config(function ($translateProvider) {
+        $translateProvider.translations('en', {
+            Owners: 'Owners',
+            Properties: 'Properties',
+            Units: 'Units',
+            Tenants: 'Tenants',
+            Transactions: 'Transactions',
+            Logout: 'Logout',
+            Settings: 'Settings',
+            Create: 'Create',
+            Edit: 'Edit',
+            View: 'View',
+            INACTIVE: 'INACTIVE',
+            Notes: 'Notes',
+        });
+        $translateProvider.translations('es', {
+            Owners: 'Dueños',
+            Properties: 'Propiedades',
+            Units: 'Unidades',
+            Tenants: 'Inquilinos',
+            Transactions: 'Transacciones',
+            Logout: 'Cerrar sesion',
+            Settings: 'Ajustes',
+            Create: 'Crear',
+            Edit: 'Editar',
+            View: 'Ver',
+            INACTIVE: 'INACTIVO',
+            Notes: 'Notas',
+        });
+        $translateProvider.preferredLanguage('en');
+    });
 
 })();
 
@@ -1004,4 +1035,6 @@ var mergeDeepNested = function(object, str){
     return mergeArray;
 
 };
+
+
 

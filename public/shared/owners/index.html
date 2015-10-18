@@ -2,12 +2,14 @@
     <div class="col-md-12">
         <div class="row">
             <div class="index-title col-md-8">
-                <h2><i class="fa fa-briefcase"></i> Owners</h2>
+                <h2><i class="fa fa-briefcase"></i> <span translate="Owners">Owners</span></h2>
             </div>
 
             <!--Create Button-->
             <div class="col-md-4">
-                <a ui-sref="owners.createOwner" class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Create</a>
+                <a ui-sref="owners.createOwner" class="btn btn-primary  pull-right">
+                    <i class="fa fa-plus"></i> <span translate="Create">Create</span>
+                </a>
             </div>
 
         </div>
@@ -32,7 +34,7 @@
                     <a ui-sref="owners.viewOwner({owner_id : owner.id})">{{owner.owner_name}}</a>
                 </h3>
                 <h4>
-                    <span class="label label-danger" ng-show="owner.owner_active == 0">INACTIVE</span>
+                    <span class="label label-danger" ng-show="owner.owner_active == 0" translate="INACTIVE">INACTIVE</span>
                 </h4>
             </div>
 
@@ -45,7 +47,7 @@
 
             <!--Note-->
             <div class="col-md-4">
-                <div class="" ng-show="owner.note"><b>Notes:</b></div>
+                <div class="" ng-show="owner.note"><b><span translate="Notes">Notes</span>:</b></div>
                 <div class="">{{owner.note}}</div>
             </div>
 
@@ -54,11 +56,11 @@
 
                     <!--View Button-->
                     <a ui-sref="owners.viewOwner({owner_id : owner.id})" class="btn btn-info"><i class="fa fa-eye"></i>
-                        View</a>
+                        <span translate="View">View</span></a>
 
                     <!--Edit Button-->
                     <a ui-sref="owners.editOwner({owner_id : owner.id})" class="btn btn-primary"><i
-                            class="fa fa-pencil"></i> Edit</a>
+                            class="fa fa-pencil"></i> <span translate="Edit">Edit</span></a>
                 </div>
             </div>
         </div>

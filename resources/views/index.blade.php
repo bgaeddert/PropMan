@@ -40,10 +40,10 @@
                             link to bypass the ui-router and call the laravel
                             router directly to redirect to the log out page
                         -------------------------------------------------------->
-                        <li><a href="/auth/logout" target="_self">Logout</a></li>
+                        <li><a href="/auth/logout" target="_self" translate="Logout">Logout</a></li>
 
                         <!-- Setting Link -->
-                        <li><a ui-sref="settings">Settings</a></li>
+                        <li><a ui-sref="settings" translate="Settings">Settings</a></li>
                     </ul>
                 </li>
             </ul>
@@ -57,23 +57,23 @@
         <ul class="main-nav">
 
             <li ui-sref-active="active">
-                <a ui-sref="owners"><i class="fa fa-briefcase"></i> Owners</a>
+                <a ui-sref="owners"><i class="fa fa-briefcase"></i> <span translate="Owners">Owners</span></a>
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="properties"><i class="fa fa-building"></i> Properties <i class="fa fa-money"></i></a>
+                <a ui-sref="properties"><i class="fa fa-building"></i> <span translate="Properties">Properties</span> <i class="fa fa-money"></i></a>
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="units"><i class="fa fa-home"></i> Units</a>
+                <a ui-sref="units"><i class="fa fa-home"></i> <span translate="Units">Units</span></a>
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="tenants"><i class="fa fa-users"></i> Tenants <i class="fa fa-money"></i></a>
+                <a ui-sref="tenants"><i class="fa fa-users"></i> <span translate="Tenants">Tenants</span> <i class="fa fa-money"></i></a>
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="transactions"><i class="fa fa-money"></i> Transactions</a>
+                <a ui-sref="transactions"><i class="fa fa-money"></i> <span translate="Transactions">Transactions</span></a>
             </li>
 
             {{--<li ui-sref-active="active">
@@ -102,6 +102,7 @@
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular-resource/angular-resource.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script type='text/javascript' src='{{URL::to('/')}}/assets/bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+<script type='text/javascript' src='{{URL::to('/')}}/assets/bower_components/angular-translate/angular-translate.min.js'></script>
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/toastr/toastr.min.js"></script>
