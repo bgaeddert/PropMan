@@ -125,4 +125,22 @@ class OwnerController extends Controller
             'data'    => $owner
         ] );
     }
+
+    /**
+     *
+     * @param $id
+     * @return Response
+     */
+    public function destroy( $id ){
+
+        $transaction = Owner::findOrFail( $id );
+
+        $transaction->delete( );
+
+        return \Response::json( [
+            'success' => true,
+            'message' => 'Owner Deleted.',
+            'data'    => []
+        ] );
+    }
 }

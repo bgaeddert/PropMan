@@ -85,6 +85,24 @@ angular.module('propman').factory('ownerFactory', function($http,$sce,$q,handler
                 });
 
             return deferred.promise;
+        },
+        delete: function(requestData){
+            var deferred = $q.defer();
+            var url = '/api/owners/'+ requestData.id ;
+            $http({
+                method: "delete",
+                url: url,
+                data: requestData
+            })
+                .success(function(data, status) {
+                    deferred.resolve(data.data);
+                    handlerFactory.successHandler('Owner deleted!');
+                }).error(function(data, status) {
+                    deferred.reject(data);
+                    handlerFactory.errorHandler(data)
+                });
+
+            return deferred.promise;
         }
     }
 });

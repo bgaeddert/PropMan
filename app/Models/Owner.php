@@ -13,6 +13,18 @@ class Owner extends Model{
 	use SoftDeletes;
 	use ByOrgTrait;
 
+	protected static function boot() {
+		parent::boot();
+
+		static::deleting(function($owner) {
+
+			foreach ($owner->Properties as $property) {
+				$property->delete();
+			}
+
+		});
+	}
+
 	/**
 	 * The database table used by the model.
 	 *

@@ -106,6 +106,7 @@
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="{{URL::to('/')}}/assets/bower_components/bootbox/bootbox.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
 <!-- Application Scripts -->
@@ -173,4 +174,10 @@
     }
 
 </script>
+
+<style>
+    .modal-backdrop {
+        z-index : 0;
+    }
+</style>
 </html>

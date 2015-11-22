@@ -83,6 +83,23 @@ angular.module('propman').factory('transactionFactory', function($http,$sce,$q,h
             });
 
             return deferred.promise;
+        },
+        delete: function(requestData){
+            var deferred = $q.defer();
+            var url = '/api/transactions/'+ requestData.id ;
+            $http({
+                method: "delete",
+                url: url,
+                data: requestData
+            })
+                .success(function(data, status) {
+                    deferred.resolve(data.data);
+                }).error(function(data, status) {
+                deferred.reject(data);
+                handlerFactory.errorHandler(data)
+            });
+
+            return deferred.promise;
         }
     }
 });

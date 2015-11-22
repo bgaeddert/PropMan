@@ -1,5 +1,5 @@
 angular.module('propman').controller('transactionCreateEditController',
-    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, transactionFactory, handlerFactory, tenant, tenants, transaction, transaction_create, property, property_view, tenant_view ){
+    function($rootScope, $state, $scope, $window, $http, $sce, $filter, $compile, $timeout, $stateParams, $uibModal, $log, transactionFactory, handlerFactory, tenant, tenants, transaction, transaction_create, property, property_view, tenant_view ){
 
         /*
          |-----------------------------------
@@ -74,6 +74,25 @@ angular.module('propman').controller('transactionCreateEditController',
                 return;
             }
 
+        };
+
+        $scope.onDelete = function(){
+            bootbox.confirm("Are you sure this transaction?", function(result) {
+
+                if(result){
+
+                    transactionFactory.delete($scope.transaction).then(function(){
+                        handlerFactory.successHandler('Transaction deleted!');
+                        if(property_view === true){
+                            $state.go('properties.viewProperty.transactions', {property_id: $scope.property.id});
+                        }
+
+                        if(tenant_view === true){
+                            $state.go('tenants.viewTenant.transactions', {tenant_id: $scope.tenant.id});
+                        }
+                    })
+                }
+            });
         };
 
 

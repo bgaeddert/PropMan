@@ -41,6 +41,18 @@ angular.module('propman').controller('ownerCreateEditController',
             });
         };
 
+        $scope.onDelete = function(){
+            bootbox.confirm("Are you sure this owner and all it's properties, unit, tenants and transactions?", function(result) {
+
+                if(result){
+
+                    ownerFactory.delete($scope.owner).then(function(){
+                        $state.go('owners');
+                    })
+                }
+            });
+        };
+
         /*
          |-----------------------------------
          |   Initialize

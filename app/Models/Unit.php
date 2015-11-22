@@ -13,6 +13,14 @@ class Unit extends Model{
 	use SoftDeletes;
 	use ByOrgTrait;
 
+	protected static function boot() {
+		parent::boot();
+
+		static::deleting(function($unit) {
+			$unit->Tenants()->delete();
+		});
+	}
+
 	/**
 	 * The database table used by the model.
 	 *

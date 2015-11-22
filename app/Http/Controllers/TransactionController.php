@@ -114,4 +114,22 @@ class TransactionController extends Controller
             'data'    => $transactions
         ] );
     }
+
+    /**
+     *
+     * @param $id
+     * @return Response
+     */
+    public function destroy( $id ){
+
+        $transaction = Transaction::findOrFail( $id );
+
+        $transaction->delete( );
+
+        return \Response::json( [
+            'success' => true,
+            'message' => 'Transaction Deleted.',
+            'data'    => []
+        ] );
+    }
 }

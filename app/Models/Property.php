@@ -13,6 +13,22 @@ class Property extends Model{
 	use SoftDeletes;
 	use ByOrgTrait;
 
+	protected static function boot() {
+		parent::boot();
+
+		static::deleting(function($property) {
+
+			foreach ($property->Units as $unit) {
+				$unit->delete();
+			}
+
+			foreach ($property->Transactions as $transaction) {
+				$transaction->delete();
+			}
+
+		});
+	}
+
 	/**
 	 * The database table used by the model.
 	 *
