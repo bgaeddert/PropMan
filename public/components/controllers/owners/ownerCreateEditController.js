@@ -42,7 +42,7 @@ angular.module('propman').controller('ownerCreateEditController',
         };
 
         $scope.onDelete = function(){
-            bootbox.confirm("Are you sure this owner and all it's properties, unit, tenants and transactions?", function(result) {
+            bootbox.confirm("Are you sure you want to DELETE this owner and all it's properties, units, tenants and transactions?", function(result) {
 
                 if(result){
 

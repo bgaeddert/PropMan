@@ -124,4 +124,22 @@ class TenantController extends Controller
             'data'    => $tenants
         ] );
     }
+
+    /**
+     *
+     * @param $id
+     * @return Response
+     */
+    public function destroy( $id ){
+
+        $transaction = Tenant::findOrFail( $id );
+
+        $transaction->delete( );
+
+        return \Response::json( [
+            'success' => true,
+            'message' => 'Tenant Deleted.',
+            'data'    => []
+        ] );
+    }
 }

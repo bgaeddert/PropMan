@@ -40,6 +40,19 @@ angular.module('propman').controller('tenantCreateEditController',
             })
         };
 
+        $scope.onDelete = function(){
+            bootbox.confirm("Are you sure you want to DELETE this tenant and all it's transactions?", function(result) {
+
+                if(result){
+
+                    tenantFactory.delete($scope.tenant).then(function(){
+                        handlerFactory.successHandler('Tenant deleted!');
+                        $state.go('units.viewUnit', {unit_id: $scope.unit.id});
+                    })
+                }
+            });
+        };
+
         /*
          |-----------------------------------
          |   Initialize

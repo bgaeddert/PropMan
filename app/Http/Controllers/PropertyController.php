@@ -126,4 +126,22 @@ class PropertyController extends Controller
             'data'    => $property
         ] );
     }
+
+    /**
+     *
+     * @param $id
+     * @return Response
+     */
+    public function destroy( $id ){
+
+        $transaction = Property::findOrFail( $id );
+
+        $transaction->delete( );
+
+        return \Response::json( [
+            'success' => true,
+            'message' => 'Property Deleted.',
+            'data'    => []
+        ] );
+    }
 }

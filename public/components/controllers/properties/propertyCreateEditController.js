@@ -40,6 +40,19 @@ angular.module('propman').controller('propertyCreateEditController',
             })
         };
 
+        $scope.onDelete = function(){
+            bootbox.confirm("Are you sure you want to DELETE this property and all it's units, tenants and transactions?", function(result) {
+
+                if(result){
+
+                    propertyFactory.delete($scope.property).then(function(){
+                        handlerFactory.successHandler('Property deleted!');
+                        $state.go('owners.viewOwner', {owner_id: $scope.owner.id});
+                    })
+                }
+            });
+        };
+
         /*
          |-----------------------------------
          |   Initialize

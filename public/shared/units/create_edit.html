@@ -100,13 +100,27 @@
                         <a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
 
                         <!--Edit Button-->
-                        <button class="btn btn-success" ng-click="onUpdate()" ng-show="unit_create === false"
+                        <button type="{{unit_create === true ? 'button' : 'submit'}}"
+                                class="btn btn-success"
+                                ng-click="onUpdate()"
+                                ng-show="unit_create === false"
                                 ng-disabled="unitForm.$invalid">Update
                         </button>
 
                         <!--Create Button-->
-                        <button class="btn btn-success" ng-click="onStore()" ng-show="unit_create === true"
+                        <button type="{{unit_create === false ? 'button' : 'submit'}}"
+                                class="btn btn-success"
+                                ng-click="onStore()"
+                                ng-show="unit_create === true"
                                 ng-disabled="unitForm.$invalid">Save
+                        </button>
+
+                        <!--Delete Button-->
+                        <button type="button"
+                                class="btn btn-danger"
+                                ng-click="onDelete()"
+                                ng-show="unit_create === false">
+                            Delete
                         </button>
                     </div>
                     <!-- ./ Buttons -->

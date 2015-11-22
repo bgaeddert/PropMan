@@ -123,4 +123,22 @@ class UnitController extends Controller
             'data'    => $units
         ] );
     }
+
+    /**
+     *
+     * @param $id
+     * @return Response
+     */
+    public function destroy( $id ){
+
+        $unit = Unit::findOrFail( $id );
+
+        $unit->delete( );
+
+        return \Response::json( [
+            'success' => true,
+            'message' => 'Unit Deleted.',
+            'data'    => []
+        ] );
+    }
 }
